@@ -77,17 +77,17 @@ Custom Kontena Platform deployments use built-in user management. The first user
 **master_admin**
 * can invite users to Kontena Platform Master and manage their roles
 * can manage all Kontena Platform Grids, Kontena Platform Grid users and their users
-* all `grid_admin` permissions for all grids
+* all `grid_admin` permissions for all Kontena Platform Grids
 
 **users_admin**
 * Invite and remove users
-* Manage grid users (only users grids)
+* Manage Kontena Platform Grid users (only users own Kontena Platform Grids)
 
 **grid_admin**
 * manage grid (update)
 * can manage Kontena Platform Grid users
-* manage grid host nodes (create, reset tokens)
-* all grid user permissions
+* manage Kontena Platform Grid host nodes (create, reset tokens)
+* all Kontena Platform Grid user permissions
 
 **user**
 * can only operate within a Kontena Platform Grid
