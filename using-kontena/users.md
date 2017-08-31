@@ -13,7 +13,7 @@ The users of Kontena Cloud may take advantage of advanced user management. All K
 
 The users who are members of an organization, may be assigned to hosted Kontena Platforms with different roles: `devops` or `dev`. The roles and their description within the scope of platform the role is given:
 
-* **`devops`** - The super user. Can do everything `dev` and `ops` can do.
+* **`devops`** - The super user. Can do everything.
 * **`dev`** - The developer user. Can use Kontena Platform to deploy stacks, access logs, use Kontena Vault and more.
 
 **Manage Kontena Cloud Organization Users**
