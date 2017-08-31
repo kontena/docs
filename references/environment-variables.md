@@ -22,6 +22,8 @@
 ## Kontena Agent
 
 - `KONTENA_URI`: Kontena Master websocket uri (required)
+- `KONTENA_SSL_VERIFY`: Verify `wss://` server SSL certificate (default: no verification)
+- `KONTENA_SSL_HOSTNAME`: Override hostname for SSL SNI and certificate subject verification
 - `KONTENA_TOKEN`: Kontena Grid token (required)
 - `KONTENA_PEER_INTERFACE`: network interface for peer/private communication (default: eth1)
 - `KONTENA_PUBLIC_IP`: specify node public ip, overrides default resolving
