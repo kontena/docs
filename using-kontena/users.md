@@ -11,7 +11,7 @@ Kontena Platform may be used from Kontena Cloud as a hosted solution or it may b
 
 The users of Kontena Cloud may take advantage of advanced user management. All Kontena Cloud users have by default their own personal account, but in addition they may belong to one or more organizations. As a member of organization, the user role may be `admin` or `member`. Admin users can manage the organization settings and invite more users. Members may use the organization resources. If you have a personal Kontena Cloud account, you are automatically Admin of this personal "organization", but you can not invite more users.
 
-The users who are members of an organization, may be assigned to hosted Kontena Platforms with different roles: `devops`, `dev`, `ops` or `manager`. The roles and their description within the scope of platform the role is given:
+The users who are members of an organization, may be assigned to hosted Kontena Platforms with different roles: `devops` or `dev`. The roles and their description within the scope of platform the role is given:
 
 * **`devops`** - The super user. Can do everything `dev` and `ops` can do.
 * **`dev`** - The developer user. Can use Kontena Platform to deploy stacks, access logs, use Kontena Vault and more.
