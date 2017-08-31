@@ -38,6 +38,8 @@
 - `WEAVEEXEC_IMAGE`: weave exec image (default: weaveworks/weaveexec)
 - `WEAVE_VERSION`: weave net version
 - `WEBSOCKET_TIMEOUT`: websocket timeout in seconds (default: 5.0)
+- `SSL_CERT_FILE`: path to SSL CA cert bundle file
+- `SSL_CERT_PATH`: path to SSL CA cert bundle directory
 
 ## Kontena CLI
 
