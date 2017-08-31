@@ -45,10 +45,20 @@ To operate properly Kontena Nodes need only a few ports opened. If you are addin
 
 In addition, please ensure [IPSec (ESP)](https://tools.ietf.org/html/rfc2406) traffic is allowed.
 
-## Kontena Node Id
+## Kontena Node ID
 
-Kontena Nodes are identified by their Docker Engine ID, as shown in `docker info`:
+Kontena Nodes are uniquely identified by their Docker Engine ID, as shown in `docker info`:
 
 ```
  ID: 44C7:P5OM:NBJT:WXHV:6EDU:67T5:YDMX:4YPU:PF6D:VUH5:7LE7:5RC7
 ```
+
+### Node ID Conflicts
+
+Each node must have an unique Node ID that stays the same across reboots, or the Kontena Nodes will not behave correctly.
+Duplicate Node IDs will cause both agents to connect as the same Kontena Node, causing the same service instances to be deployed to both machines.
+Volatile Node IDs will cause the agent to reconnect as a new Kontena Node (using grid tokens), or be be able to reconnect (using node tokens).
+
+Provisioning nodes using cloned disk images is likely to cause duplicate Node IDs if the cloned disk images already have Docker pre-installed.
+
+Node ID conflicts can be detected by the agent connection conflict errors: `connection closed with code 4041: host node ... connection conflict with new connection at ...`
