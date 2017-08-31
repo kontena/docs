@@ -1,18 +1,18 @@
-# Add Kontena Nodes
+# Provisioning Kontena Nodes
 
 Almost any machine may be turned into a Kontena Node (see [system requirements](#system-requirements)).
 
-The easiest way for adding Kontena Nodes is to [use the provisioning tool](#adding-kontena-nodes-with-provision-tool) that is built into Kontena CLI. This tool may be used to provision Kontena Nodes to most major public cloud platforms and for local testing purposes.
+The easiest way to provision Kontena Nodes is to [use the automatic provisioning tool](#adding-kontena-nodes-with-provision-tool) that is built into Kontena CLI. This tool may be used to provision Kontena Nodes to most major public cloud platforms and for local testing purposes.
 
-Alternatively, you may add Kontena Nodes manually by following the [manual install instructions](#adding-kontena-nodes-manually).
+Alternatively, you may provision Kontena Nodes manually by following the [manual provisioning instructions](#provisioning-kontena-nodes-manually).
 
 Learn more:
 
-* [Adding Kontena Nodes With Provision Tool](#adding-kontena-nodes-with-provision-tool)
-* [Adding Kontena Nodes Manually](#adding-kontena-nodes-manually)
+* [Provisioning Kontena Nodes Automatically](#provisioning-kontena-nodes-automatically)
+* [Provisioning Kontena Nodes Manually](#provisioning-kontena-nodes-manually)
 * [System Requirements](#system-requirements)
 
-## Adding Kontena Nodes With Provision Tool
+## Provisioning Kontena Nodes Automatically
 
 **For local testing purposes:**
 
@@ -26,7 +26,7 @@ Learn more:
 * [Packet](packet.md)
 * [UpCloud](upcloud.md)
 
-## Adding Kontena Nodes Manually
+## Provisioning Kontena Nodes Manually
 
 * [Ubuntu](ubuntu.md)
 * [Container Linux](container-linux.md)

@@ -13,9 +13,9 @@ In this chapter, we'll discover how to manage, operate and monitor Kontena Nodes
 * [Manage Kontena Node Labels](#manage-kontena-node-labels)
 * [Check Kontena Node Health Status](#check-kontena-node-health-status)
 
-## Add Kontena Nodes
+### Provisioning Kontena Nodes
 
-Please see the [Add Kontena Nodes](install-nodes/README.md) documentation to learn more.
+Please see the [Provisioning Kontena Nodes](install-nodes/README.md) documentation to learn more.
 
 ## List Kontena Nodes
 
