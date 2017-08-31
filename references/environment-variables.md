@@ -26,6 +26,7 @@
 - `KONTENA_PEER_INTERFACE`: network interface for peer/private communication (default: eth1)
 - `KONTENA_PUBLIC_IP`: specify node public ip, overrides default resolving
 - `KONTENA_PRIVATE_IP`: specify node private ip, overrides default resolving
+- `KONTENA_NODE_NAME`: Override node name (default: `docker info` -> `Name` from hostname)
 - `LOG_LEVEL`: logging level
 - `ETCD_IMAGE`: etcd image (default: kontena/etcd)
 - `ETCD_VERSION`: etcd image version
