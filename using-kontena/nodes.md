@@ -99,7 +99,7 @@ $ kontena node remove <NODE_ID>
 
 If the node was provisioned using the Kontena CLI built-in provisioning tool, you can terminate the host machine using the `kontena <provider> node terminate` command. This will also remove the Kontena Node. If the host machine has already been terminated, then the `kontena node remove` command can be used to forget the terminated node.
 
-If the node was provisioned with a node token, then the `kontena node remove` command can also be used to invalidate the node token, forcing the agent to disconnect if it is still connected. Nodes provisioned using grid tokens cannot be removed if they are still online, because the agent will simply reconnect and the node will quickly re-appear.
+If the node was provisioned with a node token, then the `kontena node remove` command can also be used to invalidate the node token, forcing the agent to disconnect if it is still connected. Nodes provisioned using grid tokens cannot be removed if they are still online, because the agent would simply reconnect and the node would quickly re-appear.
 
 **IMPORTANT!** If you remove a Kontena Node that has `stateful` Kontena Service instances deployed, those Kontena Service instances will be re-scheduled for the next Kontena Service deploy and lose their state.
 
