@@ -63,39 +63,16 @@ An Initial Node may be replaced as long as there has not been a majority loss. S
 
 Using the method described above, it is possible to replace all Initial Nodes one by one. In any case, the majority must be kept.
 
-See [Kontena Nodes usage documentation](./nodes.md) to learn how to manage, operate and monitor Kontena Nodes.
-
-
 #### Kontena Node Scheduling Availability
 
- Node availablity for scheduling services can be controlled with `kontena node update --availability` command. The current supported states are: `drain` and `active`.
+Sometimes, one or more Kontena Nodes might require maintenance, or they need to be replaced. Upon such events, minimizing disruption to the running Kontena Stacks and Services is often a top priority. This may be achieved with Kontena Node `availability` configuration. The availability of Kontena Node may be configured as `active` or `drain`:
 
- Nodes current availablity status can be seen using `kontena node show xyz`:
- ```
- $ k node show moby
- moby:
-   id: BCKY:WMSM:IMW4:KSNQ:C2MZ:4EZ7:ZG7J:5UQ2:MMA3:NYK7:5PEF:JBLN
-  agent version: 1.3.0.dev
-  docker version: 1.13.1
-  connected: yes
-  availability: drain
-  last connect: 2017-05-15T06:03:01.720Z
-  last seen: 2017-05-15T06:03:00.523Z
- ... snip ...
- ```
+* **`active`** - Kontena Platform will schedule workloads and treat this Kontena Node as normal. This is the default configuration for any Kontena Node.
+* **`drain`** - Kontena Platform will not schedule any new workloads and all stateless services will be re-scheduled out from this Kontena Node. Any stateful services running on this Kontena Node will be stopped.
 
- **Active**
+To summarize: when Kontena Nodes are maintained, it is recommended to configure their availability as `drain`. Once the maintenance is over and Kontena Node can be put back to work, their availability should be configured as `active`.
 
- Kontena scheduler can assign tasks into any node marked as `active` availability. `active` is also the default state for all nodes. To re-activate a node use `kontena node update --availability active moby`
-
- **Drain**
-
- For a planned maintenance or node decommisioning it is a good idea to first drain the node so there are minimal disruptions on the services running. To drain the services from a node use `kontena node update --availability drain moby`
-
- Node draining means that all the stateless services will be re-scheduled immediately out from the node. Any stateful services running on that node will be stopped.
-
- Once the maintenance is over and a node can be put back to work it can be put into active state using `kontena node update --availability active moby` command. This marks the node back in a `active` state where it will get new deployments as Kontena scheduler will see this node back in the available nodes list.
-
+See [Kontena Nodes usage documentation](./nodes.md) to learn how to manage, operate and monitor Kontena Nodes.
 
 ## Kontena Stacks
 
