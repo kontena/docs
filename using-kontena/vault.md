@@ -67,7 +67,22 @@ The email is needed for Let's Encrypt to notify when certificates are about to e
 
 #### Create domain authorization
 
-To be able to request certificates for a domain you must first prove that you are in charge of that domain. For this, Kontena certificate management supports DNS-based authorization.
+To be able to request certificates for a domain you must first prove that you are in charge of that domain. For this, Kontena certificate management supports both DNS and TLS-SNI verifications.
+
+**TLS-SNI based verification**
+
+```bash
+$ kontena certificate authorize --type tls-sni-01 --linked-service infra/lb api.example.com
+[done] Waiting for tls-sni-01 certificate to be deployed into my-grid/infra/lb
+TLS-SNI challenge certificate is deployed, you can now request the actual certificate
+```
+
+Kontena automatically links the special certificate LE gives us and deploys the linked service. Naturally the linked service is usually Kontena LB. Only thing user needs to configure is a public DNS record for the domain(s) to point to the linked service.
+
+When later on requesting the certificate, LE will make special SSL connection to the server(s) for which it expects the server to present the certificate.
+
+
+**DNS based verification**
 
 ```bash
 $ kontena certificate authorize api.example.com
