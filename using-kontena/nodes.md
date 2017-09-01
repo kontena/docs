@@ -52,7 +52,7 @@ $ kontena node show <NODE_ID>
 
 ## Show Kontena Node Configuration
 
-Generate the [`/etc/kontena-agent` environment variables](../references/environment-variables#kontena-agent) required when manually provisioning nodes using node tokens:
+Generate the [`/etc/kontena-agent.env` environment variables](../references/environment-variables#kontena-agent) required when manually provisioning nodes using node tokens:
 
 ```
 $ kontena node env core-03

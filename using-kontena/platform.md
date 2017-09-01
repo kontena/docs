@@ -171,7 +171,7 @@ $ kontena grid audit-log
 
 ## Show Kontena Node Configuration
 
-Generate the [`/etc/kontena-agent` environment variables](../references/environment-variables#kontena-agent) required when manually provisioning nodes using grid tokens:
+Generate the [`/etc/kontena-agent.env` environment variables](../references/environment-variables#kontena-agent) required when manually provisioning nodes using grid tokens:
 
 ```
 $ kontena grid env
