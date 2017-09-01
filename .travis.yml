@@ -17,6 +17,7 @@ script:
   - "gitbook build"
 deploy:
   - provider: script
+    skip_cleanup: true
     script: "$TRAVIS_BUILD_DIR/deploy.sh"
     on:
       branch: travis
