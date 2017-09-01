@@ -20,5 +20,5 @@ deploy:
     skip_cleanup: true
     script: "$TRAVIS_BUILD_DIR/deploy.sh"
     on:
-      branch: travis
+      branch: master
       repo: kontena/docs
