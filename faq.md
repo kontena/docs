@@ -1,22 +1,20 @@
 # Frequently Asked Questions
 
-## How do I get started with Kontena?
+## What is Kontena?
 
-We recommend that you start with our [quick start](./quick-start.md) guide.
+[Kontena](http://www.kontena.io) is the new, better way to run your containers in production. It's [open source](https://www.github.com/kontena/kontena) and easy to use!
 
-## What makes Kontena special?
+<img src="_images/kontena-cloud-screenshot.png" alt="Kontena Screenshot" />
 
-Kontena is built to maximize developer happiness. Due to its simplicity, it does not require dedicated ops teams to administer, operate or maintain the platform. It is a container orchestration platform that just works. Since developers don't need to worry about the platform, they can focus on creating the stuff that matters.
+## Why Kontena?
 
-## How does Kontena Work?
+Containers promise extreme scalability, portability and improved compute resource utilization. Setting up, tinkering and maintaining a complex container platform framework such as Kubernetes is not where the race is won. Kontena is a developer friendly container platform with all batteries included that is extremely easy to use and works for everybody, on any cloud. Get from zero to hero in matter of minutes rather than days, weeks or months.
 
-With Kontena, the user starts by telling the Kontena system to run a stack that is composed of one or more containers. The Kontena system will then automatically choose the host or hosts to run those containers. Kontena's scheduler has been influenced by technologies such as [Docker Swarm](https://docs.docker.com/swarm/) and [Kubernetes](http://kubernetes.io/). While the Kontena scheduler shares many similarities and concepts with these container orchestrators, Kontena's scheduler is designed to:
+If you are looking for a complete, easy to understand and use platform with minimal maintenance and full automation, Kontena is for you! It is a container platform that just works. Since developers don't need to worry about the platform, they can focus on creating the stuff that matters.
 
-* Work with Services instead of plain containers
-* Support both stateless and stateful applications
-* Have sane defaults and prefer convention over configuration
+## How to Get Started?
 
-Once the containers are ready to be started on the hosts, Kontena will apply a virtual overlay network for the containers to make it possible for them to find and communicate with each other.
+If you are new to Kontena, we recommend that you first read through the [quick start](./quick-start.md) guide. We also recommend you to [get familiar with usage](using-kontena/README.md).
 
 ## Who is the ideal user of Kontena?
 
