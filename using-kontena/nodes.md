@@ -50,7 +50,7 @@ The command that may be used for inspecting Kontena Node information.
 $ kontena node show <NODE_ID>
 ```
 
-## Show Kontena Node Agent Configuration
+## Show Kontena Node Configuration
 
 Generate the [`/etc/kontena-agent` environment variables](../references/environment-variables#kontena-agent) required when manually provisioning nodes using node tokens:
 
@@ -60,7 +60,7 @@ KONTENA_URI=ws://192.168.66.1:9292/
 KONTENA_NODE_TOKEN=yempbjWHbZLhc66gB0mAFXKS8HzS/daDwCfnHC+UfrJo5wkhQ6hpr8XKY5nUdH+h6CH81Y9bQIc4IgTcEEjQCQ==
 ```
 
-See [`kontena grid env`](./platform.md#show-kontena-platform-grid-agent-configuration) or [`kontena node reset-token`](#reset-a-kontena-node-token) if the node was not created using `kontena node create`.
+See [`kontena grid env`](./platform.md#show-kontena-node-configuration) or [`kontena node reset-token`](#reset-a-kontena-node-token) if the node was not created using `kontena node create`.
 
 ## Update Kontena Node Information
 
