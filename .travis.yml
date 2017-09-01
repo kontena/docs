@@ -17,6 +17,6 @@ script:
 deploy:
   - provider: script
     script: "$TRAVIS_BUILD_DIR/deploy.sh"
-      on:
-        branch: travis
-        repo: kontena/docs
+    on:
+      branch: travis
+      repo: kontena/docs
