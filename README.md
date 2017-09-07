@@ -82,7 +82,7 @@ If you are new to Kontena, we recommend that you first read through the [quick s
 
 # Feedback
 
-This documentation is a work in progress. Any feedback and requests are welcome. If you feel like something is missing, please [open an issue](https://github.com/kontena/kontena/issues) on GitHub.
+This documentation is a work in progress. Any feedback and requests are welcome. If you feel like something is missing, please [open an issue](https://github.com/kontena/docs) on GitHub.
 
 # License
 
