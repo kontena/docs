@@ -38,10 +38,9 @@ services:
     depends_on:
       - mongodb
   mongodb:
-    image: mongo:3.0
+    image: mongo:3.2
     container_name: kontena-server-mongo
     restart: unless-stopped
-    command: mongod --smallfiles
     volumes:
       - kontena-server-mongo:/data/db
 volumes:
