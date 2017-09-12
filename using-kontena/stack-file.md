@@ -147,6 +147,11 @@ There are many configuration options available for defining Kontena Services. In
   * **`interval`** - The interval of automatic redeployment of the service. This can be used as an "erosion-resistance" mechanism. Format <number><unit>, where unit = min, h, d. For example, value `7d`.
 * **`affinity`** - Specify affinity rules that will be used by Kontena Platform scheduler when scheduling this Kontena Service. Affinity rules may be positive (`==`) or negative (`!=`) and they may be compared against Kontena Node name, Kontena Service name, containers or labels. See usage [example](#using-affinity-rules).
 * **`hooks`** - Specify a list of commands that are executed at various stages of this Kontena Service lifecycle. The currently supported stages are `post_start` and `pre_build`. See usage [example](#using-hooks).
+  * **`pre_start`** - Specify a list of commands that are executed before each Kontena Service Instance is started. The commands are executed in the same order as defined. If any pre_start hook fails, then the remaining hooks will be skipped and the Kontena Service Instance will not be created. Any changes to the container filesystem from pre_start hooks will be reset when starting the actual Kontena Service Instance. The pre_start hooks are run with a different overlay network IP address, and cannot be used to e.g. register Kontena Service Instance IP somewhere (use post_start hooks). Each pre_start hook must specify `name`, `cmd`, `instance` and `oneshot` parameters (see example below):
+    * **`name`** - A unique name for this hook.
+    * **`cmd`** - The command to be executed.
+    * **`instance`** - A comma separated list of Kontena Service Instances (numbers) where this hook is executed (`*` for all).
+    * **`oneshot`** - Should this hook be executed only once in a Kontena Service lifetime (default: `false`)
   * **`post_start`** - Specify a list of commands that are executed after each Kontena Service Instance is started. The commands are executed in the same order as defined. Please note, these commands are executed before the `wait_for_port` check. Each post_start hook must specify the `name`, `cmd`, `instance` and `oneshot` parameters (see example below):
     * **`name`** - A unique name for this hook.
     * **`cmd`** - The command to be executed.
