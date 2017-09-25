@@ -26,6 +26,11 @@ The complete Kontena Stack File may look something like this:
 stack: kontena/example-app
 version: 0.1.0
 description: This is an example app
+depends:
+  redis:
+    stack: kontena/redis:0.1.0
+    variables:
+      version: 3.2-alpine
 variables:
   mysql_root_pw:
     type: string
@@ -56,6 +61,7 @@ services:
       - DB_URL=db
       - KONTENA_LB_INTERNAL_PORT=8080
       - KONTENA_LB_VIRTUAL_HOSTS={{ app_domain }}
+      - REDIS_HOST={{ redis }}
     deploy:
       strategy: ha
       wait_for_port: 8080
