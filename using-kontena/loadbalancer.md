@@ -10,7 +10,7 @@ In this chapter, we'll discover how to use Kontena Load Balancer:
 * [Using Kontena Load Balancer for Basic Authentication](#using-kontena-load-balancer-for-basic-authentication)
 * [Using Kontena Load Balancer for SSL Termination](#using-kontena-load-balancer-for-ssl-termination)
 * [Various Configuration Examples](#various-configuration-examples)
-* [Hints, Tips and Best Practises](#hints-tips-and-best-practises)
+* [Hints, Tips and Best Practices](#hints-tips-and-best-practices)
 
 ## Creating a Kontena Load Balancer
 
@@ -257,7 +257,7 @@ services:
 ...
 ```
 
-## Hints, Tips and Best Practises
+## Hints, Tips and Best Practices
 
 #### Accessing Kontena Load Balancer Statistics
 

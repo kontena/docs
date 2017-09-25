@@ -109,7 +109,7 @@ See [Kontena Volumes usage documentation](./volumes.md) to learn how to manage, 
 
 ## Kontena Vault
 
-Often, when two different applications or services interact, they will authenticate using secrets, access tokens or something similar. Since it is bad practise to hard code or package them together with the application (or it's meta data such as `Dockerfile`, `docker-compose.yml` or `kontena.yml`), some kind of secrets management solution is needed. Kontena Vault is a secure key-value storage system that can be used to manage such secrets.
+Often, when two different applications or services interact, they will authenticate using secrets, access tokens or something similar. Since it is bad practice to hard code or package them together with the application (or it's meta data such as `Dockerfile`, `docker-compose.yml` or `kontena.yml`), some kind of secrets management solution is needed. Kontena Vault is a secure key-value storage system that can be used to manage such secrets.
 
 Kontena Vault is fully integrated into the Kontena Platform and may be used to manage secrets for Kontena Stacks and Services. It has built-in support for managing LetsEncrypt certificates.
 

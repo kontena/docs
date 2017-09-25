@@ -16,7 +16,7 @@ Learn more:
   * [volumes](#volumes) - Kontena Volumes configuration.
 * [Template Language](#template-language)
 * [Examples](#examples)
-* [Hints, Tips and Best Practises](#hints-tips-and-best-practises)
+* [Hints, Tips and Best Practices](#hints-tips-and-best-practices)
 
 ## Kontena Stack File Reference
 
