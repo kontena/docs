@@ -42,6 +42,8 @@ The supported options:
 * **`no-deploy`** - By default the Kontena Stack is deployed right away. This option may be used to instantiate the Kontena Stack without deploy (no Kontena Services will be created or started yet). The deploy may be executed manually later using the [deploy](#deploying-a-kontena-stack) command.
 * **`values-to`** - Output variable values as YAML to file.
 * **`values-from`** - Read Kontena Stack variable values from YAML.
+* **`values-from-stack`** - Read Kontena Stack variable values from another installed Kontena Stack on Kontena Master.
+* **`v`** - Set individual variable values: `-v variable_name=variable_value` or `-v child_stack.variable_name=variable_value`. Can be used multiple times.
 
 ## Upgrading a Kontena Stack
 
@@ -56,6 +58,9 @@ The supported options:
 * **`no-deploy`** - By default the Kontena Stack upgrade is applied and deployed right away. This option may be used just to apply upgrade without deploy. The deploy may be executed manually later using the [deploy](#deploying-a-kontena-stack) command.
 * **`values-to`** - Output variable values as YAML to file.
 * **`values-from`** - Read Kontena Stack variable values from YAML.
+* **`values-from-stack`** - Read Kontena Stack variable values from another installed Kontena Stack on Kontena Master.
+* **`v`** - Set individual variable values: `-v variable_name=variable_value` or `-v child_stack.variable_name=variable_value`. Can be used multiple times.
+* **`dry-run`** - Simulate upgrade, displays a report of changes that an upgrade would make.
 * **`force`** - Force upgrade.
 
 ## Deploying a Kontena Stack
