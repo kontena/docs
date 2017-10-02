@@ -14,6 +14,7 @@ Learn more:
   * [expose](#expose) - Expose this Kontena Stack via a selected Kontena Service.
   * [services](#services) - Configuration of all Kontena Services.
   * [volumes](#volumes) - Kontena Volumes configuration.
+  * [depends](#depends) - Stack dependencies
 * [Template Language](#template-language)
 * [Examples](#examples)
 * [Hints, Tips and Best Practises](#hints-tips-and-best-practises)
@@ -194,6 +195,68 @@ There are many configuration options available for defining Kontena Services. In
 ### `volumes`
 
 Declare infrastructure agnostic Kontena Volumes that may be used as **named volumes** for any of the Kontena Services belonging to this Kontena Stack. See [usage example](#using-kontena-volumes).
+
+### `depends`
+
+Create nested Kontena Stacks using the `depends` keyword. Stacks that are listed as dependencies will be automatically installed, built, upgraded, deployed and uninstalled together with the main stack.
+
+Child stacks will be installed using a name built from parent stack name and child stack name separated with a dash: `parent_stack_name-child_stack_name-child_of_child_stack_name`.
+
+Local file example:
+
+```yaml
+depends:
+  dependency_name:
+    stack: stackfile.yml
+```
+
+Kontena Stack Registry reference example:
+
+```yaml
+depends:
+  dependency_name:
+    stack: kontena/redis
+```
+
+#### Dependency variables
+
+It is possible to pass variables to child stacks by using the `variables:` keyword.
+
+Example:
+
+```yaml
+depends:
+  redis:
+    stack: kontena/redis
+    variables:
+      version: alpine-3.2
+```
+
+You can also supply values for child stack variables when performing actions on the main Stack by using the `-v` command line parameter by using dot notation:
+
+```
+$ kontena stack install -v redis.version=alpine-3.2 app.yml
+```
+
+#### Referencing dependencies
+
+When a dependency is declared, the name of the dependency can be used like a variable in the rest of the Kontena Stack YAML file.
+
+Example:
+
+```yaml
+stack: example/app
+depends:
+  redis:
+    stack: kontena/redis
+services:
+  app:
+    image: your/app
+    environment:
+      - "REDIS_HOST={{ redis }}"
+```
+
+In this example, the `REDIS_HOST` environment variable will get the value `app-redis`.
 
 ## Template Language
 
