@@ -121,7 +121,7 @@ Each host Node runs a number of infrastructure services as Docker containers, us
 |-----------|----------|------|---------------------------|-----------------------
 | Weave DNS | TCP+UDP  | 53   | `172.17.0.1` (`docker0`)  | Weave DNS
 | etcd      | TCP      | 2379 | <ul><li>`127.0.0.1` (`lo`)</li><li>`172.17.0.1` (`docker0`)</li><li>`10.81.0.X` (weave)</li></ul> | etcd Clients
-| etcd      | TCP      | 2380 | `10.81.10.X` (weave)       | etcd Peers
+| etcd      | TCP      | 2380 | `10.81.0.X` (weave)       | etcd Peers
 | Weave Net | TCP      | 6783 | `*`                       | Weave Net Control
 | Weave Net | UDP      | 6783 | `*`                       | Weave Net Data (`sleeve`)
 | Weave Net | UDP      | 6784 | `*`                       | Weave Net Data (`fastdp`)
