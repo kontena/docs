@@ -1,5 +1,5 @@
 require(["gitbook"], function(gitbook) {
-    gitbook.events.bind("page.change", function() {
+    gitbook.events.bind("start", function(e, config) {
         var waitForEl = function(selector, callback) {
             if (jQuery(selector).length) {
                 callback();
@@ -12,6 +12,7 @@ require(["gitbook"], function(gitbook) {
         waitForEl('#launcher', function() {
             var iframe = $("#launcher").contents();
             $(iframe).find("#Embed").click(function(event) {
+                console.log("support chat opened")
                 mixpanel.track("support-chat.opened", {});
             })
         });
