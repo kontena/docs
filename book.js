@@ -18,7 +18,8 @@ module.exports = {
     scripts: {
       files: [
         "./_scripts/hs.js",
-        "./_scripts/menu.js"
+        "./_scripts/menu.js",
+        "./_scripts/tracks.js"
       ]
     },
     hs: {
