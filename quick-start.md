@@ -4,8 +4,7 @@ The average time for Kontena users to get from zero to hero is just under 20 min
 
 1. Install Kontena CLI tool.
 2. Create a [Kontena Platform](using-kontena/platform.md).
-3. Install [Kontena Nodes](using-kontena/nodes.md).
-4. Deploy first [Kontena Stack](using-kontena/stacks.md).
+3. Deploy first [Kontena Stack](using-kontena/stacks.md).
 
 Follow these steps to get started with Kontena on Kontena Cloud quickly. If you like to tinker and maintain the Kontena Platform yourself, please follow the [slow start](./slow-start.md) guide.
 
@@ -25,20 +24,27 @@ You can install the Kontena CLI using the Rubygems package manager (which is inc
 $ gem install kontena-cli
 ```
 
+Install Kontena Cloud plugin:
+
+```
+$ kontena plugin install cloud
+```
+
 After the installation is complete, you can test the installation by checking the Kontena CLI version with `kontena version`.
 
 ## Step 2. Create a Kontena Platform
 
-The easiest (and preferred) way to provision Kontena Platform Master is to use the built-in Kontena Cloud Platform provision feature of Kontena CLI. In this guide, we will provision Kontena Platform to Kontena Cloud and nodes to the local development environment using [Vagrant](https://www.vagrantup.com/). If you want to install nodes to some other environment, please see [Installing Kontena](using-kontena/install-nodes/) documentation.
+The easiest (and preferred) way to provision Kontena Platform Master is to use the built-in Kontena Cloud Platform provision feature of Kontena CLI. In this guide, we will provision Kontena Platform to Kontena Cloud and nodes to infrastructure of your choice. If you want to install nodes to some other environment, please see [Installing Kontena](using-kontena/install-nodes/) documentation.
 
-Since we will be using Vagrant, please ensure you have Vagrant 1.6 or later installed. For more details, see the official [Vagrant installation docs](https://docs.vagrantup.com/v2/installation/index.html).
+First you need to decide where Kontena Platform Nodes should be provisioned. Platform wizard currently supports three options:
 
-After Vagrant is installed, you can install required plugins to Kontena CLI.
-
-```
-$ kontena plugin install cloud
-$ kontena plugin install vagrant
-```
+- Amazon Web Services (EC2)
+  - `kontena plugin install aws`
+- DigitalOcean
+  - `kontena plugin install digitalocean`
+- Vagrant (with VirtualBox)
+  - `kontena plugin install vagrant`
+  - please ensure you have Vagrant 1.6 or later installed. For more details, see the official [Vagrant installation docs](https://docs.vagrantup.com/v2/installation/index.html).
 
 Before you can create a Kontena Cloud Platform you need to login:
 
@@ -49,55 +55,22 @@ $ kontena cloud login
 After login is completed succesfully you can start Kontena Platform provisioning with following command:
 
 ```
-$ kontena cloud platform create quick-start
-> This will create managed platform to Kontena Cloud, proceed? Yes
-> Choose organization: my-username (you)
+$ kontena cloud platform wizard quick-start
+> Choose organization: my-organization
 > Choose region: EU West
 > Initial platform size (number of nodes): 1 (dev/test)
  [done] Creating platform quick-start to region eu-west-1
  [done] Waiting for platform quick-start to come online
  [done] Switching to use platform my-username/quick-start
+ ...
+ [done] Platform my-username/quick-start is now ready.
 ```
 
 During the installation process you will have the option to select region where Kontena Platform is provisioned. It's recommended to select closest region for you to minimize latency between your local development environment and Kontena Platform.
 
-## Step 3. Install Kontena Nodes
+After wizard completes you should have a working Kontena setup installed. Verify the setup using the `kontena node list` command. It should list all the Kontena Nodes in your Platform Grid.
 
-You'll need some Kontena Nodes to run your containerized workloads. If you don't have existing Kontena infrastructure in place, you'll need to install your own.
-
-As with with Kontena Platform, the easiest (and preferred) way to provision Kontena Nodes is to use the built-in Kontena Node provisioning feature of Kontena CLI. In this guide, we will provision Kontena Nodes to the local development environment using [Vagrant](https://www.vagrantup.com/). If you want to install Kontena Nodes to some other environment, please see the [Installing Kontena Nodes](installing/nodes.md) documentation.
-
-Since we will be using Vagrant, please ensure you have Vagrant installed. For more details, see official [Vagrant installation docs](https://docs.vagrantup.com/v2/installation/index.html).
-
-
-Install a node to the platform you created in the previous chapter:
-
-```
-$ kontena vagrant node create
-> How many nodes?:  1
-> Choose a size  1024MB
- [done] Generating Vagrant config
- [done] Triggering CoreOS Container Linux box update
-...
- [done] Executing 'vagrant up'
-...
- [done] 'vagrant up' executed successfully
- [done] Waiting for node damp-forest-2 to join grid quick-start
-```
-
-You can repeat this step to provision additional Kontena Nodes to your Kontena Platform.
-
-**Note!** While Kontena will work with just a single Kontena Node, it is recommended to have at least three Kontena Nodes provisioned in a Grid.
-
-If you followed the steps above, you should now have a working Kontena setup installed. Verify the setup using the `kontena node list` command. It should list all the Kontena Nodes in your Grid.
-
-```
-$ kontena node list
-NAME              VERSION   STATUS   INITIAL   LABELS
-⊛ damp-forest-2   1.3.4     online   1 / 1     provider=vagrant
-```
-
-## Step 4. Deploy Your First Application Stack
+## Step 3. Deploy Your First Application Stack
 
  Now you are ready to deploy your first application stack.
  In this section we will show you how to package a simple WordPress application and deploy it to your Kontena Grid.
@@ -214,6 +187,7 @@ You can use the public IP address of the host node running the service instance 
 Please see the following examples for more advanced stacks:
 
 - [PostgreSQL Cluster (stolon)](https://github.com/kontena/kontena-stacks/tree/master/stolon)
+- [Kafka Cluster](https://github.com/kontena/kontena-stacks/tree/master/kafka)
 - [Kong API Gateway](https://github.com/kontena/kontena-stacks/tree/master/kong)
 - [Wordpress Cluster](https://github.com/kontena/kontena-stacks/tree/master/wordpress-cluster)
 
