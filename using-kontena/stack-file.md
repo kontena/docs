@@ -14,6 +14,7 @@ Learn more:
   * [expose](#expose) - Expose this Kontena Stack via a selected Kontena Service.
   * [services](#services) - Configuration of all Kontena Services.
   * [volumes](#volumes) - Kontena Volumes configuration.
+  * [depends](#depends) - Stack dependencies
 * [Template Language](#template-language)
 * [Examples](#examples)
 * [Hints, Tips and Best Practises](#hints-tips-and-best-practises)
@@ -26,6 +27,11 @@ The complete Kontena Stack File may look something like this:
 stack: kontena/example-app
 version: 0.1.0
 description: This is an example app
+depends:
+  redis:
+    stack: kontena/redis:0.1.0
+    variables:
+      version: 3.2-alpine
 variables:
   mysql_root_pw:
     type: string
@@ -56,6 +62,7 @@ services:
       - DB_URL=db
       - KONTENA_LB_INTERNAL_PORT=8080
       - KONTENA_LB_VIRTUAL_HOSTS={{ app_domain }}
+      - REDIS_HOST={{ redis }}
     deploy:
       strategy: ha
       wait_for_port: 8080
@@ -142,7 +149,7 @@ There are many configuration options available for defining Kontena Services. In
     * With `ha` deploy strategy, Kontena Service Instances are spread evenly across availability zones and Kontena Nodes. The Kontena Platform scheduler will try to spread the Kontena Service Instances evenly across availability zones and Kontena Nodes. Availability zones are resolved from Kontena Node labels; for example, `az=a1` means that that Node belongs to availability zone `a1`.
     * With the `daemon` deploy strategy, Kontena Service Instances are deployed to all Kontena Nodes. If used together with the service `instances` configuration option, a given number of instances will be deployed to all Kontena Nodes.
     * With the `random` deploy strategy, Kontena Service Instances are deployed randomly across your Kontena Platform.
-  * **`wait_for_port`** - Wait until the specified port is responding before deploying another instance. This makes it possible to achieve zero-downtime deploys. The value must be in milli-seconds. For example, the value `3000` (=3s).
+  * **`wait_for_port`** - Wait until the specified port is responding before deploying another instance. This makes it possible to achieve zero-downtime deploys.
   * **`min_health`** - The minimum percentage (expressed as a number in the range 0.0 - 1.0) of healthy Kontena Service Instances that do not sacrifice overall Kontena Service availability while deploying.
   * **`interval`** - The interval of automatic redeployment of the service. This can be used as an "erosion-resistance" mechanism. Format <number><unit>, where unit = min, h, d. For example, value `7d`.
 * **`affinity`** - Specify affinity rules that will be used by Kontena Platform scheduler when scheduling this Kontena Service. Affinity rules may be positive (`==`) or negative (`!=`) and they may be compared against Kontena Node name, Kontena Service name, containers or labels. See usage [example](#using-affinity-rules).
@@ -198,6 +205,68 @@ There are many configuration options available for defining Kontena Services. In
 ### `volumes`
 
 Declare infrastructure agnostic Kontena Volumes that may be used as **named volumes** for any of the Kontena Services belonging to this Kontena Stack. See [usage example](#using-kontena-volumes).
+
+### `depends`
+
+Create nested Kontena Stacks using the `depends` keyword. Stacks that are listed as dependencies will be automatically installed, built, upgraded, deployed and uninstalled together with the main stack.
+
+Child stacks will be installed using a name built from parent stack name and child stack name separated with a dash: `parent_stack_name-child_stack_name-child_of_child_stack_name`.
+
+Local file example:
+
+```yaml
+depends:
+  dependency_name:
+    stack: stackfile.yml
+```
+
+Kontena Stack Registry reference example:
+
+```yaml
+depends:
+  dependency_name:
+    stack: kontena/redis
+```
+
+#### Dependency variables
+
+It is possible to pass variables to child stacks by using the `variables:` keyword.
+
+Example:
+
+```yaml
+depends:
+  redis:
+    stack: kontena/redis
+    variables:
+      version: alpine-3.2
+```
+
+You can also supply values for child stack variables when performing actions on the main Stack by using the `-v` command line parameter by using dot notation:
+
+```
+$ kontena stack install -v redis.version=alpine-3.2 app.yml
+```
+
+#### Referencing dependencies
+
+When a dependency is declared, the name of the dependency can be used like a variable in the rest of the Kontena Stack YAML file.
+
+Example:
+
+```yaml
+stack: example/app
+depends:
+  redis:
+    stack: kontena/redis
+services:
+  app:
+    image: your/app
+    environment:
+      - "REDIS_HOST={{ redis }}"
+```
+
+In this example, the `REDIS_HOST` environment variable will get the value `app-redis`.
 
 ## Template Language
 
