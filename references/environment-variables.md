@@ -22,10 +22,15 @@
 ## Kontena Agent
 
 - `KONTENA_URI`: Kontena Master websocket uri (required)
+- `KONTENA_SSL_VERIFY`: Verify `wss://` server SSL certificate (default: no verification)
+- `KONTENA_SSL_HOSTNAME`: Override hostname for SSL SNI and certificate subject verification
 - `KONTENA_TOKEN`: Kontena Grid token (required)
+- `KONTENA_NODE_ID`: Override node ID (default: `docker info` -> `ID`)
+- `KONTENA_NODE_LABELS`: Override initial node labels (default: `docker info` -> `Labels`)
 - `KONTENA_PEER_INTERFACE`: network interface for peer/private communication (default: eth1)
 - `KONTENA_PUBLIC_IP`: specify node public ip, overrides default resolving
 - `KONTENA_PRIVATE_IP`: specify node private ip, overrides default resolving
+- `KONTENA_NODE_NAME`: Override node name (default: `docker info` -> `Name` from hostname)
 - `LOG_LEVEL`: logging level
 - `ETCD_IMAGE`: etcd image (default: kontena/etcd)
 - `ETCD_VERSION`: etcd image version
@@ -36,6 +41,8 @@
 - `WEAVEEXEC_IMAGE`: weave exec image (default: weaveworks/weaveexec)
 - `WEAVE_VERSION`: weave net version
 - `WEBSOCKET_TIMEOUT`: websocket timeout in seconds (default: 5.0)
+- `SSL_CERT_FILE`: path to SSL CA cert bundle file
+- `SSL_CERT_PATH`: path to SSL CA cert bundle directory
 
 ## Kontena CLI
 
