@@ -19,11 +19,11 @@ In this chapter, we'll discover how to manage, operate and monitor custom Konten
 * [Show Kontena Platform Master Audit Log](#show-kontena-platform-master-audit-log)
 * [Connect Kontena Platform Master to Kontena Cloud](#connect-kontena-platform-master-to-kontena-cloud)
 * [Connect to Kontena Platform Master via SSH](#connect-to-kontena-platform-master-via-ssh)
-* [Hints, Tips and Best Practises](#hints-tips-and-best-practises)
+* [Hints, Tips and Best Practices](#hints-tips-and-best-practices)
 
 ## Install Kontena Platform Master
 
-Kontena Platform Master software is designed to handle multiple Kontena Platform Grids. Since Kontena Platform (the isolated environment for running the container workloads) is combination of a Master and a Grid, most organizations are good with just one Kontena Platform Master installation. 
+Kontena Platform Master software is designed to handle multiple Kontena Platform Grids. Since Kontena Platform (the isolated environment for running the container workloads) is combination of a Master and a Grid, most organizations are good with just one Kontena Platform Master installation.
 
 Please note, each Kontena Platform Grid must be assigned a dedicated set of Kontena Nodes. Kontena Platform Master does not provide any compute resources for the Kontena Platform Grid.
 
@@ -101,7 +101,7 @@ $ kontena master init-cloud
 $ kontena master ssh
 ```
 
-## Hints, Tips and Best Practises
+## Hints, Tips and Best Practices
 
 #### Exporting Logs Directly from MongoDB
 
