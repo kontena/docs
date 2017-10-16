@@ -22,6 +22,8 @@
 ## Kontena Agent
 
 - `KONTENA_URI`: Kontena Master websocket uri (required)
+- `KONTENA_SSL_VERIFY`: Verify `wss://` server SSL certificate (default: no verification)
+- `KONTENA_SSL_HOSTNAME`: Override hostname for SSL SNI and certificate subject verification
 - `KONTENA_TOKEN`: Kontena Grid token (required)
 - `KONTENA_NODE_ID`: Override node ID (default: `docker info` -> `ID`)
 - `KONTENA_NODE_LABELS`: Override initial node labels (default: `docker info` -> `Labels`)
@@ -39,6 +41,8 @@
 - `WEAVEEXEC_IMAGE`: weave exec image (default: weaveworks/weaveexec)
 - `WEAVE_VERSION`: weave net version
 - `WEBSOCKET_TIMEOUT`: websocket timeout in seconds (default: 5.0)
+- `SSL_CERT_FILE`: path to SSL CA cert bundle file
+- `SSL_CERT_PATH`: path to SSL CA cert bundle directory
 
 ## Kontena CLI
 
