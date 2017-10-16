@@ -26,8 +26,8 @@ services:
     network_mode: host
     restart: unless-stopped
     environment:
-      - KONTENA_URI=ws://<URI>/
-      - KONTENA_TOKEN=<TOKEN>
+      - KONTENA_URI=ws://<KONTENA_URI>/
+      - KONTENA_TOKEN=<KONTENA_TOKEN>
       - KONTENA_PEER_INTERFACE=eth1
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
