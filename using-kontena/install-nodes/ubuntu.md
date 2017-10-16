@@ -64,8 +64,8 @@ $ sudo apt-get install kontena-agent
 
 At the end of the installation the process, you will be asked for a couple of configuration parameters:
 
-* `KONTENA_URI` - Specify the URI of the Kontena Platform (use ws:// for a non-tls connection) you want to use. Use `kontena platform show` to see the current Kontena Platform URI.
-* `KONTENA_TOKEN` - Specify the token of the Kontena Platform. Use `kontena platform show --token` to see the current Kontena Platform token.
+* `KONTENA_URI` - Specify the URI of the Kontena Platform (use ws:// for a non-tls connection) you want to use. Use `kontena cloud platform env` to see the current Kontena Platform URI.
+* `KONTENA_TOKEN` - Specify the token of the Kontena Platform. Use `kontena cloud platform env` to see the current Kontena Platform token.
 
 ## Restart Kontena Node
 

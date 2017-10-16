@@ -1,7 +1,7 @@
 module.exports = {
   title: "Kontena",
   plugins: [
-    "edit-link", "prism", "-highlight", "github", "anchorjs", "collapsible-menu",
+    "edit-link", "prism", "-highlight", "github", "anchorjs",
     "ga", "scripts", "mixpanel"
   ],
   pluginsConfig: {
@@ -17,7 +17,9 @@ module.exports = {
     },
     scripts: {
       files: [
-        "./_scripts/hs.js"
+        "./_scripts/hs.js",
+        "./_scripts/menu.js",
+        "./_scripts/tracks.js"
       ]
     },
     hs: {

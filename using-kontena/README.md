@@ -100,8 +100,6 @@ See [Kontena Services usage documentation](./services.md) to learn how to manage
 
 ## Kontena Volumes
 
-> **IMPORTANT!** Kontena Volumes support is still experimental. The exact details of how these volumes are managed may still change as the implementation evolves. If you plan to use Kontena Volumes today, be prepared to change your volume definitions as necessary when upgrading to newer Kontena Platform versions.
-
 Kontena Volumes provide storage (persistent; local or external) for stateful services. A Kontena Volume contains a volume configuration that abstracts an actual physical volume location. Once defined, it will be made available for Kontena Stacks via the Kontena Platform. Kontena Stacks can attach these volumes to Kontena Services. Physical Kontena Volume instances are created and attached on-demand across the Kontena Platform. The purpose of Kontena Volumes are to decouple physical infrastructure configurations and details from the application layer.
 
 In short, here's how to use the infrastructure agnostic Kontena Volumes:
@@ -118,7 +116,7 @@ See [Kontena Volumes usage documentation](./volumes.md) to learn how to manage, 
 
 ## Kontena Vault
 
-Often, when two different applications or services interact, they will authenticate using secrets, access tokens or something similar. Since it is bad practise to hard code or package them together with the application (or it's meta data such as `Dockerfile`, `docker-compose.yml` or `kontena.yml`), some kind of secrets management solution is needed. Kontena Vault is a secure key-value storage system that can be used to manage such secrets.
+Often, when two different applications or services interact, they will authenticate using secrets, access tokens or something similar. Since it is bad practice to hard code or package them together with the application (or it's meta data such as `Dockerfile`, `docker-compose.yml` or `kontena.yml`), some kind of secrets management solution is needed. Kontena Vault is a secure key-value storage system that can be used to manage such secrets.
 
 Kontena Vault is fully integrated into the Kontena Platform and may be used to manage secrets for Kontena Stacks and Services. It has built-in support for managing LetsEncrypt certificates.
 
