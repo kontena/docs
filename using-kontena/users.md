@@ -81,7 +81,7 @@ Custom Kontena Platform deployments use built-in user management. The first user
 
 **users_admin**
 * Invite and remove users
-* Manage Kontena Platform Grid users (only users own Kontena Platform Grids)
+* Manage Kontena Platform Grid users (only user's own Kontena Platform Grids)
 
 **grid_admin**
 * manage grid (update)
