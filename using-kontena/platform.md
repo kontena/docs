@@ -169,12 +169,14 @@ Show audit logs.
 $ kontena grid audit-log
 ```
 
-## Show Kontena Platform Grid Environment Details
+## Show Kontena Node Configuration
 
-Outputs currently used Kontena Platform Grid environment variables that can be used to configure Kontena CLI.
+Generate the [`/etc/kontena-agent.env` environment variables](../references/environment-variables#kontena-agent) required when manually provisioning nodes using grid tokens:
 
 ```
 $ kontena grid env
+KONTENA_URI=ws://192.168.66.1:9292/
+KONTENA_TOKEN=yempbjWHbZLhc66gB0mAFXKS8HzS/daDwCfnHC+UfrJo5wkhQ6hpr8XKY5nUdH+h6CH81Y9bQIc4IgTcEEjQCQ==
 ```
 
 ## Show Kontena Platform Grid Cloud-Config
