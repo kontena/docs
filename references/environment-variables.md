@@ -23,6 +23,8 @@
 
 - `KONTENA_URI`: Kontena Master websocket uri (required)
 - `KONTENA_TOKEN`: Kontena Grid token (required)
+- `KONTENA_NODE_ID`: Override node ID (default: `docker info` -> `ID`)
+- `KONTENA_NODE_LABELS`: Override initial node labels (default: `docker info` -> `Labels`)
 - `KONTENA_PEER_INTERFACE`: network interface for peer/private communication (default: eth1)
 - `KONTENA_PUBLIC_IP`: specify node public ip, overrides default resolving
 - `KONTENA_PRIVATE_IP`: specify node private ip, overrides default resolving
