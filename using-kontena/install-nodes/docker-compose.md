@@ -1,8 +1,4 @@
-# Creating Kontena Nodes on Container Linux
-
-CoreOS is currently recommending the use of proprietary [Container Linux Config](https://coreos.com/os/docs/latest/provisioning.html) format for provisioning Container Linux machines. Previously, they recommended the use of cloud-config that is a more generic format.
-
-Since cloud-config is widely supported by most of the public cloud providers and it may be used to provision Container Linux machines, Kontena is using cloud-config for provisioning Container Linux machines. An example cloud-config that can be used as the basis for provisioning a Kontena Node may be generated via Kontena CLI.
+# Creating Kontena Nodes with Docker Compose
 
 * [Prerequisites](#prerequisites)
 * [Create Kontena Node](#install-kontena-node)
@@ -37,8 +33,8 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
 ```
 
-* `KONTENA_URI` - Specify the URI of the Kontena Platform (use ws:// for a non-tls connection) you want to use. Use `kontena platform show` to see the current Kontena Platform URI.
-* `KONTENA_TOKEN` - Specify the token of the Kontena Platform. Use `kontena platform show --token` to see the current Kontena Platform token.
+* `KONTENA_URI` - Specify the URI of the Kontena Platform (use ws:// for a non-tls connection) you want to use. Use `kontena cloud platform env` to see the current Kontena Platform URI.
+* `KONTENA_TOKEN` - Specify the token of the Kontena Platform. Use `kontena cloud platform env` to see the current Kontena Platform token.
 * `KONTENA_PEER_INTERFACE` - The network interface that is used to connect the other Kontena Nodes.
 
 #### Step 2: Copy `docker-compose.yml` file to each host
