@@ -1,0 +1,25 @@
+language: nodejs
+sudo: true
+dist: trusty
+env:
+  global:
+    - secure: "AVPaX81SIS3baV+5FIQ9GY90wSt7IYgwg68gBwcx+TUyEf/otkUyCou0aC0rr2gUByzysGTEcoVrVirJ7u8gtU1cF+KB/UM84+qXuf4OmD7is6mdNZZwEB14ifcLFV9xm6amNSNbU7HGXNo/VRAaGSJOdY9XoQxkIw06JeypKwJWxwQFvE7ZVC/bPD0fzEiVNRTrNpchNLOYhjoUq8VKVe0msDL3/1/ihVf5A0/ZJzBohSYjn05MjgSHzZhdfyIbCGtnNvAuN9mJOr0I6NLeapva3swGTMXMWPxwY9+M5br54WmC2p+0PI2Z8TLtUT/qBR5dkfy/rkugDTUlYIBNAm81XvZmg2GBoyWJ5kEALHkT2HeDauhxo+robbNYCm6lUDR9GLUK4bmhOL1oWCb4UCF0Aj3kpcY4lDeRdrDo23FU/w5uENZMeAal4yxly4h1XrzvpYm670Oy78pRPkqZjB1Luuj4419NnrJj1E1RB7He5NwXFZPFfbZ7/v2ZIOzFyxsrmmITWcEvCTIShApU3DXbLHWCm+/0MKQeoFsP88BC7Rm8L7I53QzGnTzugfkW/gmrl5iu6fsxDQsae7aat9TAHUdzKQnk57HAl5N9VuTm22HuH7nntK8qlHr6yYVNapa2y6IvGWexkswLmhgHsJVoGieoZc+hOSd7cTugblU=" # dockerhub
+    - GA_CODE=UA-60024048-1
+    - HUBSPOT_CODE=2126125
+    - MIXPANEL_TOKEN=94fbb49ee4dd0cbee68e6a4c057d3ced
+cache:
+  directories:
+    - "node_modules"
+before_install:
+  - "npm i -g gitbook-cli"
+install:
+  - "gitbook install"
+script:
+  - "gitbook build"
+deploy:
+  - provider: script
+    skip_cleanup: true
+    script: "$TRAVIS_BUILD_DIR/deploy.sh"
+    on:
+      branch: master
+      repo: kontena/docs

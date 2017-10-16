@@ -1,7 +1,8 @@
 module.exports = {
   title: "Kontena",
   plugins: [
-    "edit-link", "prism", "-highlight", "github", "anchorjs", "collapsible-menu", "ga", "scripts"
+    "edit-link", "prism", "-highlight", "github", "anchorjs", "collapsible-menu",
+    "ga", "scripts", "mixpanel"
   ],
   pluginsConfig: {
     "edit-link": {
@@ -21,6 +22,9 @@ module.exports = {
     },
     hs: {
       code: process.env.HUBSPOT_CODE || ""
+    },
+    mixpanel: {
+      token: process.env.MIXPANEL_TOKEN || ""
     }
   },
   styles: {
