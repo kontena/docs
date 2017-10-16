@@ -32,6 +32,7 @@
 * [Users](using-kontena/users.md)
 * [Stats](using-kontena/stats.md)
 * [Logs](using-kontena/logs.md)
+* [Affinities](using-kontena/affinities.md)
 
 ## Developer Tools
 
