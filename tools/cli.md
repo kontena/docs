@@ -2,17 +2,13 @@
 
 ## Installing Kontena CLI
 
-# System Requirements
-
-Following are the version requirements for components on which Kontena depends:
-
-* **Kontena CLI:** Official package or Ruby >= 2.1
-  * **Local Image Builds (optional):** Docker 1.12.x or later
-  * **VPN (optional):** OpenVPN client
-
 ### MacOS (OSX)
 
-You can install Kontena CLI using our [official installer](https://github.com/kontena/kontena/releases/latest).
+You can install Kontena CLI using our [official installer](https://gh-releases.kontena.io/kontena/kontena/pkg/latest).
+
+### Debian / Ubuntu
+
+You can install Kontena CLI using our [official deb package](https://gh-releases.kontena.io/kontena/kontena/deb/latest).
 
 ### Linux / Windows
 
