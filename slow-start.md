@@ -1,12 +1,16 @@
 # Slow Start
 
-> NOTE! This documentation is for those who want to use the Kontena open source project to deploy custom Kontena Platform. Use of Kontena Cloud is optional. If you don't want to tinker and maintain Kontena Platform yourself, please see [quick start](./quick-start.md) documentation instead. 
+> NOTE! This documentation is for those who want to use the Kontena open source project to deploy custom Kontena Platform. Use of Kontena Cloud is optional. If you don't want to tinker and maintain Kontena Platform yourself, please see [quick start](./quick-start.md) documentation instead.
 
 ## Step 1. Install Kontena CLI (command-line interface)
 
 ### MacOS (OSX)
 
-You can install Kontena CLI using our [official installer](https://github.com/kontena/kontena/releases/latest).
+You can install Kontena CLI using our [official installer](https://gh-releases.kontena.io/kontena/kontena/pkg/latest) or [Homebrew](https://brew.sh/) :
+
+```
+$ brew install kontena
+```
 
 ### Linux / Windows
 

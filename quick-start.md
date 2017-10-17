@@ -13,7 +13,11 @@ Follow these steps to get started with Kontena on Kontena Cloud quickly. If you 
 
 ### MacOS (OSX)
 
-You can install Kontena CLI using our [official installer](https://gh-releases.kontena.io/kontena/kontena/pkg/latest).
+You can install Kontena CLI using our [official installer](https://gh-releases.kontena.io/kontena/kontena/pkg/latest) or [Homebrew](https://brew.sh/) :
+
+```
+$ brew install kontena
+```
 
 ### Debian / Ubuntu
 

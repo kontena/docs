@@ -4,7 +4,17 @@
 
 ### MacOS (OSX)
 
-You can install Kontena CLI using our [official installer](https://gh-releases.kontena.io/kontena/kontena/pkg/latest).
+You can install Kontena CLI using our [official installer](https://gh-releases.kontena.io/kontena/kontena/pkg/latest) or [Homebrew](https://brew.sh/) :
+
+```
+$ brew install kontena
+```
+
+To install the current unstable development version, you can use:
+
+```
+$ brew install --HEAD kontena
+```
 
 ### Debian / Ubuntu
 
