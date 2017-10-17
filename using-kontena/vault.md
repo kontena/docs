@@ -98,17 +98,16 @@ To verify that you really control the requested domain, create a DNS TXT record 
 Once you have created the necessary DNS proof of domain control you can request the actual certificate.
 
 ```
-$ kontena certificate get --secret-name SSL_CERT_LE_TEST api.example.com
-Certificate successfully received and stored into vault with key SSL_CERT_LE_TEST
+$ kontena certificate request api.example.com
+
 ```
 
-Kontena automatically stores the certificate in a secure vault in a format where it can be used for SSL termination with Kontena Load Balancer. If you omit the secret-name option, Kontena automatically generates the name using the domain name.
+Kontena automatically stores the certificate in a secure vault in a format where it can be used for SSL termination with Kontena Load Balancer.
 
 LetsEncrypt does not (yet) support wildcard certificates. In many cases it is necessary to serve multiple sites behind one certificate. For this, LetsEncrypt supports a concept called subject alternative names (SAN). To obtain a certificate for multiple DNS names, simply specify them in the request:
 
 ```
-$ kontena certificate get --secret-name SSL_CERT_LE_TEST example.com www.example.com
-Certificate successfully received and stored into vault with key SSL_CERT_LE_TEST
+$ kontena certificate request example.com www.example.com
 ```
 **Note:** For each of the domains in the certificate request, it is necessary to complete the domain authorization first! The first domain in the list becomes the common name and others are used as alternative names:
 
@@ -136,6 +135,24 @@ By default Kontena stores the full chain version of the certificate. This is bec
 ```
 --cert-type CERT_TYPE    The type of certificate to get: fullchain, chain or cert (default: "fullchain")
 ```
+
+#### Using certificates
+
+Starting from Kontena 1.4 version, used certificates are explicitly defined in Kontena stack yaml:
+
+
+```yaml
+...
+services:
+  my_loadbalancer:
+    image: kontena/lb:latest
+    ports:
+      - 443:443
+    certificates:
+      -
+...
+```
+
 
 #### Kontena Vault Integration
 
