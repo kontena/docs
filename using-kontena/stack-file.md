@@ -144,6 +144,10 @@ There are many configuration options available for defining Kontena Services. In
   * **`secret`** - Specify the name of a secret in Kontena Vault.
   * **`name`** - Specify the name exposed to this Kontena Service.
   * **`type`** - Specify how the secret will be exposed. Must be `env` since your Kontena Platform does not support any other way to expose secrets at the moment.
+* **`certificates`** - Expose the certificates bundled with their private key from [Kontena Vault](vault#using-letsencrypt-certificates) to this Kontena Service. See usage [example](#using-certificates). Each list item must specify the `subject`, `name` and `type` parameters:
+  * **`subject`** - Specify the subject domain of a certificate from `kontena certificate list`.
+  * **`type`** - Specify how the secret will be exposed. Must be `env` since your Kontena Platform does not support any other way to expose secrets at the moment.
+  * **`name`** - Specify the environment variable name exposed to this Kontena Service.
 * **`deploy`** - Specify how Kontena will schedule Kontena Service Instances across your Kontena Platform. The deployment options are described as a list of parameters. See usage [example](#using-deploy-options).
   * **`strategy`** - How to deploy multiple instances of this service to more than one Kontena Node. Supported values: `ha`, `daemon` and `random`.
     * With `ha` deploy strategy, Kontena Service Instances are spread evenly across availability zones and Kontena Nodes. The Kontena Platform scheduler will try to spread the Kontena Service Instances evenly across availability zones and Kontena Nodes. Availability zones are resolved from Kontena Node labels; for example, `az=a1` means that that Node belongs to availability zone `a1`.
@@ -496,6 +500,20 @@ services:
     secrets:
       - secret: MYSQL_ADMIN_PASSWORD
         name: MYSQL_PASSWORD
+        type: env
+```
+
+#### Using `certificates`
+
+In the example below, the Kontena Platform will expose the bundled X.509 certificate, private key and any certificate chain for the `example.com` certificate as an environment variable `SSL_CERTS` to the Kontena Load Balancer Service.
+
+```yaml
+services:
+  lb:
+    image: kontena/lb
+    certificates:
+      - subject: example.com
+        name: SSL_CERTS
         type: env
 ```
 
