@@ -144,7 +144,7 @@ There are many configuration options available for defining Kontena Services. In
   * **`secret`** - Specify the name of a secret in Kontena Vault.
   * **`name`** - Specify the name exposed to this Kontena Service.
   * **`type`** - Specify how the secret will be exposed. Must be `env` since your Kontena Platform does not support any other way to expose secrets at the moment.
-* **`certificates`** - Expose the certificates bundled with their private key from [Kontena Vault](vault#using-letsencrypt-certificates) to this Kontena Service. See usage [example](#using-certificates). Each list item must specify the `subject`, `name` and `type` parameters:
+* **`certificates`** - Expose the certificates bundled with their private key from [Kontena Vault](vault.md#using-letsencrypt-certificates) to this Kontena Service. See usage [example](#using-certificates). Each list item must specify the `subject`, `name` and `type` parameters:
   * **`subject`** - Specify the subject domain of a certificate from `kontena certificate list`.
   * **`type`** - Specify how the secret will be exposed. Must be `env` since your Kontena Platform does not support any other way to expose secrets at the moment.
   * **`name`** - Specify the environment variable name exposed to this Kontena Service.

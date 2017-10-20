@@ -138,7 +138,7 @@ By default Kontena stores the full chain version of the certificate. This is bec
 
 #### Using certificates
 
-Starting from Kontena 1.4 version, the [Kontena Stack YAML](stack-file#using-certificates) services can include Kontena managed Let's Encrypt `certificates`:
+Starting from Kontena 1.4 version, the [Kontena Stack YAML](stack-file.md#using-certificates) services can include Kontena managed Let's Encrypt `certificates`:
 
 
 ```yaml
