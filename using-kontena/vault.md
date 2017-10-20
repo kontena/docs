@@ -138,11 +138,10 @@ By default Kontena stores the full chain version of the certificate. This is bec
 
 #### Using certificates
 
-Starting from Kontena 1.4 version, used certificates are explicitly defined in Kontena stack yaml:
+Starting from Kontena 1.4 version, the [Kontena Stack YAML](stack-file#using-certificates) services can include Kontena managed Let's Encrypt `certificates`:
 
 
 ```yaml
-...
 services:
   my_loadbalancer:
     image: kontena/lb:latest
@@ -153,7 +152,6 @@ services:
         type: env
         name: SSL_CERTS
 ```
-
 
 #### Kontena Vault Integration
 
