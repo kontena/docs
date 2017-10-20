@@ -149,8 +149,9 @@ services:
     ports:
       - 443:443
     certificates:
-      -
-...
+      - subject: www.example.com
+        type: env
+        name: SSL_CERTS
 ```
 
 
