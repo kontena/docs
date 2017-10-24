@@ -45,13 +45,13 @@ $ kontena vault rm <name>
 
 ## Using LetsEncrypt Certificates
 
-Kontena Vault integrates natively with [LetsEncrypt](https://letsencrypt.org) to provide easy-to-use certificate management for your Kontena Services.
+Kontena Vault integrates natively with [Let's Encrypt](https://letsencrypt.org) to provide easy-to-use certificate management for your Kontena Services.
 
 The following chapters describe the flow of getting certificates from Let's Encrypt: register --> authorize domain --> request certificate
 
 #### Register for LE
 
-To use LetsEncrypt, you must first register as a user.
+To use Let's Encrypt, you must first register as a user.
 
 ```
 $ kontena certificate register <you@example.com>
@@ -108,7 +108,7 @@ $ kontena certificate request api.example.com
 
 Kontena automatically stores the certificate in a secure vault in a format where it can be used for SSL termination with Kontena Load Balancer.
 
-LetsEncrypt does not (yet) support wildcard certificates. In many cases it is necessary to serve multiple sites behind one certificate. For this, LetsEncrypt supports a concept called subject alternative names (SAN). To obtain a certificate for multiple DNS names, simply specify them in the request:
+Let's Encrypt does not (yet) support wildcard certificates. In many cases it is necessary to serve multiple sites behind one certificate. For this, Let's Encrypt supports a concept called subject alternative names (SAN). To obtain a certificate for multiple DNS names, simply specify them in the request:
 
 ```
 $ kontena certificate request example.com www.example.com
@@ -134,7 +134,7 @@ Certificate:
                 DNS:www.example.com, DNS:example.com
 ```
 
-By default Kontena stores the full chain version of the certificate. This is because LetsEncrypt intermediaries are not trusted by all client libraries (such as some libraries associated with Ruby, Docker, and wget, for example).
+By default Kontena stores the full chain version of the certificate. This is because Let's Encrypt intermediaries are not trusted by all client libraries (such as some libraries associated with Ruby, Docker, and wget, for example).
 
 #### Using certificates
 
