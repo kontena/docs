@@ -12,7 +12,7 @@ $ kontena master login --code <INITIAL_ADMIN_CODE> <master_url>
 
 ## Configuring Kontena Cloud as the authentication provider
 
-If you are installing a fresh Kontena Platform Master v0.16.0 or newer, Kontena Cloud is configured as the authentication provider automatically when using Kontena CLI for provisioining unless you elect not to use the Kontena Cloud in the installer. You can authenticate from the Kontena CLI to Kontena Cloud and register a new account by using the command:
+If you are installing a fresh Kontena Platform Master v0.16.0 or newer, Kontena Cloud is configured as the authentication provider automatically when using Kontena CLI for provisioining unless you elect not to use Kontena Cloud in the installer. You can authenticate from the Kontena CLI to Kontena Cloud and register a new account by using the command:
 
 ```
 $ kontena cloud login
@@ -20,6 +20,7 @@ $ kontena cloud login
 
 If you have upgraded your Kontena Platform Master from a previous version or installed Kontena without Kontena CLI plugins you can configure it to use Kontena Cloud by using the command:
 
+To add new users, use the invite command:
 ```
 $ kontena master init-cloud
 ```
@@ -28,7 +29,6 @@ $ kontena master init-cloud
 
 To invite more users you first need to configure the Kontena Platform Master to use an authentication provider. If you use the provisioning tools offered by Kontena CLI, this will be done automatically during installation unless you select otherwise.
 
-To add new users, use the invite command:
 
 ```
 $ kontena master user invite user@example.com
@@ -73,7 +73,7 @@ $ kontena master config import settings.json
 
 #### `server.root_url`
 
-This is he base URL to your Master Instance, which is used to build the callback url. You can use this setting if your Kontena Platform Master is accessible through a DNS name such as `kontena-master.example.com`.
+This is the base URL to your Master Instance, which is used to build the callback url. You can use this setting if your Kontena Platform Master is accessible through a DNS name such as `kontena-master.example.com`.
 
 **Example:** `https://10.0.0.1:9292`
 
@@ -131,9 +131,9 @@ Some providers may provide user information through a token info endpoint that t
 
 #### `oauth2.userinfo_requires_basic_auth`
 
-When false (default) the obtained access token is used as bearer token authentication when requesting userinfo from the authentication provider.
+When false (default), the obtained access token is used as the bearer token authentication when requesting userinfo from the authentication provider.
 
-Some providers require you to use the client_id and client_secret as basic authentication username and password. Usually this also means that you must use the `:access_token` url interpolation in `oauth2.userinfo_endpoint` to supply the access token.
+Some providers require you to use the client_id and client_secret as the basic authentication username and password. Usually this also means that you must use the `:access_token` url interpolation in `oauth2.userinfo_endpoint` to supply the access token.
 
 **Example:** `false`
 
@@ -156,7 +156,7 @@ Possible options are:
 
 #### `oauth2.code_requires_basic_auth`
 
-Some providers require that a HTTP Basic authentication header be used with client_id as the username and client_secret as the password when exchanging authorization codes for access tokens.
+Some providers require that a HTTP Basic authentication header be used with the client_id as the username and client_secret as the password when exchanging authorization codes for access tokens.
 
 **Example:** `true`
 
@@ -185,19 +185,19 @@ Same as `oauth2.userinfo_username_jsonpath` but for reading a user's id.
 
 This is what happens under the hood during an authentication request to the Kontena Platform Master:
 
-1. An administrator of the Kontena Platform Master has created an invitation for an user and has obtained an invitation code.
+1. An administrator of the Kontena Platform Master has created an invitation for a user and has obtained an invitation code.
 2. The user issues the command `kontena master join <https://master_url> <invitation_code>`. If the email address in the invitation matches the one used on the authentication provider, the user can also use the normal Master login: `kontena master login <https://master_url>` without an invitation code.
 3. The CLI automatically starts a local web server in the background to listen for the OAuth2 callback on a random TCP port. This server is only accessible through the localhost interface and is not exposed to the internet. The final step of the authentication flow will redirect the user to `http://localhost:<port>/cb?code=<auth_code>` and the CLI's local web server then receives the authorization code from the parameters in that request.
 4. The CLI requests `https://master_url/authenticate?redirect_uri=http://localhost:<random_port>/cb&invite_code=<invite_code>`
-5. Master validates the parameters and tries to find the user by using the invitation code. If an invitation code was not supplied, then the user matching will be performed in the userinfo step by comparing the email address supplied by the auth provider with one in the local user database.
-6. The Master creates an AuthorizationRequest record with a random `state` id. This will be used to match the callback coming from the auth provider with the original authentication request.
+5. The Master validates the parameters and tries to find the user by using the invitation code. If an invitation code was not supplied, then the user matching will be performed in the userinfo step by comparing the email address supplied by the auth provider with one in the local user database.
+6. The Master creates an Authorization Request record with a random `state` id. This will be used to match the callback coming from the auth provider with the original authentication request.
 7. The Master responds with a redirect to the authentication provider's authorization URL.
 8. The CLI receives a response to the request from step 4 and opens a browser to the returned authorization URL.
 9. The user sees a consent prompt asking for agreement to give the Master access to the user's basic information.
 10. The user clicks Agree and the authentication provider redirects the user back to `https://master_url/cb?code=<authorization_code>&state=<state>`
 11. The Master parses the query parameters and finds the existing authorization request using the state parameter.
 12. The Master exchanges the authorization code for an access token from the authentication provider's token endpoint.
-13. The Master requests user information using the received access token and updates the user's external id and username/email in the local user database.
+13. The Master requests the user's information using the received access token and updates the user's external id and username/email in the local user database.
 14. The Master creates a local access token with an authorization code.
 15. The Master responds with a redirect to `http://localhost:<random_port>/cb?code=<authorization_code>``.
 16. The user's browser follows the redirect to the local web server, which then parses the code from the query parameters.
