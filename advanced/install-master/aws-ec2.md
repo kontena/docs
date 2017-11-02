@@ -45,7 +45,7 @@ Options:
 
 ## Updating Kontena Platform Master
 
-By default, Kontena Platform Master will track `latest` version tag of Kontena, and will auto-update when the host is rebooted. This auto-update process can be forced by executing following command in the Kontena Platform Master host:
+By default, thr Kontena Platform Master will track the `latest` version tag of Kontena, and will auto-update when the host is rebooted. This auto-update process can be forced by executing the following command in the Kontena Platform Master host:
 
 ```
 $ sudo systemctl restart kontena-server-api
