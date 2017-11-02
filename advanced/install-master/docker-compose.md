@@ -70,7 +70,7 @@ cat certificate.crt privateKey.key > cert.pem
 
 ## Login to Kontena Platform Master
 
-After the Kontena Platform Master has started, you can authenticate as local administrator using the `KONTENA_INITIAL_ADMIN_CODE`. Please refer to [authentication](../authentication.md) for information about how to log in with the admin code and how to configure [Kontena Cloud](https://cloud.kontena.io) as the authentication provider.
+After the Kontena Platform Master has started, you can authenticate as the local administrator using the `KONTENA_INITIAL_ADMIN_CODE`. Please refer to [authentication](../authentication.md) for information about how to log in with the admin code and how to configure [Kontena Cloud](https://cloud.kontena.io) as the authentication provider.
 
 ## Updating Kontena Platform Master
 
