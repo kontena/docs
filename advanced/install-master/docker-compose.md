@@ -74,4 +74,4 @@ After the Kontena Platform Master has started, you can authenticate as local adm
 
 ## Updating Kontena Platform Master
 
-Kontena Platform Master & Agent can be updated just by changing image tag and restarting services. Kontena Platform Master and Agent versions must match at least on `major.minor` versions, although it's recommended to keep versions exactly in sync.
+Kontena Platform Master & Agent can be updated just by changing the image tag and restarting services. The Kontena Platform Master and Agent versions must match at least on `major.minor` versions, although it's recommended to keep versions exactly in sync.
