@@ -55,7 +55,7 @@ $ kontena cloud node terminate <NAME>
 
 ### Kontena Agent
 
-By default, Kontena Nodes will auto-update to the same version as Kontena Platform Master immediately if the `major` or `minor` version changes (`major.minor.x`). Kontena Nodes will do a patch level auto-update only when rebooted or systemd is restarted. This auto-update process can be forced by executing the following command in every Kontena Node host:
+By default, Kontena Nodes will auto-update to the same version as the Kontena Platform Master immediately if the `major` or `minor` version changes (`major.minor.x`). Kontena Nodes will do a patch level auto-update only when rebooted or systemd is restarted. This auto-update process can be forced by executing the following command in every Kontena Node host:
 
 ```
 $ kontena cloud node shell <NAME> systemctl restart kontena-agent
@@ -63,7 +63,7 @@ $ kontena cloud node shell <NAME> systemctl restart kontena-agent
 
 ### Host Operating System
 
-Kontena Nodes use [Container Linux](https://coreos.com/os/docs/latest/) as the host operating system. Host OS is configured to download updates automatically but they are applied only when a Kontena Node is rebooted. To apply updates, reboot a node with following command:
+Kontena Nodes use [Container Linux](https://coreos.com/os/docs/latest/) as the host operating system. Host OS is configured to download updates automatically but they are applied only when a Kontena Node is rebooted. To apply updates, reboot a node with the following command:
 
 ```
 $ kontena cloud node reboot <NAME>
