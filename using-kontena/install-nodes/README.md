@@ -2,7 +2,7 @@
 
 Almost any machine may be turned into a Kontena Node (see [system requirements](#system-requirements)).
 
-The easiest way for adding Kontena Nodes is to [use the provisioning tool](#adding-kontena-nodes-with-provision-tool) that is built into Kontena CLI. This tool may be used to provision Kontena Nodes to most major public cloud platforms and for local testing purposes.
+The easiest way for adding Kontena Nodes is to [use the provisioning tool](#adding-kontena-nodes-with-provision-tool) that is built into Kontena CLI. This tool may be used to provision Kontena Nodes to Kontena Cloud, most major public cloud platforms and for local testing purposes.
 
 Alternatively, you may add Kontena Nodes manually by following the [manual install instructions](#adding-kontena-nodes-manually).
 
@@ -14,17 +14,18 @@ Learn more:
 
 ## Adding Kontena Nodes With Provision Tool
 
-**For local testing purposes:**
-
-* [Virtualbox / Vagrant](vagrant.md)
-
 **For public cloud platforms:**
 
+* [Kontena Cloud](cloud.md)
 * [AWS EC2](aws-ec2.md)
 * [Azure](azure.md)
 * [DigitalOcean](digitalocean.md)
 * [Packet](packet.md)
 * [UpCloud](upcloud.md)
+
+**For local testing purposes:**
+
+* [Virtualbox / Vagrant](vagrant.md)
 
 ## Adding Kontena Nodes Manually
 
