@@ -4,7 +4,7 @@
 
 Kontena Platform Grid is part of Kontena Platform and provides cluster wide abstraction that is required for connecting compute resources and data volumes.
 
-In this chapter, we'll discover how to work with Kontena Platform Grids using Kontena CLI tool:
+In this chapter, we'll discover how to work with Kontena Platform Grids using the Kontena CLI tool:
 
 * [Create a New Kontena Platform Grid](#create-a-new-kontena-platform-grid)
 * [Update Kontena Platform Grid Configuration](#update-kontena-platform-grid-configuration)
@@ -30,17 +30,17 @@ Create a new Kontena Platform Grid.
 $ kontena grid create --initial-size=3 <GRID_NAME>
 ```
 
-This command accepts same options as Kontena Platform create. The only limitation is `region` setting, that is not supported. See the full list of [configuration options](../using-kontena/platform.md#configuration-options).
+This command accepts the same options as the Kontena Platform create. The only limitation is the `region` setting, that is not supported. See the full list of [configuration options](../using-kontena/platform.md#configuration-options).
 
 ## Update Kontena Platform Grid Configuration
 
-Update the configuration for current Kontena Platform Grid.
+Update the configuration for the current Kontena Platform Grid.
 
 ```
 $ kontena grid update <GRID_NAME>
 ```
 
-Just like Kontena Platform Grid create, this command accepts same options as Kontena Platform update. The only limitation is `region` setting, that is not supported. See the full list of [configuration options](../using-kontena/platform.md#configuration-options).
+Just like the Kontena Platform Grid create, this command accepts the same options as the Kontena Platform update. The only limitation is the `region` setting, that is not supported. See the full list of [configuration options](../using-kontena/platform.md#configuration-options).
 
 ## List Kontena Platform Grids
 
@@ -60,7 +60,7 @@ $ kontena grid use <GRID_NAME>
 
 ## Show Kontena Platform Grid Configuration
 
-Show details of current Kontena Platform Grid.
+Show details of the current Kontena Platform Grid.
 
 ```
 $ kontena grid current
@@ -108,7 +108,7 @@ $ kontena grid env
 
 ## Show Kontena Platform Grid Cloud-Config
 
-Outputs cloud-config YAML that can be used as a basis for installing and joining Kontena Nodes to current Kontena Platform.
+Outputs cloud-config YAML that can be used as a basis for installing and joining Kontena Nodes to a current Kontena Platform.
 
 ```
 $ kontena grid cloud-config
@@ -116,7 +116,7 @@ $ kontena grid cloud-config
 
 ## Manage Kontena Platform Grid Trusted Subnets
 
-If some of the Grid nodes are colocated in a trusted network (for example, within the boundary of your own datacenter) you can add subnets to a Grid's trusted subnet list. This disables data plane encryption within a trusted subnet and switches overlay to faster (near-native) mode as an optimization.
+If some of the Grid nodes are colocated in a trusted network (for example, within the boundary of your own datacenter) you can add subnets to a Grid's trusted subnet list. This disables data plane encryption within a trusted subnet and switches overlay to a faster (near-native) mode as an optimization.
 
 #### List Trusted Subnets
 
