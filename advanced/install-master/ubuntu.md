@@ -92,4 +92,4 @@ $ sudo apt-get update
 $ sudo apt-get upgrade
 ```
 
-**NOTE!** Kontena Platform Master and Agent versions must match at least on `major.minor` versions, although it's recommended to keep versions exactly in sync.
+**NOTE!** Kontena Platform Master and Agent versions must match at least on the `major.minor` versions, although it's recommended to keep versions exactly in sync.
