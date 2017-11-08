@@ -149,11 +149,58 @@ docker run -ti --rm alpine mkpasswd -m sha-512 passwd
 
 ## Using Kontena Load Balancer for SSL Termination
 
-Kontena Load Balancer supports SSL termination for certificates. Certificates are provided to Kontena Load Balancer using the `SSL_CERTS` environment variable. Usually, you describe these variables in the Kontena Stack File, but in this case you shouldn't. While it is theoretically possible to describe your certificates as part of the Kontena Stack File, we don't recommend doing that due to security concerns. Instead, we recommend using [Kontena Vault](vault.md).
+The Kontena Load Balancer can be used to perform SSL termination for Kontena Services linked to the Load Balancer. The SSL certificates for each service must be deployed to the Kontena Load Balancer service.
 
-#### Preparing LetsEncrypt Certificates
+SSL certificates are deployed to the Kontena Load Balancer via the `SSL_CERTS` environment variable. The Kontena Load Balancer supports TLS-SNI, and will select the correct certificate to use based on the hostname that the client is connecting to.
 
-Kontena Vault has built-in support and integration with LetsEncrypt. Therefore, it is possible to [use LetsEncrypt SSL certificates](vault.md#using-letsencrypt-certificates) instead of traditional SSL certificates.
+The `SSL_CERTS` environment variable should not be configured directly in the service environment, but using [`secrets`](stack-file.md#using-secrets) or [`certificates`](stack-file.md#using-certificates) stored in the [Kontena Vault](vault.md).
+Starting from Kontena 1.4, Let's Encrypt certificates are managed using the newer [`kontena certificate`](vault.md#using-letsencrypt-certificates) certificates and service [certificates](stack-file.md#using-certificates).
+The older style of [`kontena vault`](vault.md) secrets and service [secrets](stack-file.md#using-secrets) is still supported for externally managed certificates.
+
+### Using automated Let's Encrypt certificates
+
+Kontena has built-in support for Let's Encrypt, using either `DNS-01` challenges or fully automated `TLS-SNI-01` challenges integrated with the Kontena Load Balancer.
+
+To use Let's Encrypt certificates with the Kontena Load Balancer:
+
+* [Use the Kontena CLI to register for Let's Encrypt](vault.md#register-for-le)
+* [Create domain authorization challenges](vault.md#create-domain-authorization)
+* [Request the certificate](vault.md#get-actual-certificate)
+
+Once you have the Let's Encrpyt certificates for your domain visible in `kontena certificate list`, you may proceed to deploy them to the Kontena Load Balancer.
+
+#### Deploying SSL certificates from Kontena Vault `certificates`
+
+The Let's Encrypt certificate stored in the Kontena Vault certificate is deployed to the Kontena Load Balancer using an `SSL_CERTS` [env certificate](stack-file.md#using-certificates):
+
+```yaml
+services:
+  lb:
+    image: kontena/lb:latest
+    ports:
+      - 443:443
+    certificates:
+      - subject: www.example.com
+        type: env
+        name: SSL_CERTS
+```
+
+To deploy multiple certificates, use multiple `SSL_CERTS` env secrets:
+
+```yaml
+services:
+  lb:
+    image: kontena/lb:latest
+    ports:
+      - 443:443
+    certificates:
+      - subject: www.example.com
+        type: env
+        name: SSL_CERTS
+      - subject: test.example.com
+        type: env
+        name: SSL_CERTS
+```
 
 ### Using externally managed SSL certificates
 
