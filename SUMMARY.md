@@ -56,10 +56,12 @@
     * [UpCloud](advanced/install-master/upcloud.md)
     * [Vagrant](advanced/install-master/vagrant.md)
 * [Platform Grid](advanced/grids.md)
+  * [Etcd](advanced/etcd.md)
+  * [Internal Image Registry](advanced/internal-image-registry.md)
 * [Authentication](advanced/authentication.md)
 * [Networking](advanced/networking.md)
 * [Technology](advanced/technology.md)
-* [Etcd](advanced/etcd.md)
+
 
 ## References
 
