@@ -331,7 +331,7 @@ The Kontena Vault secrets must have names matching `ssl` or `certs`.
 
 All of the `SSL_CERTS` env secrets will be merged into a single `SSL_CERTS` environment variable. There is a limit of 128KB on the total size of the `SSL_CERTS` environment variable.
 
-The maximum number of deployable SSL certificates depends on the size of private keys and certificates used. For typical Let's Encrpyt certificates, you may expect to hit the limit at around 25 certificates per LB service.
+The maximum number of deployable SSL certificates depends on the size of private keys and certificates used. For typical Let's Encrypt certificates, you may expect to hit the limit at around 25 certificates per LB service.
 
 Note that the TLS-SNI challenge certificates used for [`kontena certificate authorize --type tls-sni-01`](vault.md#create-domain-authorization) domain authorizations also count towards this limit.
 
