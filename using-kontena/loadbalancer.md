@@ -183,9 +183,9 @@ If your certificate is issued by an intermediate CA that is not directly trusted
 $ cat cert.pem ca.pem key.pem > bundle.pem
 ```
 
-The order of the bundle is important: the certificate must be first, and the last line in the bundle must be `-----END PRIVATE KEY-----`.
+The order of the SSL certificate bundle is important: the certificate must be first, followed by any optional intermediate CA certificate chain, with the private key at the end. The last line in the bundle must be `-----END PRIVATE KEY-----` or some variation of `-----END * PRIVATE KEY-----`!
 
-#### Using Kontena Vault secrets for SSL certificates
+#### Storing SSL certificate bundles in Kontena Vault `secrets`
 
 To deploy the certificate bundle to the Kontena Load Balancer, you must first store it into Kontena Vault.
 
@@ -193,10 +193,11 @@ To deploy the certificate bundle to the Kontena Load Balancer, you must first st
 $ kontena vault write SSL_CERT_example.com < bundle.pem"
 ```
 
-The certificate bundle stored in the Kontena Vault `SSL_CERT_example.com` secret is deployed to the Kontena Load Balancer using an `SSL_CERTS` env secret:
+#### Deploying SSL certificates from Kontena Vault `secrets`
+
+The certificate bundle stored in the Kontena Vault `SSL_CERT_example.com` secret is deployed to the Kontena Load Balancer using an `SSL_CERTS` [env secret](stack-file.md#using-secrets):
 
 ```yaml
-...
 services:
   my_loadbalancer:
     image: kontena/lb:latest
@@ -206,13 +207,11 @@ services:
       - secret: SSL_CERT_example.com
         name: SSL_CERTS
         type: env
-...
 ```
 
 To deploy multiple certificate bundles, use multiple `SSL_CERTS` env secrets:
 
 ```yaml
-...
 services:
   loadbalancer:
     image: kontena/lb:latest
@@ -225,7 +224,6 @@ services:
       - secret: SSL_CERT_test_example.com
         name: SSL_CERTS
         type: env
-...
 ```
 
 ### Limitations on the number of SSL certificates
