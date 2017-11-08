@@ -202,6 +202,32 @@ services:
         name: SSL_CERTS
 ```
 
+#### Prompting for SSL certificates from Kontena `certificates`
+
+The [Kontena Stack Variables `certificates` resolver](../references/stack-file-variables.md#certificates) can be used to dynamically prompt for multiple SSL certificates stored in Kontena Vault certificates:
+
+```yaml
+variables:
+  lb_certs:
+    type: array
+    required: false
+    from:
+      certificates: Select SSL certificates
+services:
+  loadbalancer:
+    image: kontena/lb:latest
+    ports:
+      - 443:443
+    # {% if lb_certs %}
+    certificates:
+      # {% for subject in lb_certs %}
+      - subject: {{ subject }}
+        name: "SSL_CERTS"
+        type: env
+      # {% endfor %}
+    # {% endif %}
+```
+
 ### Using externally managed SSL certificates
 
 The newer Kontena Certificates model used for auto-renewable Let's Encrypt certificates does not yet support importing externally managed certificates.
