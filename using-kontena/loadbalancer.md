@@ -301,7 +301,7 @@ services:
 
 #### Prompting for SSL certificates from Kontena Vault `secrets`
 
-The [Kontena Stack Variables `vault_cert_prompt` resolver](../references/stack-file-variables.md#vaultcertprompt) can be used to dynamically prompt for multiple SSL certificate bundled stored in Kontena Vault secrets:
+The [Kontena Stack Variables `vault_cert_prompt` resolver](../references/stack-file-variables.md#vaultcertprompt) can be used to dynamically prompt for multiple SSL certificate bundles stored in Kontena Vault secrets:
 
 ```yaml
 variables:

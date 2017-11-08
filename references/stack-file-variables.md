@@ -425,8 +425,7 @@ from:
   vault_cert_prompt: Select SSL Certificates
 ```
 
-This resolver is handy if you want to link certificates from Kontena Vault to a stack.
-
+See the [Kontena Load Balancer example](../using-kontena/loadbalancer.md#prompting-for-ssl-certificates-from-kontena-vault-secrets).
 
 ### `service_link`
 
