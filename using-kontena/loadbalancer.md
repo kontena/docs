@@ -63,6 +63,33 @@ services:
 ...
 ```
 
+You can also link to an external load balancer in a different stack, e.g. the `lb` service in the `ingress-lb` stack:
+
+```yaml
+links:
+  - ingress-lb/lb
+```
+
+You can also use the [`service_link`](../references/stack-file-variables#service_link) variable resolver to dynamically prompt for an external LB service when installing the stack:
+
+```yaml
+variables:
+  lb:
+    type: string
+    from:
+      service_link:
+      	hint: Choose a loadbalancer
+      	image: kontena/lb
+services:
+  whoami:
+    image: jwilder/whoami
+    links:
+      - $lb
+    environment:
+      - KONTENA_LB_MODE=http
+      - KONTENA_LB_INTERNAL_PORT=8000
+```
+
 The full list of configuration options for Kontena Service load balancing:
 
 * **`KONTENA_LB_INTERNAL_PORT`** - Specify a port that is attached to a load balancer (**required**)
