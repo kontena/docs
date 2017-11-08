@@ -226,6 +226,34 @@ services:
         type: env
 ```
 
+#### Prompting for SSL certificates from Kontena Vault `secrets`
+
+The [Kontena Stack Variables `vault_cert_prompt` resolver](../references/stack-file-variables.md#vaultcertprompt) can be used to dynamically prompt for multiple SSL certificate bundled stored in Kontena Vault secrets:
+
+```yaml
+variables:
+  lb_certs:
+    type: array
+    required: false
+    from:
+      vault_cert_prompt: Pick SSL cert(s) from Vault
+services:
+  loadbalancer:
+    image: kontena/lb:latest
+    ports:
+      - 443:443
+    secrets:
+      # {% if lb_certs %}
+      # {% for cert in lb_certs %}
+      - secret: {{ cert }}
+        name: SSL_CERTS
+        type: env
+      # {% endfor %}
+      # {% endif %}
+```
+
+The Kontena Vault secrets must have names matching `ssl` or `certs`.
+
 ### Limitations on the number of SSL certificates
 
 All of the `SSL_CERTS` env secrets will be merged into a single `SSL_CERTS` environment variable. There is a limit of 128KB on the total size of the `SSL_CERTS` environment variable.
