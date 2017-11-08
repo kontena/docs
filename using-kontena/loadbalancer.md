@@ -335,7 +335,33 @@ The maximum number of deployable SSL certificates depends on the size of private
 
 Note that the TLS-SNI challenge certificates used for [`kontena certificate authorize --type tls-sni-01`](vault.md#create-domain-authorization) domain authorizations also count towards this limit.
 
-If you attempt to add more SSL certificates and exceed the combined `SSL_CERTS` env size limit, the LB service will continue to run using the existing certificates, but the deploy will fail with an error: `Kontena::Models::ServicePod::ConfigError: Env SSL_CERTS is too large at ... bytes`
+If you attempt to add more SSL certificates and exceed the combined `SSL_CERTS` env size limit, the LB service will continue to run using the existing certificates, and the deploy will fail with an error: `Kontena::Models::ServicePod::ConfigError: Env SSL_CERTS is too large at ... bytes`
+
+## Kontena Load Balancer Health Checks
+
+By default, the Kontena Load Balancer will perform TCP healthchecks for all service backends, including both `tcp` and `http` (default) `KONTENA_LB_MODE` services. The load balancer will consider the service backend unhealthy if it is unable to connect to the `KONTENA_LB_INTERNAL_PORT`, and will stop routing incoming requests/connections to that backend.
+
+#### Using HTTP health checks
+
+To use HTTP healthchecks for a `KONTENA_LB_MODE=http` service (default), you must also configure a `health_check` with `protocol: http` for the Kontena Service:
+
+```yaml
+services:
+  whoami:
+    image: jwilder/whoami
+    links:
+      - $lb
+      environment:
+        - KONTENA_LB_MODE=http
+        - KONTENA_LB_INTERNAL_PORT=8000
+        - KONTENA_LB_VIRTUAL_PATH=/
+      health_check:
+        protocol: http
+        port: 8000
+        uri: /
+```
+
+The load balancer will consider the service backend unhealthy if it is unable to connect to the `KONTENA_LB_INTERNAL_PORT`, or if it receives a non-2xx/3xx HTTP response.
 
 ## Various Configuration Examples
 
