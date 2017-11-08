@@ -307,6 +307,8 @@ All of the `SSL_CERTS` env secrets will be merged into a single `SSL_CERTS` envi
 
 The maximum number of deployable SSL certificates depends on the size of private keys and certificates used. For typical Let's Encrpyt certificates, you may expect to hit the limit at around 25 certificates per LB service.
 
+Note that the TLS-SNI challenge certificates used for [`kontena certificate authorize --type tls-sni-01`](vault.md#create-domain-authorization) domain authorizations also count towards this limit.
+
 If you attempt to add more SSL certificates and exceed the combined `SSL_CERTS` env size limit, the LB service will continue to run using the existing certificates, but the deploy will fail with an error: `Kontena::Models::ServicePod::ConfigError: Env SSL_CERTS is too large at ... bytes`
 
 ## Various Configuration Examples
