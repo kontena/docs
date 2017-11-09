@@ -14,6 +14,7 @@
 * [Platform](using-kontena/platform.md)
 * [Nodes](using-kontena/nodes.md)
   * [Installing](using-kontena/install-nodes/README.md)
+    * [Kontena Cloud](using-kontena/install-nodes/cloud.md)
     * [AWS EC2](using-kontena/install-nodes/aws-ec2.md)
     * [Microsoft Azure (Classic)](using-kontena/install-nodes/azure.md)
     * [Container Linux](using-kontena/install-nodes/container-linux.md)
