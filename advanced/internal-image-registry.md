@@ -6,13 +6,8 @@ title: Internal Image Registry
 
 Kontena has built-in support for creating an Internal Image Registry. The Internal Image Registry may be used to store Docker images used by your own application. Kontena's Internal Image Registry runs on the same infrastructure and private network as your Nodes. Therefore, access to Kontena's Image Registry is not open publicly and may be accessed only by using [VPN access](../tools/vpn-access.md). This isolation ensures that you will have total control over the access control, security and distribution of your images. Kontena Image Registry is based on [Docker Image Registry](https://docs.docker.com/registry/).
 
-Kontena may be used with any Docker Image Registry. Users looking for a zero-maintenance, ready-to-go solution are encouraged to consider [Kontena Cloud](/tools/image-registry.md), [Docker Hub](https://hub.docker.com/account/signup/) or [Quay](https://quay.io/). Both of these services provide a hosted registry, as well as some advanced features.
+Kontena may be used with any Docker Image Registry. Users looking for a zero-maintenance, ready-to-go solution are encouraged to consider [Kontena Cloud](/tools/image-registry.md), [Docker Hub](https://hub.docker.com/account/signup/) or [Quay](https://quay.io/). All of these services provide a hosted registry, as well as some advanced features.
 
-You should use Kontena's built-in Image Registry if you want to:
-
-* Have total control over where your images are being stored
-* Fully own your images' distribution pipeline
-* Ensure access control and security for your own Docker images
 
 ## Using Image Registry
 
@@ -127,27 +122,4 @@ Log in to registry using the Docker CLI:
 
 ```
 $ docker login -u admin -e not@val.id -p <registry_password> registry.<grid_name>.kontena.local
-```
-
-# Private Registries
-
-It is possible to use private Docker image registries with Kontena by configuring
-registry credentials on Kontena Master. Following are the relevant commands.
-
-### Add Private Registry Configuration
-
-```
-$ kontena external-registry add --username <user> --email <email> --password <password> <url>
-```
-
-### List Private Registries
-
-```
-$ kontena external-registry list
-```
-
-### Remove Private Registry Configuration
-
-```
-$ kontena external-registry remove <name>
 ```

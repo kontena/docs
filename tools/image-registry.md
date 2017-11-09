@@ -33,13 +33,15 @@ title: Image Registry
 
 #### Login with Docker CLI
 
-#### Automated way
+##### Automated way
 
 ```
 $ kontena cloud image-repository docker-login
 ```
 
-#### Manual way
+Creates a permanent Kontena Cloud OAuth2 token and runs `docker login -u <YOUR_USERNAME> images.kontena.io` with generated token as the password.
+
+##### Manual way
 
 * Create a permanent Kontena Cloud OAuth2 token:
 
@@ -47,7 +49,7 @@ $ kontena cloud image-repository docker-login
   $ kontena cloud token create <NAME>
   ```
 
-* Login with Docker CLI using your Kontena Cloud username and permanent token from the previous step:
+* Login with Docker CLI using your Kontena Cloud username and permanent token from the previous step as the password:
 
   ```
   $ docker login -u <USERNAME> images.kontena.io
