@@ -2,152 +2,163 @@
 title: Image Registry
 ---
 
-# Kontena Image Registry
+# Kontena Cloud Image Registry
 
-Kontena has built-in support for creating a private Image Registry. The Image Registry may be used to store Docker images used by your own application. Kontena's Image Registry runs on the same infrastructure and private network as your Nodes. Therefore, access to Kontena's Image Registry is not open publicly and may be accessed only by using [VPN access](vpn-access.md). This isolation ensures that you will have total control over the access control, security and distribution of your images. Kontena Image Registry is based on [Docker Image Registry](https://docs.docker.com/registry/).
+[Kontena Cloud](https://kontena.io/cloud) Image Registry provides a zero-maintenance, secure and ready-to-go solution for storing Docker images.
 
-Kontena may be used with any Docker Image Registry. Users looking for a zero-maintenance, ready-to-go solution are encouraged to consider [Docker Hub](https://hub.docker.com/account/signup/) or [Quay](https://quay.io/). Both of these services provide a hosted registry, as well as some advanced features.
+## Using Kontena Cloud Image Registry
 
-You should use Kontena's built-in Image Registry if you want to:
+* [Prerequisites](./image-registry.md#prerequisites)
+* [Using with Docker CLI](./image-registry.md#using-with-docker-cli)
+  * [Login](./image-registry.md#login-with-docker-cli)
+  * [Build & push](./image-registry.md#build-push-an-image-with-docker-cli)
+  * [Pull](./image-registry.md#pull-an-image-with-docker-cli)
+* [List repositories](./image-registry#list-repositories)
+* [Create a repository](./image-registry#create-a-repository)
+* [Show a repository details](./image-registry#show-a-repository-details)
+* [Remove a repository](./image-registry#remove-a-repository)
+* [List a repository tags](./image-registry#create-a-repository-tags)
+* [Using with Kontena Platform](./image-registry#using-repositories-with-kontena-platform)
+  * [Using with Kontena Stacks](./image-registry#using-with-kontena-stacks)
+  * [Add image registry configuration](./image-registry#add-image-registry-configuration)
+  * [List image registry configurations](./image-registry#list-image-registry-configurations)
+  * [Remove an image registry configuration](./image-registry#remove-an-image-registry-configuration)
 
-* Have total control over where your images are being stored
-* Fully own your images' distribution pipeline
-* Ensure access control and security for your own Docker images
+### Prerequisites
 
-## Using Image Registry
+* [Kontena Cloud](https://cloud.kontena.io) account
+* [Kontena CLI](/tools/cli.md) with the `cloud` plugin. If you don't have the plugin installed, you can install (or upgrade) it with the: `kontena plugin install cloud` command.
 
-* [Create Image Registry Service](image-registry.md#create-image-registry-service)
-  * [Local Storage Backend](image-registry.md#local-storage-backend)
-  * [Amazon S3 Storage Backend](image-registry.md#amazon-s3-storage-backend)
-  * [Azure Storage Backend](image-registry.md#azure-storage-backend)
-* [Accessing Image Registry](image-registry.md#accessing-image-registry)
-* [TLS/SSL](image-registry.md#tlsssl)
-* [Authentication](image-registry.md#authentication)
+### Using with Docker CLI
 
-### Create Image Registry Service
+#### Login with Docker CLI
 
-#### Local Storage Backend
-
-```
-$ kontena registry create
-```
-
-#### Amazon S3 Storage Backend
-
-Write Amazon S3 access keys to Kontena Vault:
-
-```
-$ kontena vault write REGISTRY_STORAGE_S3_ACCESSKEY <access_key>
-$ kontena vault write REGISTRY_STORAGE_S3_SECRETKEY <secret_key>
-```
-
-Create registry service:
+##### Automated way
 
 ```
-$ kontena registry create --s3-bucket=<bucket_name> --s3-region=<optional_aws_region> --s3-v4auth
+$ kontena cloud image-repository docker-login
 ```
 
-#### Azure storage backend
+Creates a permanent Kontena Cloud OAuth2 token and runs `docker login -u <YOUR_USERNAME> images.kontena.io` with generated token as the password.
 
-Write Azure account key to Kontena Vault:
+##### Manual way
 
-```
-$ kontena vault write REGISTRY_STORAGE_AZURE_ACCOUNTKEY <azure_account_key>
-```
+* Create a permanent Kontena Cloud OAuth2 token:
 
-Create registry service:
+  ```
+  $ kontena cloud token create <NAME>
+  ```
 
-```
-$ kontena registry create --azure-account-name=<account_name> --azure-container-name=<container_name>
-```
+* Login with Docker CLI using your Kontena Cloud username and permanent token from the previous step as the password:
 
-### Accessing Image Registry
+  ```
+  $ docker login -u <USERNAME> images.kontena.io
+  ```
 
-Before you can push images to the registry, you should set up the Kontena VPN service. In addition, you must set `--insecure-registry=registry.<grid_name>.kontena.local` in your local Docker daemon configuration.
+#### Build & Push an image with Docker CLI
 
-Building and pushing an image to the registry:
-
-```
-$ docker build -t registry.<grid_name>.kontena.local/myimage:mytag .
-$ docker push registry.<grid_name>.kontena.local/myimage:mytag
-```
-
-Deploying an image from the registry:
+Build:
 
 ```
-$ kontena service create myservice registry.<grid_name>.kontena.local/myimage:mytag
-$ kontena service deploy myservice
+$ docker build -t images.kontena.io/<ORG>/<REPO>:<TAG> .
 ```
 
-### TLS/SSL
-
-Generate your own certificate:
+Push:
 
 ```
-$ openssl req -x509 -newkey rsa:2048 -keyout registry_key.pem -out registry_ca.pem -days 1080 -nodes -subj '/CN=registry.<grid_name>.kontena.local/O=My Company Name LTD./C=US'
+$ docker push images.kontena.io/<ORG>/<REPO>:<TAG>
 ```
 
-Write key and certificate to Kontena Vault:
+#### Pull an image with Docker CLI
 
 ```
-$ kontena vault write REGISTRY_HTTP_TLS_KEY "$(cat registry_key.pem)"
-$ kontena vault write REGISTRY_HTTP_TLS_CERTIFICATE "$(cat registry_ca.pem)"
+$ docker pull images.kontena.io/<ORG>/<REPO>:<TAG>
 ```
 
-Redeploy Kontena Image Registry:
+### List image repositories
 
 ```
-$ kontena service deploy --force registry/api
+$ kontena cloud image-repository list --org <ORG>
 ```
 
-Then you have to instruct your local Docker daemon to trust that certificate. This is done by copying the `registry_ca.pem` file to `/etc/docker/certs.d/registry.<grid_name>.kontena.local/ca.crt`.
-
-
-### Authentication
-
-Kontena Image Registry supports basic authentication. Authentication can be enabled by writing `REGISTRY_AUTH_PASSWORD` to Kontena Vault:
+### Create a repository
 
 ```
-$ kontena vault write REGISTRY_AUTH_PASSWORD <password>
+$ kontena cloud image-repository create --org <ORG> <REPOSITORY>
 ```
 
-And then updating the service with the auth secret to read it from Vault:
+It's also possible to create a repository by just pushing a tag to a new repository:
 
 ```
-$ kontena service update --secret REGISTRY_AUTH_PASSWORD:AUTH_PASSWORD:env registry/api
+$ docker push images.kontena.io/<ORG>/<REPOSITORY>:<TAG>
 ```
 
-After the password has been set you should redeploy the registry service:
+### Show a repository details
 
 ```
-$ kontena service deploy --force registry/api
+$ kontena cloud image-repository show <REPOSITORY>
 ```
 
-Log in to registry using the Docker CLI:
+### Remove a repository
 
 ```
-$ docker login -u admin -e not@val.id -p <registry_password> registry.<grid_name>.kontena.local
+$ kontena cloud image-repository remove <REPOSITORY>
 ```
 
-# Private Registries
-
-It is possible to use private Docker image registries with Kontena by configuring
-registry credentials on Kontena Master. Following are the relevant commands.
-
-### Add Private Registry Configuration
+### List a repository tags
 
 ```
-$ kontena external-registry add --username <user> --email <email> --password <password> <url>
+$ kontena cloud image-repository tag list <REPOSITORY>
 ```
 
-### List Private Registries
+### Using repositories with Kontena Platform
+
+#### Using with Kontena Stacks
+
+Kontena Stack service image should point to the Kontena Cloud Image Registry endpoint. Image URI format is:
+
+```
+images.kontena.io/<ORGANIZATION>/<REPOSITORY>:<TAG>
+```
+
+Example:
+
+```yaml
+services:
+  hello:
+    image: images.kontena.io/acme/hello:1.0
+```
+
+Configures a stack to fetch an image from the `acme` organization, `hello` repository with a tag `1.0`.
+
+> Note: you need to [add image registry configuration](image-registry.md#add-image-registry-configuration) to make this work with Kontena Platform
+
+#### Add Image Registry configuration
+
+* Create a permanent Kontena Cloud OAuth2 token:
+
+  ```
+  $ kontena cloud token create <NAME>
+  ```
+
+* Add external registry configuration
+
+  ```
+  $ kontena external-registry add --username <USERNAME> --email <EMAIL> --password <TOKEN> images.kontena.io
+  ```
+
+  - `USERNAME` - your Kontena Cloud username
+  - `EMAIL` - your Kontena Cloud email
+  - `TOKEN` - Kontena Cloud permanent token from previous step
+
+#### List image registry configurations
 
 ```
 $ kontena external-registry list
 ```
 
-### Remove Private Registry Configuration
+#### Remove an image registry configuration
 
 ```
-$ kontena external-registry remove <name>
+$ kontena external-registry remove <NAME>
 ```
