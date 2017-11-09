@@ -87,6 +87,12 @@ $ kontena cloud image-repository list --org <ORG>
 $ kontena cloud image-repository create --org <ORG> <REPOSITORY>
 ```
 
+It's also possible to create a repository by just pushing a tag to a new repository:
+
+```
+$ docker push images.kontena.io/<ORG>/<REPOSITORY>:<TAG>
+```
+
 ### Show a repository details
 
 ```
