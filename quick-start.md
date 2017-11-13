@@ -2,224 +2,87 @@
 
 The average time for Kontena users to get from zero to hero is just under 20 minutes! Let's assume you have already created some amazing application and packaged it as docker containers, here's what it takes to get from zero to hero with Kontena:
 
-1. Install Kontena CLI tool.
-2. Create a [Kontena Platform](using-kontena/platform.md).
-3. Install [Kontena Nodes](using-kontena/nodes.md).
-4. Deploy first [Kontena Stack](using-kontena/stacks.md).
+1. Sign-up to Kontena Cloud.
+2. Create an organization for Kontena Platforms.
+3. Create a [Kontena Platform](using-kontena/platform.md).
+4. Install [Kontena Nodes](using-kontena/nodes.md).
+5. Deploy first [Kontena Stack](using-kontena/stacks.md).
 
-Follow these steps to get started with Kontena on Kontena Cloud quickly. If you like to tinker and maintain the Kontena Platform yourself, please follow the [slow start](./slow-start.md) guide.
+## Step 1. Sign-up to Kontena Cloud
 
-## Step 1. Install Kontena CLI (command-line interface)
+You can sign-up to Kontena Cloud by following this link: https://cloud.kontena.io/sign-up
 
-### MacOS (OSX)
+## Step 2. Create an Organization
 
-You can install Kontena CLI using our [official installer](https://gh-releases.kontena.io/kontena/kontena/pkg/latest) or [Homebrew](https://brew.sh/) :
+After you have signed up and verified your email, you can create an organization for your project. An organization is a workspace for development teams to monitor, manage and operate Kontena Platforms.
 
-```
-$ brew install kontena
-```
+<img src="_images/kontena-cloud-create-org.png" alt="Create Organization" />
 
-### Debian / Ubuntu
+## Step 3. Create a Kontena Platform
 
-You can install Kontena CLI using our [official deb package](https://gh-releases.kontena.io/kontena/kontena/deb/latest).
+The Kontena Platform will abstract all available compute resources and make these resources available to your container workloads. To create your first Kontena Platform, just open the 'Create Platform' dialog and fill in the platform name. For testing purposes Mini platform type is enough.
 
-### Linux / Windows
+<img src="_images/kontena-cloud-create-platform.png" alt="Create Platform" />
 
-> Prerequisites: You'll need Ruby version 2.1 or later installed on your system. For more details, see the official [Ruby installation docs](https://www.ruby-lang.org/en/documentation/installation/).
+After clicking the 'Create' button your Kontena Platform will be provisioned shortly to Kontena Cloud.
 
-You can install the Kontena CLI using the Rubygems package manager (which is included in Ruby).
+## Step 4. Install Kontena Nodes
 
-```
-$ gem install kontena-cli
-```
+When the platform is ready you'll need some Kontena Nodes to run your containerized workloads.
 
-After the installation is complete, you can test the installation by checking the Kontena CLI version with `kontena version`.
+After selecting Kontena Cloud as the provider and clicking the 'Add nodes' button, terminal windows should open and you can choose a node type and the number of nodes you want to create.
 
-## Step 2. Create a Kontena Platform
+<img src="_images/kontena-cloud-provision-nodes.png" alt="Provision Nodes" />
 
-The easiest (and preferred) way to provision Kontena Platform Master is to use the built-in Kontena Cloud Platform provision feature of Kontena CLI. In this guide, we will provision Kontena Platform to Kontena Cloud and nodes to the local development environment using [Vagrant](https://www.vagrantup.com/). If you want to install nodes to some other environment, please see [Installing Kontena](using-kontena/install-nodes/) documentation.
-
-Since we will be using Vagrant, please ensure you have Vagrant 1.6 or later installed. For more details, see the official [Vagrant installation docs](https://docs.vagrantup.com/v2/installation/index.html).
-
-After Vagrant is installed, you can install required plugins to Kontena CLI.
-
-```
-$ kontena plugin install cloud
-$ kontena plugin install vagrant
-```
-
-Before you can create a Kontena Cloud Platform you need to login:
-
-```
-$ kontena cloud login
-```
-
-After login is completed succesfully you can start Kontena Platform provisioning with following command:
-
-```
-$ kontena cloud platform create quick-start
-> This will create managed platform to Kontena Cloud, proceed? Yes
-> Choose organization: my-username (you)
-> Choose region: EU West
-> Initial platform size (number of nodes): 1 (dev/test)
- [done] Creating platform quick-start to region eu-west-1
- [done] Waiting for platform quick-start to come online
- [done] Switching to use platform my-username/quick-start
-```
-
-During the installation process you will have the option to select region where Kontena Platform is provisioned. It's recommended to select closest region for you to minimize latency between your local development environment and Kontena Platform.
-
-## Step 3. Install Kontena Nodes
-
-You'll need some Kontena Nodes to run your containerized workloads. If you don't have existing Kontena infrastructure in place, you'll need to install your own.
-
-As with with Kontena Platform, the easiest (and preferred) way to provision Kontena Nodes is to use the built-in Kontena Node provisioning feature of Kontena CLI. In this guide, we will provision Kontena Nodes to the local development environment using [Vagrant](https://www.vagrantup.com/). If you want to install Kontena Nodes to some other environment, please see the [Installing Kontena Nodes](installing/nodes.md) documentation.
-
-Since we will be using Vagrant, please ensure you have Vagrant installed. For more details, see official [Vagrant installation docs](https://docs.vagrantup.com/v2/installation/index.html).
-
-
-Install a node to the platform you created in the previous chapter:
-
-```
-$ kontena vagrant node create
-> How many nodes?:  1
-> Choose a size  1024MB
- [done] Generating Vagrant config
- [done] Triggering CoreOS Container Linux box update
-...
- [done] Executing 'vagrant up'
-...
- [done] 'vagrant up' executed successfully
- [done] Waiting for node damp-forest-2 to join grid quick-start
-```
-
-You can repeat this step to provision additional Kontena Nodes to your Kontena Platform.
+You can always execute `cloud node create` later in the terminal to provision additional Kontena Nodes to your Kontena Platform.
 
 **Note!** While Kontena will work with just a single Kontena Node, it is recommended to have at least three Kontena Nodes provisioned in a Grid.
 
-If you followed the steps above, you should now have a working Kontena setup installed. Verify the setup using the `kontena node list` command. It should list all the Kontena Nodes in your Grid.
+If you followed the steps above, you should now have a working Kontena setup installed. Verify the setup using the `node list` command. It should list all the Kontena Nodes in your Kontena Platform.
 
 ```
-$ kontena node list
-NAME              VERSION   STATUS   INITIAL   LABELS
-⊛ damp-forest-2   1.3.4     online   1 / 1     provider=vagrant
+> node list
+NAME              VERSION   STATUS       INITIAL   LABELS
+⊛ damp-forest-2   1.4.0     online 11s   1 / 1     region=eu-west-1,az=a,provider=kontena
 ```
 
-## Step 4. Deploy Your First Application Stack
+## Step 5. Deploy Your First Application Stack
 
- Now you are ready to deploy your first application stack.
- In this section we will show you how to package a simple WordPress application and deploy it to your Kontena Grid.
+After the provisioned node is online, you are ready to deploy your first application stack. To install a ready-made stack you can execute `stack install kontena/hello-world` command in terminal.
 
-First create the `kontena.yml` file with the following contents:
-
-```yaml
-stack: examples/wordpress
-version: 0.3.0
-variables:
-  wordpress-mysql-root:
-    type: string
-    from:
-      vault: wordpress-mysql-root
-      random_string: 32
-    to:
-      vault: wordpress-mysql-root
-  wordpress-mysql-password:
-    type: string
-    from:
-      vault: wordpress-mysql-password
-      random_string: 32
-    to:
-      vault: wordpress-mysql-password
-services:
-  wordpress:
-    image: wordpress:4.6
-    stateful: true
-    ports:
-      - 80:80
-    environment:
-      WORDPRESS_DB_HOST: mysql
-      WORDPRESS_DB_USER: wordpress
-      WORDPRESS_DB_NAME: wordpress
-    secrets:
-      - secret: wordpress-mysql-password
-        name: WORDPRESS_DB_PASSWORD
-        type: env
-  mysql:
-    image: mariadb:5.5
-    stateful: true
-    environment:
-      MYSQL_DATABASE: wordpress
-      MYSQL_USER: wordpress
-    secrets:
-      - secret: wordpress-mysql-root
-        name: MYSQL_ROOT_PASSWORD
-        type: env
-      - secret: wordpress-mysql-password
-        name: MYSQL_PASSWORD
-        type: env
-```
-
-You can then install and deploy the `wordpress` stack:
-
-```
-$ kontena stack install kontena.yml
- [done] Creating stack wordpress
- [done] Deploying stack wordpress
-```
+<img src="_images/kontena-cloud-install-stack.png" alt="Install Stack" />
 
 The initial stack deployment may take some time while the host nodes pull the referenced Docker images.
 
-After the stack deployment is finished you can verify that the wordpress and mysql services are running:
+After the stack deployment is finished you can verify from the Kontena Cloud Dashboard that the lb and web services are running or executing the `stack ls` command:
 
 ```
-$ kontena stack ls
-NAME                                                         VERSION    SERVICES   STATE      EXPOSED PORTS
-⊝ wordpress                                                  0.3.0      2          running    *:80->80/tcp
+> stack ls
+NAME            STACK                       SERVICES   STATE     EXPOSED PORTS
+⊛ hello-world   kontena/hello-world:1.0.0   2          running   *:80->80/tcp
 ```
 
-You can use the `kontena service` commands to view the resulting configuration of each deployed stack service:
+To test the installed stack, you must connect to the IP address of the host node publishing the `lb` service on TCP port 80. You can use the public IP address of the host node running the service instance displayed as part of the kontena service show output `service show hello-world/lb`:
 
 ```
-$ kontena service show wordpress/wordpress
-test/wordpress/wordpress:
-  stack: test/wordpress
-  status: running
-  image: wordpress:4.6
-  revision: 2
-  stateful: yes
-  scaling: 1
-  strategy: ha
-  deploy_opts:
-    min_health: 0.8
-  dns: wordpress.wordpress.test.kontena.local
-  secrets:
-    - secret: wordpress-mysql-password
-      name: WORDPRESS_DB_PASSWORD
-      type: env
-  env:
-    - WORDPRESS_DB_HOST=mysql
-    - WORDPRESS_DB_USER=wordpress
-    - WORDPRESS_DB_NAME=wordpress
-  net: bridge
-  ports:
-    - 80:80/tcp
-  instances:
-    wordpress-wordpress-1:
-      rev: 2016-11-28 13:51:02 UTC
-      service_rev: 2
-      node: hidden-moon-99
-      dns: wordpress-1.wordpress.test.kontena.local
-      ip: 10.81.128.115
-      public ip: 192.0.2.1
-      status: running
-      exit code: 0
+> service show hello-world/lb
+   ...
+   hello-world/lb/1:
+      scheduled_to: damp-forest-2
+      deploy_rev: 2017-11-10 08:11:10 UTC
+      rev: 2017-11-10 08:11:10 UTC
+      state: running
+      containers:
+        hello-world.lb-1 (on damp-forest-2):
+          dns: lb-1.hello-world.quick-start.kontena.local
+          ip: 10.81.128.41
+          public ip: 18.194.195.204
+          status: running
 ```
 
-To test the wordpress service, you must connect to the IP address of the host node publishing the wordpress service on TCP port 80.
-You can use the public IP address of the host node running the service instance displayed as part of the `kontena service show` output.
-**Note:** For the special case of using Vagrant for the Kontena setup, you must use the *private* IP address of the node running the `wordpress/wordpress` service: `kontena node show hidden-moon-99 | grep 'private ip'`.
+You can also browse services on the Kontena Cloud Dashboard to see stats, logs and configuration of each deployed stack service.
 
-Please see the following examples for more advanced stacks:
+To explore and install ready-made stacks you can use the `stack reg search` command or see the following examples:
 
 - [PostgreSQL Cluster (stolon)](https://github.com/kontena/kontena-stacks/tree/master/stolon)
 - [Kong API Gateway](https://github.com/kontena/kontena-stacks/tree/master/kong)
@@ -234,5 +97,14 @@ This completes the quick start guide for setting up Kontena. For further learnin
 * [Stacks](using-kontena/stacks.md)
 * [Secrets Management](using-kontena/vault.md)
 * [Loadbalancer](using-kontena/loadbalancer.md)
+
+## Advanced
+
+### Quick Start with Kontena CLI
+If you prefer creating a Kontena Platform from your local machine with the Kontena CLI, please follow [Quick Start with Kontena CLI](./quick-start-cli.html) guide.
+
+### Maintain the Kontena Platform yourself
+If you'd like to tinker and maintain the Kontena Platform yourself, please follow the [slow start](./slow-start.html) guide.
+
 
 We hope you will find this documentation helpful! If you have any suggestions on improving our documentation, please [open an issue](https://github.com/kontena/kontena/issues) on GitHub.
