@@ -63,6 +63,15 @@ An Initial Node may be replaced as long as there has not been a majority loss. S
 
 Using the method described above, it is possible to replace all Initial Nodes one by one. In any case, the majority must be kept.
 
+#### Kontena Node Scheduling Availability
+
+Sometimes, one or more Kontena Nodes might require maintenance, or they need to be replaced. Upon such events, minimizing disruption to the running Kontena Stacks and Services is often a top priority. This may be achieved with Kontena Node `availability` configuration. The availability of Kontena Node may be configured as `active` or `drain`:
+
+* **`active`** - Kontena Platform will schedule workloads and treat this Kontena Node as normal. This is the default configuration for any Kontena Node.
+* **`drain`** - Kontena Platform will not schedule any new workloads and all stateless services will be re-scheduled out from this Kontena Node. Any stateful services running on this Kontena Node will be stopped.
+
+To summarize: when Kontena Nodes are maintained, it is recommended to configure their availability as `drain`. Once the maintenance is over and Kontena Node can be put back to work, their availability should be configured as `active`.
+
 See [Kontena Nodes usage documentation](./nodes.md) to learn how to manage, operate and monitor Kontena Nodes.
 
 ## Kontena Stacks
@@ -81,7 +90,7 @@ See [Kontena Stacks usage documentation](./stacks.md) to learn how to manage, op
 
 > One of the challenges with containerized application infrastructure is the fact that you cannot rely on individual containers, because containers are ephemeral environments that come and go. They spin up and down in response to both network hardware failures and functionality built into the container orchestrator in order to support scaling, migrations, load balancing, rolling updates and restarts. While containers get their own IP addresses, those IP addresses cannot be predicted in advance. Therefore, an abstraction that defines a logical set of containers, their configuration and their desired state is needed. In Kontena, this abstraction is called a Kontena Service.
 
-Kontena Services are part of [Kontena Stack](#kontena-stack) and describe containerized workloads with a desired state. They consume compute resources provided by [Kontena Nodes](#kontena-nodes) and storage provided by [Kontena Volumes](#kontena-volumes). They are orchestrated across the Kontena Platform according to the deploy strategy and affinity rules. Since the Kontena Platform will abstract the underlying infrastructure as single unified plane, Kontena Services may communicate with each other in multi-host environments just as in a local area network.
+Kontena Services are part of [Kontena Stack](#kontena-stack) and describe containerized workloads with a desired state. They consume compute resources provided by [Kontena Nodes](#kontena-nodes) and storage provided by [Kontena Volumes](#kontena-volumes). They are orchestrated across the Kontena Platform according to the deploy strategy and [affinity rules](./affinities.md). Since the Kontena Platform will abstract the underlying infrastructure as single unified plane, Kontena Services may communicate with each other in multi-host environments just as in a local area network.
 
 Kontena monitors the state of each Service instance and actively manages it to ensure the desired state of the Service. An action is triggered when there are fewer healthy instances than the desired scale of your Service, when a node becomes unavailable, or when a Service instance fails.
 

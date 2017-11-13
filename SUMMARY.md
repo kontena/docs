@@ -14,6 +14,7 @@
 * [Platform](using-kontena/platform.md)
 * [Nodes](using-kontena/nodes.md)
   * [Installing](using-kontena/install-nodes/README.md)
+    * [Kontena Cloud](using-kontena/install-nodes/cloud.md)
     * [AWS EC2](using-kontena/install-nodes/aws-ec2.md)
     * [Microsoft Azure (Classic)](using-kontena/install-nodes/azure.md)
     * [Container Linux](using-kontena/install-nodes/container-linux.md)
@@ -32,6 +33,7 @@
 * [Users](using-kontena/users.md)
 * [Stats](using-kontena/stats.md)
 * [Logs](using-kontena/logs.md)
+* [Affinities](using-kontena/affinities.md)
 
 ## Developer Tools
 
@@ -55,10 +57,12 @@
     * [UpCloud](advanced/install-master/upcloud.md)
     * [Vagrant](advanced/install-master/vagrant.md)
 * [Platform Grid](advanced/grids.md)
+  * [Etcd](advanced/etcd.md)
+  * [Internal Image Registry](advanced/internal-image-registry.md)
 * [Authentication](advanced/authentication.md)
 * [Networking](advanced/networking.md)
 * [Technology](advanced/technology.md)
-* [Etcd](advanced/etcd.md)
+
 
 ## References
 

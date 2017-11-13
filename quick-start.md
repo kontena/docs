@@ -1,6 +1,6 @@
 # Quick Start
 
-The average time for Kontena users to get from zero to hero is just under 20 minutes! Let's assume you have already created some amazing application and packaged is as docker containers, here's what it takes to get from zero to hero with Kontena:
+The average time for Kontena users to get from zero to hero is just under 20 minutes! Let's assume you have already created some amazing application and packaged it as docker containers, here's what it takes to get from zero to hero with Kontena:
 
 1. Sign-up to Kontena Cloud.
 2. Create an organization for Kontena Platforms.
