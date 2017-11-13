@@ -63,6 +63,33 @@ services:
 ...
 ```
 
+You can also link to an external load balancer in a different stack, e.g. the `lb` service in the `ingress-lb` stack:
+
+```yaml
+links:
+  - ingress-lb/lb
+```
+
+You can also use the [`service_link`](../references/stack-file-variables#service_link) variable resolver to dynamically prompt for an external LB service when installing the stack:
+
+```yaml
+variables:
+  lb:
+    type: string
+    from:
+      service_link:
+      	hint: Choose a loadbalancer
+      	image: kontena/lb
+services:
+  whoami:
+    image: jwilder/whoami
+    links:
+      - $lb
+    environment:
+      - KONTENA_LB_MODE=http
+      - KONTENA_LB_INTERNAL_PORT=8000
+```
+
 The full list of configuration options for Kontena Service load balancing:
 
 * **`KONTENA_LB_INTERNAL_PORT`** - Specify a port that is attached to a load balancer (**required**)
@@ -122,75 +149,219 @@ docker run -ti --rm alpine mkpasswd -m sha-512 passwd
 
 ## Using Kontena Load Balancer for SSL Termination
 
-Kontena Load Balancer supports SSL termination for certificates. Certificates are provided to Kontena Load Balancer using the `SSL_CERTS` environment variable. Usually, you describe these variables in the Kontena Stack File, but in this case you shouldn't. While it is theoretically possible to describe your certificates as part of the Kontena Stack File, we don't recommend doing that due to security concerns. Instead, we recommend using [Kontena Vault](vault.md).
+The Kontena Load Balancer can be used to perform SSL termination for Kontena Services linked to the Load Balancer. The SSL certificates for each service must be deployed to the Kontena Load Balancer service.
 
-#### Preparing Traditional SSL Certificates
+SSL certificates are deployed to the Kontena Load Balancer via the `SSL_CERTS` environment variable. The Kontena Load Balancer supports TLS-SNI, and will select the correct certificate to use based on the hostname that the client is connecting to.
 
-The Kontena Load Balancer is expecting SSL certificate as a `.pem` file, which contains a public certificate followed by a private key. The public certificate must be placed before the private key; order matters.
+The `SSL_CERTS` environment variable should not be configured directly in the service environment, but using [`secrets`](stack-file.md#using-secrets) or [`certificates`](stack-file.md#using-certificates) stored in the [Kontena Vault](vault.md).
+Starting from Kontena 1.4, Let's Encrypt certificates are managed using the newer [`kontena certificate`](vault.md#using-letsencrypt-certificates) certificates and service [certificates](stack-file.md#using-certificates).
+The older style of [`kontena vault`](vault.md) secrets and service [secrets](stack-file.md#using-secrets) is still supported for externally managed certificates.
 
-If you want to create a self-signed certificate, you can run the following script to generate and package a certificate as `.pem` file:
+### Using automated Let's Encrypt certificates
 
-```
-$ openssl req -x509 -newkey rsa:2048 -keyout key.pem -out ca.pem -days 1080 -nodes -subj '/CN=*/O=My Company Name LTD./C=US'
-$ cat ca.pem key.pem > cert.pem
-```
+Kontena has built-in support for Let's Encrypt, using either `DNS-01` challenges or fully automated `TLS-SNI-01` challenges integrated with the Kontena Load Balancer.
 
-If you have a real certificate, it must be packaged as a `.pem` file. The structure is as follows: cert, intermediates and private key. Please note, the `.pem` file must contain both a public certificate and a private key. For example:
+To use Let's Encrypt certificates with the Kontena Load Balancer:
 
-```
-$ cat STAR_kontena_io.crt STAR_kontena_io.ca-bundle key.pem > cert.pem
-```
+* [Use the Kontena CLI to register for Let's Encrypt](vault.md#register-for-le)
+* [Create domain authorization challenges](vault.md#create-domain-authorization)
+* [Request the certificate](vault.md#get-actual-certificate)
 
-Finally, once you have the `.pem` file, you can store it in the Kontena Vault like this:
+Once you have the Let's Encrpyt certificates for your domain visible in `kontena certificate list`, you may proceed to deploy them to the Kontena Load Balancer.
 
-```
-$ kontena vault write <MY_CERT_NAME> "$(cat cert.pem)"
-```
+#### Deploying SSL certificates from Kontena Vault `certificates`
 
-Where `MY_CERT_NAME` is the name of your SSL certificate in Kontena Vault.
-
-#### Preparing LetsEncrypt Certificates
-
-Kontena Vault has built-in support and integration with LetsEncrypt. Therefore, it is possible to [use LetsEncrypt SSL certificates](vault.md#using-letsencrypt-certificates) instead of traditional SSL certificates.
-
-#### Using SSL Certificates from Kontena Vault
-
-You can expose a certificate (or any other secrets) stored in Kontena Vault to Kontena Load Balancer like this:
+The Let's Encrypt certificate stored in the Kontena Vault certificate is deployed to the Kontena Load Balancer using an `SSL_CERTS` [env certificate](stack-file.md#using-certificates):
 
 ```yaml
-...
+services:
+  lb:
+    image: kontena/lb:latest
+    ports:
+      - 443:443
+    certificates:
+      - subject: www.example.com
+        type: env
+        name: SSL_CERTS
+```
+
+To deploy multiple certificates, use multiple `SSL_CERTS` env secrets:
+
+```yaml
+services:
+  lb:
+    image: kontena/lb:latest
+    ports:
+      - 443:443
+    certificates:
+      - subject: www.example.com
+        type: env
+        name: SSL_CERTS
+      - subject: test.example.com
+        type: env
+        name: SSL_CERTS
+```
+
+#### Prompting for SSL certificates from Kontena `certificates`
+
+The [Kontena Stack Variables `certificates` resolver](../references/stack-file-variables.md#certificates) can be used to dynamically prompt for multiple SSL certificates stored in Kontena Vault certificates:
+
+```yaml
+variables:
+  lb_certs:
+    type: array
+    required: false
+    from:
+      certificates: Select SSL certificates
+services:
+  loadbalancer:
+    image: kontena/lb:latest
+    ports:
+      - 443:443
+    # {% if lb_certs %}
+    certificates:
+      # {% for subject in lb_certs %}
+      - subject: {{ subject }}
+        name: "SSL_CERTS"
+        type: env
+      # {% endfor %}
+    # {% endif %}
+```
+
+### Using externally managed SSL certificates
+
+The newer Kontena Certificates model used for auto-renewable Let's Encrypt certificates does not yet support importing externally managed certificates.
+
+To deploy externally managed SSL certificates, you may used the older Kontena Vault `secrets` based method.
+
+#### Preparing the SSL Certificate bundle
+
+The Kontena Load Balancer expects SSL certificates in the form of a PEM-encoded certificate bundle, containing the `CERTIFICATE`, any optional intermediate CA `CERTIFICATE` chain, and the `PRIVATE KEY` last.  
+
+Using a self-signed certificate as an example:
+
+```
+$ openssl req -x509 -newkey rsa:2048 -keyout key.pem -out cert.pem -days 1080 -nodes -subj '/CN=example.com'
+```
+
+The certificate bundle must be generated by concatenating the certificate and private key files:
+
+```
+$ cat cert.pem key.pem > bundle.pem
+```
+
+If your certificate is issued by an intermediate CA that is not directly trusted by the client, you may also include optional intermediate CA certificate chains in the bundle:
+
+```
+$ cat cert.pem ca.pem key.pem > bundle.pem
+```
+
+The order of the SSL certificate bundle is important: the certificate must be first, followed by any optional intermediate CA certificate chain, with the private key at the end. The last line in the bundle must be `-----END PRIVATE KEY-----` or some variation of `-----END * PRIVATE KEY-----`!
+
+#### Storing SSL certificate bundles in Kontena Vault `secrets`
+
+To deploy the certificate bundle to the Kontena Load Balancer, you must first store it into Kontena Vault.
+
+```
+$ kontena vault write SSL_CERT_example.com < bundle.pem"
+```
+
+#### Deploying SSL certificates from Kontena Vault `secrets`
+
+The certificate bundle stored in the Kontena Vault `SSL_CERT_example.com` secret is deployed to the Kontena Load Balancer using an `SSL_CERTS` [env secret](stack-file.md#using-secrets):
+
+```yaml
 services:
   my_loadbalancer:
     image: kontena/lb:latest
     ports:
       - 443:443
     secrets:
-      - secret: <MY_CERT_NAME>
+      - secret: SSL_CERT_example.com
         name: SSL_CERTS
         type: env
-...
 ```
 
-Where `MY_CERT_NAME` is the name of your SSL certificate in Kontena Vault. If you need to expose multiple certificates, you can do it like this:
+To deploy multiple certificate bundles, use multiple `SSL_CERTS` env secrets:
 
 ```yaml
-...
 services:
   loadbalancer:
     image: kontena/lb:latest
     ports:
       - 443:443
     secrets:
-      - secret: <MY_CERT1_NAME>
+      - secret: SSL_CERT_example.com
         name: SSL_CERTS
         type: env
-      - secret: <MY_CERT2_NAME>
+      - secret: SSL_CERT_test_example.com
         name: SSL_CERTS
         type: env
-...
 ```
 
-Where `MY_CERT1_NAME` and `MY_CERT2_NAME` are names of the certificates you have stored in Kontena Vault before.
+#### Prompting for SSL certificates from Kontena Vault `secrets`
+
+The [Kontena Stack Variables `vault_cert_prompt` resolver](../references/stack-file-variables.md#vaultcertprompt) can be used to dynamically prompt for multiple SSL certificate bundles stored in Kontena Vault secrets:
+
+```yaml
+variables:
+  lb_certs:
+    type: array
+    required: false
+    from:
+      vault_cert_prompt: Pick SSL cert(s) from Vault
+services:
+  loadbalancer:
+    image: kontena/lb:latest
+    ports:
+      - 443:443
+    secrets:
+      # {% if lb_certs %}
+      # {% for cert in lb_certs %}
+      - secret: {{ cert }}
+        name: SSL_CERTS
+        type: env
+      # {% endfor %}
+      # {% endif %}
+```
+
+The Kontena Vault secrets must have names matching `ssl` or `certs`.
+
+### Limitations on the number of SSL certificates
+
+All of the `SSL_CERTS` env secrets will be merged into a single `SSL_CERTS` environment variable. There is a limit of 128KB on the total size of the `SSL_CERTS` environment variable.
+
+The maximum number of deployable SSL certificates depends on the size of private keys and certificates used. For typical Let's Encrypt certificates, you may expect to hit the limit at around 25 certificates per LB service.
+
+Note that the TLS-SNI challenge certificates used for [`kontena certificate authorize --type tls-sni-01`](vault.md#create-domain-authorization) domain authorizations also count towards this limit.
+
+If you attempt to add more SSL certificates and exceed the combined `SSL_CERTS` env size limit, the LB service will continue to run using the existing certificates, and the deploy will fail with an error: `Kontena::Models::ServicePod::ConfigError: Env SSL_CERTS is too large at ... bytes`
+
+## Kontena Load Balancer Health Checks
+
+By default, the Kontena Load Balancer will perform TCP healthchecks for all service backends, including both `tcp` and `http` (default) `KONTENA_LB_MODE` services. The load balancer will consider the service backend unhealthy if it is unable to connect to the `KONTENA_LB_INTERNAL_PORT`, and will stop routing incoming requests/connections to that backend.
+
+#### Using HTTP health checks
+
+To use HTTP healthchecks for a `KONTENA_LB_MODE=http` service (default), you must also configure a `health_check` with `protocol: http` for the Kontena Service:
+
+```yaml
+services:
+  whoami:
+    image: jwilder/whoami
+    links:
+      - $lb
+      environment:
+        - KONTENA_LB_MODE=http
+        - KONTENA_LB_INTERNAL_PORT=8000
+        - KONTENA_LB_VIRTUAL_PATH=/
+      health_check:
+        protocol: http
+        port: 8000
+        uri: /
+```
+
+The load balancer will consider the service backend unhealthy if it is unable to connect to the `KONTENA_LB_INTERNAL_PORT`, or if it receives a non-2xx/3xx HTTP response.
 
 ## Various Configuration Examples
 

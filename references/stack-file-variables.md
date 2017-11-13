@@ -405,6 +405,17 @@ from:
 
 This resolver is handy if you want to change scaling after the stack has been deployed.
 
+### `certificates`
+
+Prompt (multiselect) [Kontena Vault certificates](../using-kontena/vault.md#using-certificates) for use with [Stack service `certificates`](../using-kontena/stack-file.html#using-certificates)
+
+```
+from:
+  certificates: Select SSL Certificates
+```
+
+See the [Kontena Load Balancer example](../using-kontena/loadbalancer.md#prompting-for-ssl-certificates-from-kontena-certificates).
+
 ### `vault_cert_prompt`
 
 Prompt (multiselect) Kontena vault keys that contain `ssl` or `cert` words.
@@ -414,8 +425,7 @@ from:
   vault_cert_prompt: Select SSL Certificates
 ```
 
-This resolver is handy if you want to link certificates from Kontena Vault to a stack.
-
+See the [Kontena Load Balancer example](../using-kontena/loadbalancer.md#prompting-for-ssl-certificates-from-kontena-vault-secrets).
 
 ### `service_link`
 
