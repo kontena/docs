@@ -201,7 +201,7 @@ There are many configuration options available for defining Kontena Services. In
   * **Bind mount host directory as volume** will expose a path from your host to a specified path in your container. For example, if you want to mount `/data/mysql` from your host to path `/var/lib/mysql` in your container, you can do it like this: `/data/mysql:/var/lib/mysql`
 * **`volumes_from`** - Mount all the volumes from one or more Kontena Service(s) that are part of this same Kontena Stack. Lists the Kontena Service names. See [example](#using-volumes-from).
 * **`logging`** - Specify [docker logging driver configuration](https://docs.docker.com/compose/compose-file/compose-file-v2/#logging) that will replace [the Kontena Platform built-in logging features](./logs.md). **NOTE!** Once you set the docker logging driver configuration here, you can not see log entries origination from this Kontena Service on the Kontena Platform logging interface anymore.
-* **`health_check`** - Specify health checks for this service. Provide health check configuration information as described below. See [example](#using-health-check).
+* **`health_check`** - Specify health checks for this service. Provide health check configuration information as described below. See [example](#using-healthcheck).
   * **`protocol`** - protocol to use, either `http` or `tcp`. When performing tcp mode check, your Kontena Platform will only try to open a tcp socket connection to the specified port. If the connection is successful the Kontena Service Instance is considered healthy.
   * **`port`** - port to use for the check. This is the port the application is using within the Kontena Service Instance.
   * **`interval`** - how often the health check is performed. Defined in seconds.
