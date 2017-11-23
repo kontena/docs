@@ -498,8 +498,10 @@ variables:
     type: enum # a list of predefined options
     default: latest # default value
     options:
-      - 5.5
+      - "5.5"
       - latest
+    from:
+      prompt: Database version?
   use_mariadb:
     type: boolean
     from:
