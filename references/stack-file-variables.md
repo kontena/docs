@@ -1,6 +1,6 @@
 # Kontena Stack File Variables
 
-[Kontena Stack File](../using-kontena/stack-file.md) variables, declared in `variables` section, may be used to fill in values or providing additional conditional logic. In addition, they may be used with [Kontena Stack File Template Language](../using-kontena/stack-file.md#template-language). All variables, including environment variables you might want to use, must be declared in this section. 
+[Kontena Stack File](../using-kontena/stack-file.md) variables, declared in `variables` section, may be used to fill in values or providing additional conditional logic. In addition, they may be used with [Kontena Stack File Template Language](../using-kontena/stack-file.md#template-language). All variables, including environment variables you might want to use, must be declared in this section.
 
 Here is an example how to declare variable named `mysql_root_pw` and how to use it as part services of configuration:
 
@@ -32,7 +32,7 @@ environment:
 ## Built-in Default Variables
 
 Kontena Stack File has several built-in default variables that may be used throughout the entire Kontena Stack File (not only in the services section). These variables are:
- 
+
   * `STACK` - Contains the current stack name. Usage: `${STACK}`
   * `GRID` - Contains the current grid name (for those who run Kontena Platform Master themselves). Usage: `${GRID}`
   * `PLATFORM` - Contains the current Kontena Platform name. Usage: `${PLATFORM}`
@@ -434,9 +434,9 @@ Ask a link target from the user. List of service links can be filtered by image 
 ```
 from:
   service_link:
-  	hint: Choose a loadbalancer
-  	image: kontena/lb
-  	name: loadbalancer
+      hint: Choose a loadbalancer
+      image: kontena/lb
+      name: loadbalancer
 ```
 
 
@@ -475,7 +475,7 @@ to:
 
 ## Examples
 
-#### Using Conditional Variables 
+#### Using Conditional Variables
 
 In the following example, we'll create a MySQL stack where you can select to use MariaDB, select a version and place the root password into Kontena Vault.
 
@@ -518,7 +518,7 @@ variables:
       env: db_image # place the value into local env variable "db_image"
 services:
   mysql:
-    image: ${db_image}:${mysql_version} # use the variables
+    image: "${db_image}:${mysql_version}" # use the variables
     stateful: true
     secrets:
       - secret: wp-mysql-root # expose MYSQL_ROOT_PASSWORD to the container from vault key wp-mysql-root
