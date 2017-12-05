@@ -169,9 +169,28 @@ To use Let's Encrypt certificates with the Kontena Load Balancer:
 
 Once you have the Let's Encrpyt certificates for your domain visible in `kontena certificate list`, you may proceed to deploy them to the Kontena Load Balancer.
 
-#### Deploying SSL certificates from Kontena Vault `certificates`
+### Using externally managed SSL certificates
 
-The Let's Encrypt certificate stored in the Kontena Vault certificate is deployed to the Kontena Load Balancer using an `SSL_CERT_*` [env certificate](stack-file.md#using-certificates):
+Externally managed SSL certificates can also be imported into Kontena, for use in the Kontena Load Balancer. These can be self-signed certificates, or any other non-Let's Encrypt certificates, such as wildcard certificates.
+
+To import a certificate, you need the certificate, the private key and any optional intermediate certificate chain certs as separate PEM files:
+
+```
+$ kontena certificate import --private-key key.pem --chain ca-chain.pem cert.pem
+ [done] Importing certificate from cert.pem...     
+development/test:
+  subject: test
+  valid until: 2017-11-30T19:30:52Z
+  alt names:
+    - test-1
+  auto renewable: false
+```
+
+These imported certificates can be used identically to Let's Encrypt managed certificates, except that they will not be auto-renewed by Kontena.
+
+### Deploying SSL certificates from Kontena Vault `certificates`
+
+The SSL certificate stored in the Kontena Vault certificate is deployed to the Kontena Load Balancer using an `SSL_CERT_*` [env certificate](stack-file.md#using-certificates):
 
 ```yaml
 services:
@@ -245,11 +264,13 @@ services:
     # {% endif %}
 ```
 
-### Using externally managed SSL certificates
+### Using older secrets-based certificates
 
-The newer Kontena Certificates model used for auto-renewable Let's Encrypt certificates does not yet support importing externally managed certificates.
+Previous releases of Kontena did not support the new `certificates` model, and certificate bundles were stored and used from [Kontena Vault secrets](vault.md).
 
-To deploy externally managed SSL certificates, you may used the older Kontena Vault `secrets` based method.
+These certificate bundles must be structured in a certain way to be used with the Kontena Load Balancer.
+
+With newer versions of Kontena, the use of the `kontena certificate` commands is recommended.
 
 #### Preparing the SSL Certificate bundle
 
