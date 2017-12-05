@@ -505,7 +505,7 @@ services:
 
 #### Using `certificates`
 
-In the example below, the Kontena Platform will expose the bundled X.509 certificate, private key and any certificate chain for the `example.com` certificate as an environment variable `SSL_CERTS` to the Kontena Load Balancer Service.
+In the example below, the Kontena Platform will expose the bundled X.509 certificate, private key and any certificate chain for the `example.com` certificate as an `SSL_CERT_*` environment variable to the Kontena Load Balancer Service.
 
 ```yaml
 services:
@@ -513,9 +513,13 @@ services:
     image: kontena/lb
     certificates:
       - subject: example.com
-        name: SSL_CERTS
+        name: SSL_CERT_example.com
         type: env
 ```
+
+Multiple certificates can be deployed using separate `SSL_CERT_*` envs.
+
+Alternatively, multiple certificates can be deployed with the same `SSL_CERTS` env, and all of the certificates will be combined into a single environment variable. You must take into account the [limitations on the number of SSL certificates](#limitations-on-the-number-of-ssl-certificates)] when using the combined `SSL_CERTS` env.
 
 #### Using Kontena Volumes
 

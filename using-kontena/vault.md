@@ -150,10 +150,10 @@ services:
     certificates:
       - subject: www.example.com
         type: env
-        name: SSL_CERTS
+        name: SSL_CERT_www.example.com
 ```
 
-Kontena will inject the certificate from the vault into `SSL_CERTS` environment variable for the service instance container.
+Kontena will inject the certificate from the vault into the `SSL_CERT_*` environment variable for the service instance container.
 
 #### Renewing Let's Encrypt certificates
 
