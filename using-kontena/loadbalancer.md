@@ -36,7 +36,7 @@ Kontena Load Balancer is configured via its `environment` variables. Here's the 
 
 * **`KONTENA_LB_HEALTH_URI`** - URI at which to enable the Kontena Load Balancer level health check endpoint. Returns `200 OK` when Kontena Load Balancer is functional.
 * **`STATS_PASSWORD`** - The password for accessing Kontena Load Balancer statistics using HTTP Basic authentication. The default username is `stats` and the default password is 'secret'.
-* **`SSL_CERTS`** - SSL certificates to be used. See more at [SSL Termination](loadbalancer.md#ssl-termination).
+* **`SSL_CERTS`** and **`SSL_CERT_*`** - SSL certificates to be used. See more at [SSL Termination](loadbalancer.md#ssl-termination).
 * **`KONTENA_LB_SSL_CIPHERS`** - SSL Cipher suite used by the load balancer when operating in SSL mode. See more at [SSL Ciphers](loadbalancer.md#configuringcustomsslciphers)
 * **`KONTENA_LB_CUSTOM_SETTINGS`** - Custom settings; each line will be appended to `defaults` section in the HAProxy configuration file.
 * **`KONTENA_LB_SSL_CIPHERS`** - By default Kontena Load Balancer is using [strong SSL cipher suite](https://github.com/kontena/kontena-loadbalancer/blob/master/confd/templates/haproxy.tmpl#L9). If you want to use a custom cipher suite, you can specify it here. E.g. `ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-AES256-GCM-SHA384`.
@@ -151,9 +151,9 @@ docker run -ti --rm alpine mkpasswd -m sha-512 passwd
 
 The Kontena Load Balancer can be used to perform SSL termination for Kontena Services linked to the Load Balancer. The SSL certificates for each service must be deployed to the Kontena Load Balancer service.
 
-SSL certificates are deployed to the Kontena Load Balancer via the `SSL_CERTS` environment variable. The Kontena Load Balancer supports TLS-SNI, and will select the correct certificate to use based on the hostname that the client is connecting to.
+SSL certificates are deployed to the Kontena Load Balancer via the `SSL_CERTS` and `SSL_CERT_*` environment variables. The Kontena Load Balancer supports TLS-SNI, and will select the correct certificate to use based on the hostname that the client is connecting to.
 
-The `SSL_CERTS` environment variable should not be configured directly in the service environment, but using [`secrets`](stack-file.md#using-secrets) or [`certificates`](stack-file.md#using-certificates) stored in the [Kontena Vault](vault.md).
+The `SSL_CERTS`/`SSL_CERT_*` environment variables should not be configured directly in the service environment, but using [`secrets`](stack-file.md#using-secrets) or [`certificates`](stack-file.md#using-certificates) stored in the [Kontena Vault](vault.md).
 Starting from Kontena 1.4, Let's Encrypt certificates are managed using the newer [`kontena certificate`](vault.md#using-letsencrypt-certificates) certificates and service [certificates](stack-file.md#using-certificates).
 The older style of [`kontena vault`](vault.md) secrets and service [secrets](stack-file.md#using-secrets) is still supported for externally managed certificates.
 
@@ -171,7 +171,7 @@ Once you have the Let's Encrpyt certificates for your domain visible in `kontena
 
 #### Deploying SSL certificates from Kontena Vault `certificates`
 
-The Let's Encrypt certificate stored in the Kontena Vault certificate is deployed to the Kontena Load Balancer using an `SSL_CERTS` [env certificate](stack-file.md#using-certificates):
+The Let's Encrypt certificate stored in the Kontena Vault certificate is deployed to the Kontena Load Balancer using an `SSL_CERT_*` [env certificate](stack-file.md#using-certificates):
 
 ```yaml
 services:
@@ -182,10 +182,27 @@ services:
     certificates:
       - subject: www.example.com
         type: env
-        name: SSL_CERTS
+        name: SSL_CERT_www.example.com
 ```
 
-To deploy multiple certificates, use multiple `SSL_CERTS` env secrets:
+To deploy multiple certificates, use multiple `SSL_CERT_*` envs, one for each certificate:
+
+```yaml
+services:
+  lb:
+    image: kontena/lb:latest
+    ports:
+      - 443:443
+    certificates:
+      - subject: www.example.com
+        type: env
+        name: SSL_CERT_www.example.com
+      - subject: test.example.com
+        type: env
+        name: SSL_CERT_test.example.com
+```
+
+Alternatively, use multiple `SSL_CERTS` envs to deploy the certificates, but be aware of the [limitations on the number of SSL certificates](#limitations-on-the-number-of-ssl-certificates) deployed in this way:
 
 ```yaml
 services:
@@ -222,7 +239,7 @@ services:
     certificates:
       # {% for subject in lb_certs %}
       - subject: {{ subject }}
-        name: "SSL_CERTS"
+        name: "SSL_CERT_{{ subject }}"
         type: env
       # {% endfor %}
     # {% endif %}
@@ -282,7 +299,7 @@ services:
         type: env
 ```
 
-To deploy multiple certificate bundles, use multiple `SSL_CERTS` env secrets:
+To deploy multiple certificate bundles, use multiple `SSL_CERT_*` or `SSL_CERTS` env secrets:
 
 ```yaml
 services:
@@ -294,8 +311,8 @@ services:
       - secret: SSL_CERT_example.com
         name: SSL_CERTS
         type: env
-      - secret: SSL_CERT_test_example.com
-        name: SSL_CERTS
+      - secret: SSL_CERT_test.example.com
+        name: SSL_CERT_test.example.com
         type: env
 ```
 
@@ -329,13 +346,13 @@ The Kontena Vault secrets must have names matching `ssl` or `certs`.
 
 ### Limitations on the number of SSL certificates
 
-All of the `SSL_CERTS` env secrets will be merged into a single `SSL_CERTS` environment variable. There is a limit of 128KB on the total size of the `SSL_CERTS` environment variable.
+Using separate `SSL_CERT_*` envs for each certificate will allow deploying a large number of certificates, up to the OS's total size limit on the process environment. This is typically around 2MB, which allows for several hundred typical Let's Encrypt SSL certificates.
 
-The maximum number of deployable SSL certificates depends on the size of private keys and certificates used. For typical Let's Encrypt certificates, you may expect to hit the limit at around 25 certificates per LB service.
+When using multiple `SSL_CERTS` envs, all of the certificates will be merged into a single `SSL_CERTS` environment variable. There is a limit of 128KB on the total size of the `SSL_CERTS` environment variable within Linux. For typical Let's Encrypt certificates, you may expect to hit the limit at around 25 certificates per LB service.
 
-Note that the TLS-SNI challenge certificates used for [`kontena certificate authorize --type tls-sni-01`](vault.md#create-domain-authorization) domain authorizations also count towards this limit.
+Note that the TLS-SNI challenge certificates used for [`kontena certificate authorize --type tls-sni-01`](vault.md#create-domain-authorization) domain authorizations also count towards the `SSL_CERTS` limit, but the size of the challenge certificates is much smaller than normal. You may expect to hit the limit at around 50 pending domain authorizations.
 
-If you attempt to add more SSL certificates and exceed the combined `SSL_CERTS` env size limit, the LB service will continue to run using the existing certificates, and the deploy will fail with an error: `Kontena::Models::ServicePod::ConfigError: Env SSL_CERTS is too large at ... bytes`
+If you attempt to use too many SSL certificates and/or domain authorizations and exceed the combined `SSL_CERTS` env size limit, the LB service will continue to run using the existing certificates, and the deploy will fail with an error: `Kontena::Models::ServicePod::ConfigError: Env SSL_CERTS is too large at ... bytes`
 
 ## Kontena Load Balancer Health Checks
 
