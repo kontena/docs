@@ -128,10 +128,10 @@ Load balancers are used to distribute traffic between different services. Theref
 
 The Kontena Load Balancer is built on proven technologies such as [HAproxy](http://www.haproxy.org/) and [etcd](https://github.com/coreos/etcd). It is fully automated, enabling consistent load balancing for any number of Kontena Stacks and Services. The Kontena Load Balancer key features include:
 
-* Zero downtime
+* Zero downtime reloads
 * Fully automated configuration
 * Dynamic routing
-* Support for TCP and HTTP traffic
+* Support for HTTP, HTTP/2 and TCP traffic
 * SSL termination on multiple certificates
 * Link certificates from [Kontena Vault](#kontena-vault)
 
