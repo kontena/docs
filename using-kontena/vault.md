@@ -150,10 +150,10 @@ services:
     certificates:
       - subject: www.example.com
         type: env
-        name: SSL_CERTS
+        name: SSL_CERT_www.example.com
 ```
 
-Kontena will inject the certificate from the vault into `SSL_CERTS` environment variable for the service instance container.
+Kontena will inject the certificate from the vault into the `SSL_CERT_*` environment variable for the service instance container.
 
 #### Renewing Let's Encrypt certificates
 
@@ -187,3 +187,22 @@ valid_until: '2017-11-22T09:55:00.000+00:00'
 alt_names: []
 auto_renewable: true
 ```
+
+#### Exporting a certificate
+
+To export a managed certificate, use:
+
+```
+$ kontena certificate export example.com
+-----BEGIN CERTIFICATE-----
+...
+-----END CERTIFICATE-----
+-----BEGIN CERTIFICATE-----
+...
+-----END CERTIFICATE-----
+-----BEGIN RSA PRIVATE KEY-----
+...
+-----END RSA PRIVATE KEY-----
+```
+
+This outputs the entire certificate bundle by default. Use the `--cert`, `--chain` or `--key` options to export the different parts of the certificate separately.
