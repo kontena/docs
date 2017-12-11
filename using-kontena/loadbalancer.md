@@ -39,8 +39,7 @@ Kontena Load Balancer is configured via its `environment` variables. Here's the 
 * **`SSL_CERTS`** and **`SSL_CERT_*`** - SSL certificates to be used. See more at [SSL Termination](loadbalancer.md#ssl-termination).
 * **`KONTENA_LB_SSL_CIPHERS`** - SSL Cipher suite used by the load balancer when operating in SSL mode. See more at [SSL Ciphers](loadbalancer.md#configuringcustomsslciphers)
 * **`KONTENA_LB_CUSTOM_SETTINGS`** - Custom settings; each line will be appended to `defaults` section in the HAProxy configuration file.
-* **`KONTENA_LB_SSL_CIPHERS`** - By default Kontena Load Balancer is using [strong SSL cipher suite](https://github.com/kontena/kontena-loadbalancer/blob/master/confd/templates/haproxy.tmpl#L9). If you want to use a custom cipher suite, you can specify it here. E.g. `ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-AES256-GCM-SHA384`.
-
+* **`KONTENA_LB_ACCEPT_PROXY`** - Enables proxy protocol (accept-proxy).
 ## Linking Kontena Services to Kontena Load Balancer
 
 Any Kontena Service may be linked to Kontena Load Balancer simply by adding a `links` variable with the name of the Kontena Load Balancer. Load balancing options for this Kontena Service may be configured via `environment` variable. The only required configuration is the port that is attached to Kontena Load Balancer.
@@ -97,9 +96,9 @@ The full list of configuration options for Kontena Service load balancing:
 * **`KONTENA_LB_BALANCE`** - Specify the load-balancing algorithm. Possible values: `roundrobin`, `source`, `leastconn`. Default: `roundrobin`.
 * **`KONTENA_LB_EXTERNAL_PORT`** - Specify a port to which the load balancer will start to listen. This may be used only if `KONTENA_LB_MODE` is set to `tcp`.
 * **`KONTENA_LB_VIRTUAL_HOSTS`** - Comma-separated list of virtual hosts. This may be used only if `KONTENA_LB_MODE` is set to `http`. Please note, if you would like to access your service through the VPN, you'll need to add that as a virtual host as well.
-* **`KONTENA_LB_VIRTUAL_PATH`** - Specify a path that is used to match the request. This may be used only if `KONTENA_LB_MODE` is set to `http`. For example, if you set a value here for "/api", then any request to e.g. "/api/foo" is proxied to "/foo" in your application.
+* **`KONTENA_LB_VIRTUAL_PATH`** - Specify a comma separated list of paths that are used to match the request. This may be used only if `KONTENA_LB_MODE` is set to `http`. For example, if you set a value here for "/api", then any request to e.g. "/api/foo" is proxied to "/foo" in your application.
 * **`KONTENA_LB_KEEP_VIRTUAL_PATH`** - If set to true, the virtual path will be kept in the request path. This may be used only if `KONTENA_LB_MODE` is set to `http`. Default: `false`.
-* **`KONTENA_LB_COOKIE`** - Enables cookie-based session stickiness. With an empty value, it defaults to the load balancer-set cookie. Can be customized to use application cookies. See details at [HAProxy docs](https://cbonte.github.io/haproxy-dconv/configuration-1.5.html#4.2-cookie).
+* **`KONTENA_LB_COOKIE`** - Enables cookie-based session stickiness. With an empty value, it defaults to the load balancer-set cookie. Can be customized to use application cookies. See details at [HAProxy docs](https://cbonte.github.io/haproxy-dconv/1.8/configuration.html#4.2-cookie).
 * **`KONTENA_LB_CUSTOM_SETTINGS`** - Extra settings; each line will be appended to either the related backend section or the listen session in the HAProxy configuration file.
 
 ## Using Kontena Load Balancer for Basic Authentication
@@ -492,4 +491,4 @@ environment:
 ...
 ```
 
-See HAProxy [docs](http://cbonte.github.io/haproxy-dconv/1.6/configuration.html#option%20http-ignore-probes) for details.
+See HAProxy [docs](https://cbonte.github.io/haproxy-dconv/1.8/configuration.html#4.2-option%20http-ignore-probes) for details.
