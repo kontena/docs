@@ -1,6 +1,6 @@
 # Kontena Stack File Variables
 
-[Kontena Stack File](../using-kontena/stack-file.md) variables, declared in `variables` section, may be used to fill in values or providing additional conditional logic. In addition, they may be used with [Kontena Stack File Template Language](../using-kontena/stack-file.md#template-language). All variables, including environment variables you might want to use, must be declared in this section. 
+[Kontena Stack File](../using-kontena/stack-file.md) variables, declared in `variables` section, may be used to fill in values or providing additional conditional logic. In addition, they may be used with [Kontena Stack File Template Language](../using-kontena/stack-file.md#template-language). All variables, including environment variables you might want to use, must be declared in this section.
 
 Here is an example how to declare variable named `mysql_root_pw` and how to use it as part services of configuration:
 
@@ -32,7 +32,7 @@ environment:
 ## Built-in Default Variables
 
 Kontena Stack File has several built-in default variables that may be used throughout the entire Kontena Stack File (not only in the services section). These variables are:
- 
+
   * `STACK` - Contains the current stack name. Usage: `${STACK}`
   * `GRID` - Contains the current grid name (for those who run Kontena Platform Master themselves). Usage: `${GRID}`
   * `PLATFORM` - Contains the current Kontena Platform name. Usage: `${PLATFORM}`
@@ -336,6 +336,18 @@ from:
     charset: hex_upcase
 ```
 
+##### Defined charsets:
+ * numbers (0-9)
+ * letters (a-z + A-Z)
+ * downcase (a-z)
+ * upcase (A-Z)
+ * alphanumeric (0-9 + a-z + A-Z)
+ * hex (0-9 + a-f)
+ * hex_upcase (0-9 + A-F)
+ * base64 (base64 charset (length has to be divisible by four when using base64))
+ * ascii_printable (all printable ascii chars)
+ * or a set of characters, for example: `length: 8, charset: '01'` will generate something like: **01001100**
+
 ### `interpolate`
 
 Hint must be a string. Variable references in that string template will be used to build the final value.
@@ -365,18 +377,6 @@ quorum:
   from:
     evaluate: (${nodes}/2) + 1
 ```
-
-##### Defined charsets:
- * numbers (0-9)
- * letters (a-z + A-Z)
- * downcase (a-z)
- * upcase (A-Z)
- * alphanumeric (0-9 + a-z + A-Z)
- * hex (0-9 + a-f)
- * hex_upcase (0-9 + A-F)
- * base64 (base64 charset (length has to be divisible by four when using base64))
- * ascii_printable (all printable ascii chars)
- * or a set of characters, for example: `length: 8, charset: '01'` will generate something like: **01001100**
 
 ### `random_uuid`
 Ignores the hint completely.
@@ -475,7 +475,7 @@ to:
 
 ## Examples
 
-#### Using Conditional Variables 
+#### Using Conditional Variables
 
 In the following example, we'll create a MySQL stack where you can select to use MariaDB, select a version and place the root password into Kontena Vault.
 
