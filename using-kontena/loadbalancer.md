@@ -99,6 +99,7 @@ The full list of configuration options for Kontena Service load balancing:
 * **`KONTENA_LB_VIRTUAL_PATH`** - Specify a comma separated list of paths that are used to match the request. This may be used only if `KONTENA_LB_MODE` is set to `http`. For example, if you set a value here for "/api", then any request to e.g. "/api/foo" is proxied to "/foo" in your application.
 * **`KONTENA_LB_KEEP_VIRTUAL_PATH`** - If set to true, the virtual path will be kept in the request path. This may be used only if `KONTENA_LB_MODE` is set to `http`. Default: `false`.
 * **`KONTENA_LB_COOKIE`** - Enables cookie-based session stickiness. With an empty value, it defaults to the load balancer-set cookie. Can be customized to use application cookies. See details at [HAProxy docs](https://cbonte.github.io/haproxy-dconv/1.8/configuration.html#4.2-cookie).
+* **`KONTENA_LB_HTTP2`** - Enable HTTP2 support. Default: `true`.
 * **`KONTENA_LB_CUSTOM_SETTINGS`** - Extra settings; each line will be appended to either the related backend section or the listen session in the HAProxy configuration file.
 
 ## Using Kontena Load Balancer for Basic Authentication
@@ -176,7 +177,7 @@ To import a certificate, you need the certificate, the private key and any optio
 
 ```
 $ kontena certificate import --private-key key.pem --chain ca-chain.pem cert.pem
- [done] Importing certificate from cert.pem...     
+ [done] Importing certificate from cert.pem...
 development/test:
   subject: test
   valid until: 2017-11-30T19:30:52Z
@@ -273,7 +274,7 @@ With newer versions of Kontena, the use of the `kontena certificate` commands is
 
 #### Preparing the SSL Certificate bundle
 
-The Kontena Load Balancer expects SSL certificates in the form of a PEM-encoded certificate bundle, containing the `CERTIFICATE`, any optional intermediate CA `CERTIFICATE` chain, and the `PRIVATE KEY` last.  
+The Kontena Load Balancer expects SSL certificates in the form of a PEM-encoded certificate bundle, containing the `CERTIFICATE`, any optional intermediate CA `CERTIFICATE` chain, and the `PRIVATE KEY` last.
 
 Using a self-signed certificate as an example:
 
