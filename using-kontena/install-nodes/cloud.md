@@ -6,6 +6,7 @@
 * [Terminate Kontena Node](#terminate-kontena-node)
 * [Update Kontena Node](#update-kontena-node)
 * [Advanced Usage](#advanced-usage)
+* [Pricing](#pricing)
 
 ## Prerequisites
 
@@ -71,7 +72,7 @@ $ kontena cloud node reboot <NAME>
 
 ## Advanced Usage
 
-## Create
+### Create
 
 ```
 Usage:
@@ -86,7 +87,7 @@ Options:
     --ssh-key SSH_KEY             Path to ssh public key
 ```
 
-## List
+### List
 
 ```
 Usage:
@@ -97,7 +98,7 @@ Options:
     --quiet, -q                   Output the identifying column only
 ```
 
-## Shell
+### Shell
 
 ```
 Usage:
@@ -111,7 +112,7 @@ Options:
     --platform PLATFORM           Specify Kontena Cloud platform to use
 ```
 
-## Terminate
+### Terminate
 
 ```
 Usage:
@@ -124,3 +125,7 @@ Options:
     --platform PLATFORM           Specify Kontena Cloud platform to use
     --force                       Force remove (default: false)
 ```
+
+## Pricing
+
+For more information, see [Kontena Cloud Compute Pricing](https://www.kontena.io/pricing)

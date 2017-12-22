@@ -4,7 +4,7 @@ title: Image Registry
 
 # Kontena Cloud Image Registry
 
-[Kontena Cloud](https://kontena.io/cloud) Image Registry provides a zero-maintenance, secure and ready-to-go solution for storing Docker images.
+[Kontena Cloud](https://kontena.io/cloud#image-registry) Image Registry provides a zero-maintenance, secure and ready-to-go solution for storing Docker images.
 
 ## Using Kontena Cloud Image Registry
 
@@ -23,6 +23,7 @@ title: Image Registry
   * [Add image registry configuration](./image-registry#add-image-registry-configuration)
   * [List image registry configurations](./image-registry#list-image-registry-configurations)
   * [Remove an image registry configuration](./image-registry#remove-an-image-registry-configuration)
+* [Pricing](./image-registry.md#pricing)
 
 ### Prerequisites
 
@@ -162,3 +163,7 @@ $ kontena external-registry list
 ```
 $ kontena external-registry remove <NAME>
 ```
+
+## Pricing
+
+For more information, see [Kontena Cloud Image Registry](https://www.kontena.io/pricing)

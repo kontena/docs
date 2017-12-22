@@ -20,6 +20,7 @@ In this chapter, we'll discover how to manage Kontena Platforms using the Konten
 * [Show Kontena Platform Grid Environment Details](#show-kontena-platform-grid-environment-details)
 * [Show Kontena Platform Grid Cloud-Config](#show-kontena-platform-grid-cloud-config)
 * [Manage Kontena Platform Grid Trusted Subnets](#manage-kontena-platform-grid-trusted-subnets)
+* [Pricing](#pricing)
 
 ## Create a New Kontena Platform
 
@@ -206,3 +207,7 @@ $ kontena grid trusted-subnet add <grid> <subnet>
 ```
 $ kontena grid trusted-subnet remove <grid> <subnet>
 ```
+
+## Pricing
+
+For more information, see [Kontena Cloud Platform Pricing](https://www.kontena.io/pricing)
