@@ -40,6 +40,8 @@ Kontena Load Balancer is configured via its `environment` variables. Here's the 
 * **`KONTENA_LB_SSL_CIPHERS`** - SSL Cipher suite used by the load balancer when operating in SSL mode. See more at [SSL Ciphers](loadbalancer.md#configuringcustomsslciphers)
 * **`KONTENA_LB_CUSTOM_SETTINGS`** - Custom settings; each line will be appended to `defaults` section in the HAProxy configuration file.
 * **`KONTENA_LB_ACCEPT_PROXY`** - Enables proxy protocol (accept-proxy).
+* **`KONTENA_LB_HTTP2`** - Enable HTTP2 support. Default: `true`.
+
 ## Linking Kontena Services to Kontena Load Balancer
 
 Any Kontena Service may be linked to Kontena Load Balancer simply by adding a `links` variable with the name of the Kontena Load Balancer. Load balancing options for this Kontena Service may be configured via `environment` variable. The only required configuration is the port that is attached to Kontena Load Balancer.
@@ -99,7 +101,6 @@ The full list of configuration options for Kontena Service load balancing:
 * **`KONTENA_LB_VIRTUAL_PATH`** - Specify a comma separated list of paths that are used to match the request. This may be used only if `KONTENA_LB_MODE` is set to `http`. For example, if you set a value here for "/api", then any request to e.g. "/api/foo" is proxied to "/foo" in your application.
 * **`KONTENA_LB_KEEP_VIRTUAL_PATH`** - If set to true, the virtual path will be kept in the request path. This may be used only if `KONTENA_LB_MODE` is set to `http`. Default: `false`.
 * **`KONTENA_LB_COOKIE`** - Enables cookie-based session stickiness. With an empty value, it defaults to the load balancer-set cookie. Can be customized to use application cookies. See details at [HAProxy docs](https://cbonte.github.io/haproxy-dconv/1.8/configuration.html#4.2-cookie).
-* **`KONTENA_LB_HTTP2`** - Enable HTTP2 support. Default: `true`.
 * **`KONTENA_LB_CUSTOM_SETTINGS`** - Extra settings; each line will be appended to either the related backend section or the listen session in the HAProxy configuration file.
 
 ## Using Kontena Load Balancer for Basic Authentication
