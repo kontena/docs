@@ -47,6 +47,8 @@ Once the Kontena Platform is created, Kontena Nodes may be added. The first Kont
 
 With etcd, the majority of the Initial Nodes should be always online and healthy. This is to ensure that there is distributed key/value storage data consistency and replication across the cluster. A well designed production environment should be defined with an odd `initial-size` value (e.g. 3, 5 or 7). In addition, the Initial Nodes should be spread across different availability zones. Please see [etcd admin guide](https://coreos.com/etcd/docs/latest/v2/admin_guide.html#optimal-cluster-size) for further details.
 
+**Note:** Currently the `initial-size` is static and **can not** be changed afterwards. This means you cannot "promote" additional initial nodes after the grid has been created.
+
 #### Initial Node Failures
 
 The majority of the Initial Nodes must be always online and healthy. Otherwise the Kontena Platform will stop working. The Kontena Platform with an `initial-size=3` is operational if one of the Initial Nodes is missing or unhealthy. The Kontena Platform with an `initial-size=5` is operational even if two Initial Nodes are missing or unhealthy. While this may sound good, it is highly recommended to repair or replace any missing or unhealthy Initial Nodes as soon as possible.
