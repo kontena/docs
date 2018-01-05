@@ -81,7 +81,7 @@ $ kontena cloud platform list
 Example: List all the platforms in the organization `acme`
 
 ```
-$ kontena cloud platform list --org acme
+$ kontena cloud platform list --organization acme
 ```
 
 ## Switch to Another Kontena Platform
@@ -143,7 +143,7 @@ It's possible to connect a custom [Kontena Platform Grid](../advanced/grids.md) 
 To connect your Kontena Platform Grid to Kontena Cloud, use following command:
 
 ```
-$ kontena cloud platform join [--org=<ORGANIZATION>] <MASTER_NAME> <GRID_NAME> <PLATFORM_NAME>
+$ kontena cloud platform join [--organization=<ORGANIZATION>] <MASTER_NAME> <GRID_NAME> <PLATFORM_NAME>
 ```
 
 ## Show Kontena Platform Event Logs
