@@ -75,7 +75,7 @@ In order to request a Let's Encrypt certificate for any domains, you must first 
 Kontena's certificate management for Let's Encrypt supports different challenge types:
 
 * `dns-01` (since <1.0)
-* `tls-sni-01` (since 1.4)
+* `tls-sni-01` (since 1.4, but [out of service](https://github.com/kontena/kontena/issues/3209) since 2018-01-10)
 * `http-01` (since 1.4.x/1.5)
 
 In order to use the automated challenge methods, HTTP/HTTPS connections to the domain(s) in question must be handled by a [Kontena Load Balancer](loadbalancer.md) service.
@@ -97,6 +97,8 @@ Later on when requesting the certificate, the Let's Encrypt verification servers
 The `--linked-service` must be configured to expose port 80.
 
 #### TLS-SNI based verification
+
+**Note:** All TLS-SNI variants have been disabled by Let's Encrypt since 2018-01-10 due to security weaknesses, and it is as of yet unknown if and when it may be re-enabled. See the [Kontena Issue](https://github.com/kontena/kontena/issues/3209) for further / more up-to-date information.
 
 The `tls-sni-01` challenge can also be used for automated certificate renewals.
 
