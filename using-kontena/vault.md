@@ -109,7 +109,7 @@ TLS-SNI challenge certificate is deployed, you can now request the actual certif
 Kontena automatically provisions the challenge certificate provided by LE to the linked service in the form of `SSL_CERT_acme_challenge_*` environment variable secrets.
 The linked service is typically a [Kontena Load Balancer](loadbalancer.md) service which responds to TLS-SNI connections for the `*.acme.invalid` challenge certificate subject name.
 
-Later on when requesting the certificate, the Let's Encrpyt verification servers will connect to the domain on TCP port 443, and establish a TLS connection for the challenge hostname.
+Later on when requesting the certificate, the Let's Encrypt verification servers will connect to the domain on TCP port 443, and establish a TLS connection for the challenge hostname.
 The `--linked-service` must be configured to expose port 443.
 
 #### DNS based verification
