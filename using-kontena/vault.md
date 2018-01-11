@@ -114,6 +114,8 @@ The `--linked-service` must be configured to expose port 443.
 
 #### DNS based verification
 
+The `dns-01` challenge records must be deployed manually to the DNS zone, and cannot be used for automated certificate renewals.
+
 ```bash
 $ kontena certificate authorize api.example.com
 Record name:_acme-challenge
@@ -121,7 +123,9 @@ Record type:TXT
 Record content:5m1FCaNvneLduTN4AcPqAbyuQhBQA4ESisAQfEYvXIE
 ```
 
-To verify that you really control the requested domain, create a DNS TXT record for the domain `_acme-challenge.api.example.com` with content specified in the response.
+Before requesting the certificate, you must create a DNS TXT record for the domain `_acme-challenge.api.example.com` with content specified in the output.
+
+The advantage of the `dns-01` method is that the Let's Encrypt verification servers do not need to be able to connect to the domain, and can thus also be used for internal services not accessible to the internet.
 
 #### Get actual certificate
 
