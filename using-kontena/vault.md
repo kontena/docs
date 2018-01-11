@@ -69,7 +69,7 @@ The email is needed for Let's Encrypt to notify when certificates are about to e
 
 **Note:** This registration is needed only once per Kontena Platform.
 
-### Create domain authorization
+### Authorize the domain
 
 In order to request a Let's Encrypt certificate for any domains, you must first prove that you are in control of each domain.
 Kontena's certificate management for Let's Encrypt supports different challenge types:
@@ -127,23 +127,27 @@ Before requesting the certificate, you must create a DNS TXT record for the doma
 
 The advantage of the `dns-01` method is that the Let's Encrypt verification servers do not need to be able to connect to the domain, and can thus also be used for internal services not accessible to the internet.
 
-#### Get actual certificate
+### Request the certificate
 
-Once you have created the necessary DNS proof of domain control you can request the actual certificate.
+Once you have created and provisioned the domain authorizations, you can request the actual certificates from Let's Encrypt:
 
 ```
 $ kontena certificate request api.example.com
-
+ [done] Requesting certificate for api.example.com      
 ```
 
-Kontena automatically stores the certificate in a secure vault in a format where it can be used for SSL termination with Kontena Load Balancer.
+Kontena automatically stores the certificate and (encrypted) private key into the secure vault in a format where it can be used for [SSL termination with the Kontena Load Balancer](loadbalancer.md#deploying-ssl-certificates-from-kontena-vault-certificates).
+Kontena will include the complete certificate chain including any intermediary Let's Encrpyt CA certificates when deploying the requested certificates. This is because the Let's Encrypt CAs are not yet directly trusted by all SSL clients, including some libraries associated with Ruby, Docker, and e.g. wget.
 
-Let's Encrypt does not (yet) support wildcard certificates. In many cases it is necessary to serve multiple sites behind one certificate. For this, Let's Encrypt supports a concept called subject alternative names (SAN). To obtain a certificate for multiple DNS names, simply specify them in the request:
+#### Certificates with multiple domains
+
+Let's Encrypt does not (yet) support wildcard certificates. In many cases it is necessary to serve multiple sites behind one certificate. For this, Let's Encrypt supports a concept called subject alternative names (SAN). To obtain a certificate for multiple DNS names, simply specify multiple domains in the request. The first domain in the list becomes the common name and others are used as alternative names:
 
 ```
 $ kontena certificate request example.com www.example.com
 ```
-**Note:** For each of the domains in the certificate request, it is necessary to complete the domain authorization first! The first domain in the list becomes the common name and others are used as alternative names:
+
+**Note:** For each of the domains in the certificate request, it is necessary to complete the domain authorization first!
 
 ```
 Certificate:
@@ -163,8 +167,6 @@ Certificate:
             X509v3 Subject Alternative Name:
                 DNS:www.example.com, DNS:example.com
 ```
-
-By default Kontena stores the full chain version of the certificate. This is because Let's Encrypt intermediaries are not trusted by all client libraries (such as some libraries associated with Ruby, Docker, and wget, for example).
 
 #### Using certificates
 
