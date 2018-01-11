@@ -75,8 +75,8 @@ In order to request a Let's Encrypt certificate for any domains, you must first 
 Kontena's certificate management for Let's Encrypt supports different challenge types:
 
 * `dns-01` (since <1.0)
-* `http-01` (since 1.4.x/1.5)
 * `tls-sni-01` (since 1.4)
+* `http-01` (since 1.4.x/1.5)
 
 In order to use the automated challenge methods, HTTP/HTTPS connections to the domain(s) in question must be handled by a [Kontena Load Balancer](loadbalancer.md) service.
 
