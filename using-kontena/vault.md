@@ -43,13 +43,13 @@ $ kontena vault update <name> <value>
 $ kontena vault rm <name>
 ```
 
-## Using LetsEncrypt Certificates
+## Using Let's Encrpyt Certificates
 
 Kontena Vault integrates natively with [Let's Encrypt](https://letsencrypt.org) to provide easy-to-use certificate management for your Kontena Services.
 
 The following chapters describe the flow of getting certificates from Let's Encrypt: register --> authorize domain --> request certificate
 
-### Register for LE
+### Register for Let's Encrpyt
 
 To use Let's Encrypt, you must first register as a user.
 

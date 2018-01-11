@@ -164,9 +164,9 @@ Kontena has built-in support for Let's Encrypt, using either `DNS-01` challenges
 
 To use Let's Encrypt certificates with the Kontena Load Balancer:
 
-* [Use the Kontena CLI to register for Let's Encrypt](vault.md#register-for-le)
-* [Create domain authorization challenges](vault.md#create-domain-authorization)
-* [Request the certificate](vault.md#get-actual-certificate)
+* [Use the Kontena CLI to register for Let's Encrypt](vault.md#register-for-lets-encrpyt)
+* [Create domain authorization challenges](vault.md#authorize-the-domain)
+* [Request the certificate](vault.md#request-the-certificate)
 
 Once you have the Let's Encrpyt certificates for your domain visible in `kontena certificate list`, you may proceed to deploy them to the Kontena Load Balancer.
 
