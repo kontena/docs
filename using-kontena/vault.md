@@ -49,7 +49,7 @@ Kontena Vault integrates natively with [Let's Encrypt](https://letsencrypt.org) 
 
 The following chapters describe the flow of getting certificates from Let's Encrypt: register --> authorize domain --> request certificate
 
-#### Register for LE
+### Register for LE
 
 To use Let's Encrypt, you must first register as a user.
 
@@ -69,24 +69,50 @@ The email is needed for Let's Encrypt to notify when certificates are about to e
 
 **Note:** This registration is needed only once per Kontena Platform.
 
-#### Create domain authorization
+### Create domain authorization
 
-To be able to request certificates for a domain you must first prove that you are in charge of that domain. For this, Kontena certificate management supports both DNS and TLS-SNI verifications.
+In order to request a Let's Encrypt certificate for any domains, you must first prove that you are in control of each domain.
+Kontena's certificate management for Let's Encrypt supports different challenge types:
 
-**TLS-SNI based verification**
+* `dns-01` (since <1.0)
+* `http-01` (since 1.4.x/1.5)
+* `tls-sni-01` (since 1.4)
+
+In order to use the automated challenge methods, HTTP/HTTPS connections to the domain(s) in question must be handled by a [Kontena Load Balancer](loadbalancer.md) service.
+
+#### HTTP-01 based verification
+
+The `http-01` challenge is the most popular choice, and allows for automated certificate renewals.
 
 ```bash
-$ kontena certificate authorize --type tls-sni-01 --linked-service infra/lb api.example.com
-[done] Waiting for tls-sni-01 certificate to be deployed into my-grid/infra/lb
+$ kontena certificate authorize --type http-01 --linked-service ingress-lb/lb api.example.com
+ [done] Waiting for http-01 challenge to be deployed into my-grid/ingress-lb/lb      
+HTTP challenge is deployed, you can now request the actual certificate
+```
+
+Kontena automatically provisions the acme-challenge token/key-authorizations provided by LE to the linked service in the form of `ACME_CHALLENGE_*` environment variable secrets.
+The linked service is typically a [Kontena Load Balancer](loadbalancer.md) service which responds to `GET /.well-known/acme-challenge` requests using the provisioned tokens.
+
+Later on when requesting the certificate, the Let's Encrypt verification servers will connect to the domain on TCP port 80, and make a HTTP request for the challenge token.
+The `--linked-service` must be configured to expose port 80.
+
+#### TLS-SNI based verification
+
+The `tls-sni-01` challenge can also be used for automated certificate renewals.
+
+```bash
+$ kontena certificate authorize --type tls-sni-01 --linked-service ingress-lb/lb api.example.com
+[done] Waiting for tls-sni-01 certificate to be deployed into my-grid/ingress-lb/lb
 TLS-SNI challenge certificate is deployed, you can now request the actual certificate
 ```
 
-Kontena automatically links the special certificate LE gives us and deploys the linked service. Naturally the linked service is usually Kontena LB. Only thing user needs to configure is a public DNS record for the domain(s) to point to the linked service.
+Kontena automatically provisions the challenge certificate provided by LE to the linked service in the form of `SSL_CERT_acme_challenge_*` environment variable secrets.
+The linked service is typically a [Kontena Load Balancer](loadbalancer.md) service which responds to TLS-SNI connections for the `*.acme.invalid` challenge certificate subject name.
 
-When later on requesting the certificate, LE will make special SSL connection to the server(s) for which it expects the server to present the certificate.
+Later on when requesting the certificate, the Let's Encrpyt verification servers will connect to the domain on TCP port 443, and establish a TLS connection for the challenge hostname.
+The `--linked-service` must be configured to expose port 443.
 
-
-**DNS based verification**
+#### DNS based verification
 
 ```bash
 $ kontena certificate authorize api.example.com
@@ -157,10 +183,11 @@ Kontena will inject the certificate from the vault into the `SSL_CERT_*` environ
 
 #### Renewing Let's Encrypt certificates
 
-If you have made the authorizations of all the domain in the certificate using `tls-sni-01` authorization model Kontena will automatically renew the certificate 7 days prior to it's expiration. In practice this means that you must do the first request for the certificate manually and after that the management is fully automated.
+If you have made the authorizations of all the domain in the certificate using either `http-01` or `tls-sni-01` type authorizations, then Kontena will automatically renew the certificate 7 days prior to it's expiration.
+In practice this means that you must do the first request for the certificate manually and after that the management is fully automated.
 
-For `dns-01` authorized certificate the renewal process is fully manual as Kontena cannot automate the DNS challenge fullfilment part.
-
+For `dns-01` domain authorizations, the renewal process is fully manual as Kontena cannot automate the DNS challenge provisioning.
+The expiration and auto-renewal support for each certificate can be checked using `kontena certificate list`.
 
 #### Inspecting certificate details
 

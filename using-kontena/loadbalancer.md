@@ -160,7 +160,7 @@ The older style of [`kontena vault`](vault.md) secrets and service [secrets](sta
 
 ### Using automated Let's Encrypt certificates
 
-Kontena has built-in support for Let's Encrypt, using either `DNS-01` challenges or fully automated `TLS-SNI-01` challenges integrated with the Kontena Load Balancer.
+Kontena has built-in support for Let's Encrypt, using either `DNS-01` challenges or fully automated `HTTP-01`/`TLS-SNI-01` challenges integrated with the Kontena Load Balancer.
 
 To use Let's Encrypt certificates with the Kontena Load Balancer:
 
