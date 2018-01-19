@@ -6,9 +6,9 @@ Here is an example how to declare variable named `mysql_root_pw` and how to use 
 
 ```yaml
 variables:
-  mysql_root_pw:
-    type: string
-    from:
+  mysql_root_pw: 
+    type: string 
+    from:        
       prompt: Enter a root password for MySQL or leave empty to auto generate
       random_string: 16
 services:
@@ -39,9 +39,47 @@ Kontena Stack File has several built-in default variables that may be used throu
 
 ## Variables Reference
 
+### Type
+
+Defines the [data type](#data_types) of the variable.
+
+```
+variables:
+  variable_name:
+    type: string
+```
+
+### Default
+
+Sets a default value. The value will be used when no other value for the variable has been supplied.
+
+```
+variables:
+  image_tag:
+    type: string
+    default: latest
+    from:
+      env: IMAGE_TAG
+```
+
+The `image_tag` will get the value "latest" unless the environment variable `IMAGE_TAG` has been set.
+
+### Value
+
+Set a constant value that can only be changed by modifying the file.
+
+```
+variables:
+  image_tag:
+    type: string
+    value: latest
+```
+
+The value of image_tag will always be "latest". Any `from:` sources will not be used.
+
 ### From
 
-Define where a value for the variable is obtained from. A list of resolvers and their options can be found further in this documentation.
+Define where a value for the variable should be looked up from, for example an environment variable name, an interactive prompt or a random password generator. See the list of available resolvers and their options [here](#resolvers).
 
 You can define multiple sources, for example:
 
@@ -106,31 +144,23 @@ Works just the same as `only_if`, but opposite. The processing of this variable 
   skip_if: use_mysql # don't process this variable if use_mysql has a truthy value.
 ```
 
-### Type
-
-Data type for the variable, options are: string, integer, boolean, enum and uri.
-
-```
-  type: string
-```
-
 ### Type handler options
 
-Everything else is passed to the type handler as options:
+Everything else is passed to the type handler as options. Each data type can have a different set of options.
 
 ```
 username:
   type: string
-  min_length: 10 # require length to be at least 10 characters
+  min_length: 10 # require string length to be at least 10 characters
   max_length: 16 # and maximum of 16 characters
-  downcase: true # make the string all lower case
+  downcase: true # make the string all lower case even if input is MixedCase
 ```
 
 ## Data Types
 
 The data types can have several options, validations, sanitizations and transformations. For example, the minimum length of a string can be defined, the string can be converted to UPPER CASE characters and cleaned up of leading/trailing whitespace.
 
-There's a global validation applicable to all data types:
+There's one global validation rule that is applicable to all data types, the `in:` validator. You can use it to make the value valid if it is one of the accepted values listed under the `in:` keyword, known as `enum` in some languages.
 
 ```
   type: string
@@ -282,7 +312,7 @@ arr:
 
 The variable `arr` will have the value `a,b,c`.
 
-## Resolvers (From:)
+## Resolvers
 
 Resolvers are used to obtain a value for the variable from several inputs. If you define multiple sources, they will be processed one by one until one of them results in a non-null value.
 
