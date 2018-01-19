@@ -41,7 +41,7 @@ Kontena Stack File has several built-in default variables that may be used throu
 
 ### Type
 
-Defines the [data type](#data_types) of the variable.
+Defines the [data type](#data-types) of the variable.
 
 ```
 variables:
