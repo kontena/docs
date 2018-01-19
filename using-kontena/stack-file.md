@@ -156,7 +156,7 @@ There are many configuration options available for defining Kontena Services. In
   * **`wait_for_port`** - Wait until the specified port is responding before deploying another instance. This makes it possible to achieve zero-downtime deploys.
   * **`min_health`** - The minimum percentage (expressed as a number in the range 0.0 - 1.0) of healthy Kontena Service Instances that do not sacrifice overall Kontena Service availability while deploying.
   * **`interval`** - The interval of automatic redeployment of the service. This can be used as an "erosion-resistance" mechanism. Format <number><unit>, where unit = min, h, d. For example, value `7d`.
-* **`affinity`** - Specify affinity rules that will be used by Kontena Platform scheduler when scheduling this Kontena Service. Affinity rules may be positive (`==`) or negative (`!=`) and they may be compared against Kontena Node name, Kontena Service name, containers or labels. See usage [example](#using-affinity-rules).
+* **`affinity`** - Specify affinity rules that will be used by Kontena Platform scheduler when scheduling this Kontena Service. Affinity rules may be positive (`==`) or negative (`!=`) and they may be compared against Kontena Node name, Kontena Service name, containers or labels. See [Deployment affinities documentation](./affinities.md).
 * **`hooks`** - Specify a list of commands that are executed at various stages of this Kontena Service lifecycle. The currently supported stages are `pre_start`, `post_start`, `pre_stop` and `pre_build`. See usage [example](#using-hooks).
   * **`pre_start`** - Specify a list of commands that are executed before each Kontena Service Instance is started. The commands are executed in the same order as defined. If any pre_start hook fails, then the remaining hooks will be skipped and the Kontena Service Instance will not be created. Any changes to the container filesystem from pre_start hooks will be reset when starting the actual Kontena Service Instance. The pre_start hooks are run with a different overlay network IP address, and cannot be used to e.g. register Kontena Service Instance IP somewhere (use post_start hooks). Each pre_start hook must specify `name`, `cmd`, `instance` and `oneshot` parameters (see example below):
     * **`name`** - A unique name for this hook.
@@ -422,13 +422,6 @@ db:
 deploy:
   strategy: "ha"
   wait_for_port: 3000
-```
-
-#### Using `affinity` rules
-
-```yaml
-affinity:
-  - node==node1.kontena.io
 ```
 
 #### Using `hooks`
