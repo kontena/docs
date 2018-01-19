@@ -7,8 +7,8 @@ Here is an example how to declare a variable named `mysql_root_pw` and how to us
 ```yaml
 variables:
   mysql_root_pw: 
-    type: string 
-    from:        
+    type: string
+    from:
       prompt: Enter a root password for MySQL or leave empty to auto generate
       random_string: 16
 
@@ -23,7 +23,7 @@ services:
 
 You can use resolved variables in Kontena Stack File [`services`](./stack-file.md#variables) section using bash-like `${VARIABLE_NAME}` syntax.
 
-**IMPORTANT!** The stack YAML file has to be valid YAML before AND after the variable intepolation. Often you can avoid creating invalid YAML by using quotes. For example:
+**IMPORTANT!** The Stack YAML file has to be valid YAML before AND after the variable intepolation. Often you can avoid creating invalid YAML by using quotes. For example:
 
 ```
 image: "${imagename}"
