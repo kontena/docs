@@ -2,7 +2,7 @@
 
 [Kontena Stack File](../using-kontena/stack-file.md) variables, declared in `variables` section, may be used to fill in values or providing additional conditional logic. In addition, they may be used with [Kontena Stack File Template Language](../using-kontena/stack-file.md#template-language). All variables, including environment variables you might want to use, must be declared in this section. 
 
-Here is an example how to declare variable named `mysql_root_pw` and how to use it as part services of configuration:
+Here is an example how to declare a variable named `mysql_root_pw` and how to use it in a service definition:
 
 ```yaml
 variables:
@@ -11,6 +11,7 @@ variables:
     from:        
       prompt: Enter a root password for MySQL or leave empty to auto generate
       random_string: 16
+
 services:
   mysql:
     image: mysql
@@ -22,11 +23,10 @@ services:
 
 You can use resolved variables in Kontena Stack File [`services`](./stack-file.md#variables) section using bash-like `${VARIABLE_NAME}` syntax.
 
-**IMPORTANT!** The variables are interpolated into the raw YAML before parsing. This can cause the YAML to become invalid. Often you can avoid that by using quotes. For example:
+**IMPORTANT!** The stack YAML file has to be valid YAML before AND after the variable intepolation. Often you can avoid creating invalid YAML by using quotes. For example:
 
 ```
-environment:
-  - "PASSWORD=${some_password}"
+image: "${imagename}"
 ```
 
 ## Built-in Default Variables
