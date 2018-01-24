@@ -64,11 +64,11 @@
 * [Networking](advanced/networking.md)
 * [Technology](advanced/technology.md)
 
-## Tutorials
+## Guides
 
-* [What are tutorials?](tutorials/tutorials.md)
-* [Configure Platform](tutorials/configure-platform.md)
-  * [Use private Docker images](tutorials/configure-platform/images-from-private-repos.md)
+* [What are guides?](guides/guides.md)
+* [Configure Platform](guides/configure-platform.md)
+  * [Use private Docker images](guides/configure-platform/images-from-private-repos.md)
 
 ## References
 
