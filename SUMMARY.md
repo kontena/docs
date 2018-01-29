@@ -4,8 +4,7 @@
 
 * [What is Kontena?](README.md)
 * [Quick Start](quick-start.md)
-  * [With Kontena CLI](quick-start-cli.md)
-  * [Slow Start](slow-start.md)
+* [Install Kontena Platform](install-kontena-platform.md)
 * [Kontena FAQ](faq.md)
 * [Help and Support](help-support.md)
 
