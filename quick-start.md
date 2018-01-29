@@ -88,6 +88,56 @@ To explore and install ready-made stacks you can use the `stack reg search` comm
 - [Kong API Gateway](https://github.com/kontena/kontena-stacks/tree/master/kong)
 - [Wordpress Cluster](https://github.com/kontena/kontena-stacks/tree/master/wordpress-cluster)
 
+## Next Step - Operate Kontena Platform from Local Machine
+In order to operate Kontena Platform from your local computer, you need first to install Kontena CLI:
+
+### MacOS (OSX)
+
+You can install Kontena CLI using our [official installer](https://gh-releases.kontena.io/kontena/kontena/pkg/latest) or [Homebrew](https://brew.sh/) :
+
+```
+$ brew install kontena
+```
+
+### Debian / Ubuntu
+
+You can install Kontena CLI using our [official deb package](https://gh-releases.kontena.io/kontena/kontena/deb/latest).
+
+### Linux / Windows
+
+> Prerequisites: You'll need Ruby version 2.1 or later installed on your system. For more details, see the official [Ruby installation docs](https://www.ruby-lang.org/en/documentation/installation/).
+
+
+You can install the Kontena CLI using the Rubygems package manager, which is included in Ruby.
+
+```
+$ gem install kontena-cli
+$ kontena plugin install cloud
+```
+
+**OPTIONAL**
+
+To enable tab-completion for bash, add the following to your `.bashrc` scripts:
+
+```
+which kontena > /dev/null && . "$( kontena whoami --bash-completion-path )"
+```
+### Start using Kontena CLI
+
+After installing the CLI, you are required to login to Kontena Cloud:
+
+```
+$ kontena cloud login
+```
+
+After the login is completed succesfully you can start using Kontena Platform:
+
+```
+$ kontena cloud platform use <org>/<platform>
+```
+
+You are now ready to execute Kontena CLI commands.
+
 ## Congratulations -- Enjoy!
 
 This completes the quick start guide for setting up Kontena. For further learning, you can continue by reading the following:
@@ -100,11 +150,8 @@ This completes the quick start guide for setting up Kontena. For further learnin
 
 ## Advanced
 
-### Quick Start with Kontena CLI
-If you prefer creating a Kontena Platform from your local machine with the Kontena CLI, please follow [Quick Start with Kontena CLI](./quick-start-cli.html) guide.
-
 ### Maintain the Kontena Platform yourself
-If you'd like to tinker and maintain the Kontena Platform yourself, please follow the [slow start](./slow-start.html) guide.
+If you'd like to tinker and maintain the Kontena Platform yourself, please follow the [Install Kontena Platform](./install-kontena-platform.html) guide.
 
 
 We hope you will find this documentation helpful! If you have any suggestions on improving our documentation, please [open an issue](https://github.com/kontena/kontena/issues) on GitHub.

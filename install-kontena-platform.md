@@ -1,4 +1,4 @@
-# Slow Start
+# Install Kontena Platform
 
 > NOTE! This documentation is for those who want to use the Kontena open source project to deploy custom Kontena Platform. Use of Kontena Cloud is optional. If you don't want to tinker and maintain Kontena Platform yourself, please see [quick start](./quick-start.md) documentation instead.
 
