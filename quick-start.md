@@ -7,7 +7,7 @@ The average time for Kontena users to get from zero to hero is just under 20 min
 3. Create a [Kontena Platform](using-kontena/platform.md).
 4. Install [Kontena Nodes](using-kontena/nodes.md).
 5. Deploy first [Kontena Stack](using-kontena/stacks.md).
-6. Install Kontena CLI
+6. Operating Kontena Cloud with Kontena CLI tool
 
 ## Step 1. Sign-up to Kontena Cloud
 
@@ -89,7 +89,7 @@ To explore and install ready-made stacks you can use the `stack reg search` comm
 - [Kong API Gateway](https://github.com/kontena/kontena-stacks/tree/master/kong)
 - [Wordpress Cluster](https://github.com/kontena/kontena-stacks/tree/master/wordpress-cluster)
 
-## Next Step - Operate Kontena Platform from Local Machine
+## Next Steps: Operating Kontena Cloud with Kontena CLI tool
 In order to operate Kontena Platform from your local computer, you need first to install Kontena CLI:
 
 ### MacOS (OSX)
