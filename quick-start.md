@@ -152,7 +152,7 @@ This completes the quick start guide for setting up Kontena. For further learnin
 ## Advanced
 
 ### Maintain the Kontena Platform yourself
-If you'd like to tinker and maintain the Kontena Platform yourself, please follow the [Install Kontena Platform](./install-kontena-platform.html) guide.
+If you'd like to tinker and maintain the Kontena Platform yourself, please follow the [Install Kontena Platform](./install.html) guide.
 
 
 We hope you will find this documentation helpful! If you have any suggestions on improving our documentation, please [open an issue](https://github.com/kontena/kontena/issues) on GitHub.
