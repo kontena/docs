@@ -7,7 +7,7 @@ The average time for Kontena users to get from zero to hero is just under 20 min
 3. Create a [Kontena Platform](using-kontena/platform.md).
 4. Install [Kontena Nodes](using-kontena/nodes.md).
 5. Deploy first [Kontena Stack](using-kontena/stacks.md).
-6. Operating Kontena Cloud with Kontena CLI tool
+6. Operate Kontena Cloud with Kontena CLI tool
 
 ## Step 1. Sign-up to Kontena Cloud
 
