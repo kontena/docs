@@ -73,7 +73,7 @@ $ kontena master config import settings.json
 
 #### `server.root_url`
 
-This is he base URL to your Master Instance, which is used to build the callback url. You can use this setting if your Kontena Platform Master is accessible through a DNS name such as `kontena-master.example.com`.
+This is the base URL to your Master Instance, which is used to build the callback url. You can use this setting if your Kontena Platform Master is accessible through a DNS name such as `kontena-master.example.com`.
 
 **Example:** `https://10.0.0.1:9292`
 
