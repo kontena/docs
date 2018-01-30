@@ -33,8 +33,8 @@
 | labels | ✗ |
 | links | ✓ |
 | logging | ✓ |
-| mac_address | x |
-| network_mode | v |
+| mac_address | ✗ |
+| network_mode | ✓ |
 | networks | ✗ |
 | oom_score_adj | ✗ |
 | pid | ✓ |
