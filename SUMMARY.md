@@ -66,6 +66,7 @@
 
 ## References
 
+* [Cheat Sheet](references/cheat-sheet.md)
 * [Stack File Variables](references/stack-file-variables.md)
   * [Stack File vs Docker Compose](references/stack-file-vs-compose.md)
 * [Environment Variables](references/environment-variables.md)
