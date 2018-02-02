@@ -68,7 +68,8 @@
 * [What are guides?](guides/guides.md)
 * [Configure Platform](guides/configure-platform.md)
   * [Use private Docker images](guides/configure-platform/images-from-private-repos.md)
-
+* [Managing Services](guides/managing-services.md)
+  * [Moving a stateful service to another node](guides/managing-services/moving-a-stateful-service-to-another-node.md)
 ## References
 
 * [Stack File Variables](references/stack-file-variables.md)
