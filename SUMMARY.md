@@ -63,6 +63,11 @@
 * [Networking](advanced/networking.md)
 * [Technology](advanced/technology.md)
 
+## Guides
+
+* [What are guides?](guides/guides.md)
+* [Configure Platform](guides/configure-platform.md)
+  * [Use private Docker images](guides/configure-platform/images-from-private-repos.md)
 
 ## References
 
