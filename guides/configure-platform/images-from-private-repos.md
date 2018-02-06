@@ -2,15 +2,6 @@
 
 This page shows you how to configure your Kontena Platform to pull images from your private Kontena repositories
 
-## Before your begin
-
-* You need to have Kontena Platform running, see our [quickstart guide](../../quickstart.md)
-* You need to have a [Kontena Cloud](https://cloud.kontena.io) account and organization created
-* You need to have Kontena [CLI](../../tools/cli.md)
-* You need to have the cloud olugin installed on the CLI.
-    `kontena plugin ls` to see if it is installed, and  `kontena plugin install cloud` if not already there.
-* CLI needs to be connected to the platform you wish to configure. Use `kontena cloud platform use xyz/foobar` to use a certain platform.
-
 ## Create an authorization token
 
 The platform nodes need a security token to pull images from private Kontena Image Repositories. So first we need to create a token suited for that purpose.
