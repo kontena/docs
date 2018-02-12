@@ -5,6 +5,7 @@
 - `MONGODB_URI`: MongoDB connection uri (required)
 - `VAULT_KEY`: secret key for the Kontena Vault (required)
 - `VAULT_IV`: initialization vector for the Kontena Vault (required)
+- `INTIIAL_ADMIN_CODE`: initial authorization code to obtain an access token for authenticating as the internal administrator (optional)
 - `WEB_CONCURRENCY`: number of forked master api worker processes (default: Number of CPU cores available)
 - `MAX_THREADS`: number of threads inside single master api worker process (default: 8)
 - `LOG_LEVEL`: logging level
