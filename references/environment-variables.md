@@ -5,6 +5,7 @@
 - `MONGODB_URI`: MongoDB connection uri (required)
 - `VAULT_KEY`: secret key for the Kontena Vault (required)
 - `VAULT_IV`: initialization vector for the Kontena Vault (required)
+- `INTIIAL_ADMIN_CODE`: initial authorization code to obtain an access token for authenticating as the internal administrator (optional)
 - `WEB_CONCURRENCY`: number of forked master api worker processes (default: Number of CPU cores available)
 - `MAX_THREADS`: number of threads inside single master api worker process (default: 8)
 - `LOG_LEVEL`: logging level
@@ -25,6 +26,7 @@
 - `KONTENA_SSL_VERIFY`: Verify `wss://` server SSL certificate (default: no verification)
 - `KONTENA_SSL_HOSTNAME`: Override hostname for SSL SNI and certificate subject verification
 - `KONTENA_TOKEN`: Kontena Grid token (required)
+- `INITIAL_ADMIN_CODE`: Initial authorization code to obtain an access token for authenticating as the internal administrator (optional)
 - `KONTENA_NODE_ID`: Override node ID (default: `docker info` -> `ID`)
 - `KONTENA_NODE_LABELS`: Override initial node labels (default: `docker info` -> `Labels`)
 - `KONTENA_PEER_INTERFACE`: network interface for peer/private communication (default: eth1)
