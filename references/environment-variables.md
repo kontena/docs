@@ -26,6 +26,7 @@
 - `KONTENA_SSL_VERIFY`: Verify `wss://` server SSL certificate (default: no verification)
 - `KONTENA_SSL_HOSTNAME`: Override hostname for SSL SNI and certificate subject verification
 - `KONTENA_TOKEN`: Kontena Grid token (required)
+- `INITIAL_ADMIN_CODE`: Initial authorization code to obtain an access token for authenticating as the internal administrator (optional)
 - `KONTENA_NODE_ID`: Override node ID (default: `docker info` -> `ID`)
 - `KONTENA_NODE_LABELS`: Override initial node labels (default: `docker info` -> `Labels`)
 - `KONTENA_PEER_INTERFACE`: network interface for peer/private communication (default: eth1)
