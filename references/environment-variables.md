@@ -37,6 +37,7 @@
 - `CADVISOR_IMAGE`: cadvisor image (default: kontena/cadvisor)
 - `CADVISOR_VERSION`: cadvisor image version
 - `CADVISOR_DISABLED`: if set to `true` agent won't start cadvisor at all
+- `INITIAL_ADMIN_CODE`: Initial authorization code to obtain an access token for authenticating as the internal administrator (optional)
 - `WEAVE_IMAGE`: weave net image (default: weaveworks/weave)
 - `WEAVEEXEC_IMAGE`: weave exec image (default: weaveworks/weaveexec)
 - `WEAVE_VERSION`: weave net version
