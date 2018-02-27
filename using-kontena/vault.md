@@ -76,7 +76,7 @@ Kontena's certificate management for Let's Encrypt supports different challenge 
 
 * `dns-01` (since <1.0)
 * `tls-sni-01` (since 1.4, but [out of service](https://github.com/kontena/kontena/issues/3209) since 2018-01-10)
-* `http-01` (since 1.4.x/1.5)
+* `http-01` (since 1.5)
 
 In order to use the automated challenge methods, HTTP/HTTPS connections to the domain(s) in question must be handled by a [Kontena Load Balancer](loadbalancer.md) service.
 
