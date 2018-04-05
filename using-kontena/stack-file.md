@@ -70,7 +70,7 @@ services:
       post_start:
         - name: sleep
           cmd: sleep 10
-          instances: *
+          instances: "*"
   db:
     image: mysql:5.6
     stateful: true
@@ -171,7 +171,7 @@ There are many configuration options available for defining Kontena Services. In
   * **`pre_stop`** - Specify a list of commands that are executed before each Kontena Service Instance is stopped. The commands are executed in the same order as defined. Each post_start hook must specify the `name`, `cmd` and `instance` parameters (see example below):
     * **`name`** - A unique name for this hook.
     * **`cmd`** - The command to be executed.
-    * **`instance`** - A comma separated list of Kontena Service Instances (numbers) where this hook is executed (`*` for all).
+    * **`instances`** - A comma separated list of Kontena Service Instances (numbers) where this hook is executed (`"*"` for all).
     * **`oneshot`** - Should this hook be executed only once in a Kontena Service lifetime (default: `false`)
   * **`pre_build`** - Specify a list of commands that are executed before the actual Docker image is built. The commands are executed in the same order as defined. If any of the commands fail the build is aborted. Each pre_build hook must specify the `name` and `cmd` parameters (see example below):
     * **`name`** - A unique name for this hook.
@@ -433,7 +433,7 @@ hooks:
   post_start:
     - name: sleep
       cmd: sleep 10
-      instances: *
+      instances: "*"
       oneshot: true
 ```
 
