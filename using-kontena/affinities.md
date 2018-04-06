@@ -36,5 +36,5 @@ Soft affinities are expressed with `~`.
 
 For example:
 
-- `label==~az-1a` tries to match nodes with name `node-1`. Affinity is discarded if none of the nodes have matching name.
+- `label==~node=node-1` tries to match nodes with name `node-1`. Affinity is discarded if none of the nodes have matching name.
 - `service!=~mysql` tries to match nodes which don't have instance of `mysql` service deployed. Affinity is discarded if all nodes have instance of `mysql` service deployed.
