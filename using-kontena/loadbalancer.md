@@ -60,7 +60,7 @@ services:
     environment:
       - KONTENA_LB_INTERNAL_PORT=80
     links:
-      - internet_lb
+      - my_loadbalancer
 ...
 ```
 
