@@ -63,9 +63,17 @@
 * [Networking](advanced/networking.md)
 * [Technology](advanced/technology.md)
 
+## Guides
+
+* [What are guides?](guides/guides.md)
+* [Administration](guides/administration.md)
+  * [Using nsenter to access a node without SSH](guides/administration/using-nsenter-to-access-a-node-without-ssh.md)
+* [Configure Platform](guides/configure-platform.md)
+  * [Use private Docker images](guides/configure-platform/images-from-private-repos.md)
 
 ## References
 
+* [Cheat Sheet](references/cheat-sheet.md)
 * [Stack File Variables](references/stack-file-variables.md)
   * [Stack File vs Docker Compose](references/stack-file-vs-compose.md)
 * [Environment Variables](references/environment-variables.md)
