@@ -39,6 +39,7 @@ Kontena Load Balancer is configured via its `environment` variables. Here's the 
 * **`SSL_CERTS`** and **`SSL_CERT_*`** - SSL certificates to be used. See more at [SSL Termination](loadbalancer.md#ssl-termination).
 * **`KONTENA_LB_SSL_CIPHERS`** - SSL Cipher suite used by the load balancer when operating in SSL mode. See more at [SSL Ciphers](loadbalancer.md#configuringcustomsslciphers)
 * **`KONTENA_LB_CUSTOM_SETTINGS`** - Custom settings; each line will be appended to `defaults` section in the HAProxy configuration file.
+* **`KONTENA_LB_GLOBAL_SETTINGS`** - Custom settings; each line will be appended to `global` section in the HAProxy configuration file.
 * **`KONTENA_LB_ACCEPT_PROXY`** - Enables proxy protocol (accept-proxy).
 * **`KONTENA_LB_HTTP2`** - Enable HTTP2 support. Default: `true`.
 
