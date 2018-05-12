@@ -21,7 +21,7 @@ After you have signed up and verified your email, you can create an organization
 
 ## Step 3. Create a Kontena Platform
 
-The Kontena Platform will abstract all available compute resources and make these resources available to your container workloads. To create your first Kontena Platform, just open the 'Create Platform' dialog and fill in the platform name. For testing purposes Mini platform type is enough.
+The Kontena Platform will abstract all available compute resources and make these resources available to your container workloads. To create your first Kontena Platform, just open the 'Create Platform' dialog and fill in the platform name. For testing purposes, the Mini platform type is enough.
 
 <img src="_images/kontena-cloud-create-platform.png" alt="Create Platform" />
 
@@ -49,13 +49,13 @@ NAME              VERSION   STATUS       INITIAL   LABELS
 
 ## Step 5. Deploy Your First Application Stack
 
-After the provisioned node is online, you are ready to deploy your first application stack. To install a ready-made stack you can execute `stack install kontena/hello-world` command in terminal.
+After the provisioned node is online, you are ready to deploy your first application stack. To install a ready-made stack you can execute the `stack install kontena/hello-world` command in terminal.
 
 <img src="_images/kontena-cloud-install-stack.png" alt="Install Stack" />
 
 The initial stack deployment may take some time while the host nodes pull the referenced Docker images.
 
-After the stack deployment is finished you can verify from the Kontena Cloud Dashboard that the lb and web services are running or executing the `stack ls` command:
+After the stack deployment is finished, you can verify from the Kontena Cloud Dashboard that the lb and web services are running or executing the `stack ls` command:
 
 ```
 > stack ls
@@ -63,7 +63,7 @@ NAME            STACK                       SERVICES   STATE     EXPOSED PORTS
 ⊛ hello-world   kontena/hello-world:1.0.0   2          running   *:80->80/tcp
 ```
 
-To test the installed stack, you must connect to the IP address of the host node publishing the `lb` service on TCP port 80. You can use the public IP address of the host node running the service instance displayed as part of the kontena service show output `service show hello-world/lb`:
+To test the installed stack, you must connect to the IP address of the host node publishing the `lb` service on TCP port 80. You can use the public IP address of the host node running the service instance displayed as part of the Kontena service show output `service show hello-world/lb`:
 
 ```
 > service show hello-world/lb
@@ -90,11 +90,11 @@ To explore and install ready-made stacks you can use the `stack reg search` comm
 - [Wordpress Cluster](https://github.com/kontena/kontena-stacks/tree/master/wordpress-cluster)
 
 ## Next Steps: Operating Kontena Cloud with Kontena CLI tool
-In order to operate Kontena Platform from your local computer, you need first to install Kontena CLI:
+In order to operate the Kontena Platform from your local computer, you need first to install the Kontena CLI:
 
 ### MacOS (OSX)
 
-You can install Kontena CLI using our [official installer](https://gh-releases.kontena.io/kontena/kontena/pkg/latest) or [Homebrew](https://brew.sh/) :
+You can install the Kontena CLI using our [official installer](https://gh-releases.kontena.io/kontena/kontena/pkg/latest) or [Homebrew](https://brew.sh/) :
 
 ```
 $ brew install kontena
@@ -102,7 +102,7 @@ $ brew install kontena
 
 ### Debian / Ubuntu
 
-You can install Kontena CLI using our [official deb package](https://gh-releases.kontena.io/kontena/kontena/deb/latest).
+You can install the Kontena CLI using our [official deb package](https://gh-releases.kontena.io/kontena/kontena/deb/latest).
 
 ### Linux / Windows
 
@@ -131,7 +131,7 @@ After installing the CLI, you are required to login to Kontena Cloud:
 $ kontena cloud login
 ```
 
-After the login is completed succesfully you can start using Kontena Platform:
+After the login is completed succesfully you can start using your Kontena Platform:
 
 ```
 $ kontena cloud platform use <org>/<platform>
