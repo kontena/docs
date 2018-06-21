@@ -2,7 +2,7 @@
 
 ## Prerequisites
 
-- [Kontena CLI](cli.md)
+- [Kontena CLI](/tools/cli.md)
 - UpCloud Account. Visit [https://www.upcloud.com/kontena/](https://www.upcloud.com/kontena/) to get started
 
 ## Install Kontena CLI Plugin

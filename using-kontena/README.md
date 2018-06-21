@@ -13,10 +13,6 @@ The Kontena Platform setup requires installation of the Kontena Platform Master 
 * **Kontena Platform Master** is a machine (or number of machines in high-availability setup) that provides the management API for using Kontena. It will perform the orchestration and scheduling for the container workloads. In addition, it will authenticate users, enforce policies and track all the user actions in audit log.
 * **Kontena Platform Grid** is a cluster wide abstraction that is required for connecting compute resources and data volumes. It will automatically bind all connected machines together using the built-in overlay network technology and it will provide IP address management for all the containers running inside. Therefore, communication inside the Kontena Platform multi-host environment works the same as in a local area network.
 
-The users of [Kontena Cloud](https://www.kontena.io/cloud) may use the Kontena Platform as a hosted solution that includes the Kontena Platform Master and Kontena Platform Grid fully setup and ready-to-go. Since the Kontena Platform is [open source](https://github.com/kontena/kontena), users may also choose to use [Kontena Platform Master](../advanced/master.md) with any number of [Kontena Platform Grids](../advanced/grids.md) as custom setup on any infrastructure.
-
-See [Kontena Platform usage documentation](./platform.md) to learn how to manage, operate and monitor the Kontena Platforms.
-
 ## Kontena Nodes
 
 Kontena Nodes (machines; bare metal or virtual) provide all the compute resources for the Kontena Platform. They are connected to the Kontena Platform from any cloud (public, private or hybrid) using the built-in overlay network technology. The number of Kontena Nodes may be adjusted according to compute resource needs. Once connected, each Kontena Node will provide additional compute resources to the pool of available resources.
@@ -201,7 +197,8 @@ See [Kontena Platform Statistics usage documentation](./stats.md) to learn how t
 
 ## Usage Documentation
 
-* [Platform](platform.md)
+* [Platform Master](master.md)
+* [Platform Grid](grids.md)
 * [Nodes](nodes.md)
 * [Stacks](stacks.md)
 * [Stack Files](stack-files.md)
@@ -215,8 +212,6 @@ See [Kontena Platform Statistics usage documentation](./stats.md) to learn how t
 
 ## Advanced Usage Documentation
 
-* [Platform Master](../advanced/master.md)
-* [Platform Grid](../advanced/grids.md)
 * [Authentication](../advanced/authentication.md)
 * [Networking](../advanced/networking.md)
 * [Technology](../advanced/technology.md)

@@ -1,7 +1,5 @@
 # Kontena Platform Master
 
-> Note! This documentation is mostly targeted for people running custom Kontena Platform deployments. People using Kontena Cloud with hosted Kontena Platforms may skip most parts of this documentation since it is not relevant (or applicable).
-
 The [Kontena Platform Master](../using-kontena/README.md#kontena-platform-master) is a machine (or number of machines in high-availability setup) that provides the management API for using Kontena.
 
 In this chapter, we'll discover how to manage, operate and monitor custom Kontena Platform Master:

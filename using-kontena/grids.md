@@ -1,57 +1,30 @@
-# Using Kontena Platform Masters
+# Using Kontena Platform Grids
 
-[Kontena Platform](./README.md#kontena-platform) is an environment for orchestrating and running containerized workloads. It provides all the required technology as a tightly integrated package.
+Kontena Platform Grid is part of Kontena Platform and provides cluster wide abstraction that is required for connecting compute resources and data volumes.
 
-In this chapter, we'll discover how to manage Kontena Platforms using the Kontena CLI tool:
+In this chapter, we'll discover how to work with Kontena Platform Grids using Kontena CLI tool:
 
-* [List Kontena Platform Masters](#list-kontena-platform-masters)
-* [Switch to Another Kontena Platform Master](#switch-to-another-kontena-platform-master)
-* [Login to A Kontena Platform Master](#login-to-a-kontena-platform-master)
-
-## List Kontena Platform Masters
-
-List all the platform masters.
-
-Example: List all the platforms connected from your local machine
-
-```
-$ kontena master ls
-```
-
-## Switch to Another Kontena Platform Master
-
-Switch context to another platform. The name of this other platform is provided as argument.
-
-Example: Switch the master to `staging`.
-
-```
-$ kontena master use staging
-```
-
-## Login to A Kontena Platform Master
-
-
-Example: Login to Kontena Platform Master and giving local alias `staging`
-
-```
-$ kontena master login --name staging https://<master_url>
-```
+* [Create a New Kontena Platform Grid](#create-a-new-kontena-platform-grid)
+* [Update Kontena Platform Grid Configuration](#update-kontena-platform-grid-configuration)
+* [List Kontena Platform Grids](#list-kontena-platform-grids)
+* [Switch to Another Kontena Platform Grid](#switch-to-another-kontena-platform-grid)
+* [Show Kontena Platform Grid Configuration](#show-kontena-platform-grid-configuration)
+* [Import Kontena Platform Grid to Kontena Cloud](#import-kontena-platform-grid-to-kontena-cloud)
+* [Remove Kontena Platform Grid](#remove-kontena-platform-grid)
+* [Show Kontena Platform Event Logs](#show-kontena-platform-event-logs)
+* [Show Kontena Platform Logs](#show-kontena-platform-logs)
+* [Show Kontena Platform Audit Log](#show-kontena-platform-audit-log)
+* [Show Kontena Platform Grid Environment Details](#show-kontena-platform-grid-environment-details)
+* [Show Kontena Platform Grid Cloud-Config](#show-kontena-platform-grid-cloud-config)
+* [Manage Kontena Platform Grid Trusted Subnets](#manage-kontena-platform-grid-trusted-subnets)
 
 
 ## Create a New Kontena Platform Grid
 
-Create a new Kontena Platform Grid for a selected organization.
+Create a new Kontena Platform Grid.
 
 ```
-$ kontena grid create <NAME>
-```
-
-You can also pass other [configuration options](#configuration-options) when creating a new grid.
-
-Example: Create a new grid called `staging` with the initial size set to `3`:
-
-```
-$ kontena grid create --initial-size=3 staging
+$ kontena grid create --initial-size=3 <GRID_NAME>
 ```
 
 <h6 id="configuration-options">Configuration Options (* available only on create)</h6>
@@ -71,30 +44,43 @@ $ kontena grid create --initial-size=3 staging
   * `none` - Disable log forwarding
 * **`log-opts`** - Specify configuration for the log forwarder (as described above). At the moment log forwarding is only supported for FluentD. If you enable log forwarding, you need to specify the FluentD server address here using the following format: `fluentd-server=<HOST>:<PORT>`, where `HOST` is the FluentD server address and `PORT` is the FluentD server port. Example: enable log forwarding to FluentD `kontena grid update --log-forwarder=fluentd --log-opt=fluentd-server=xyz:22445 staging`
 
-## List Kontena Platform Grids
+## Update Kontena Platform Grid Configuration
 
-List platform grids.
+Update the configuration for current Kontena Platform Grid.
 
 ```
-$ kontena grid ls
+$ kontena grid update <GRID_NAME>
+```
+
+The configuration options are the same with Kontena Platform Grid `create`. See the list of supported configuration options [above](#configuration-options).
+
+## Import Kontena Platform Grid to Kontena Cloud
+
+It's possible to connect Kontena Platform Grid to the [Kontena Cloud](https://www.kontena.io/cloud) as a Kontena Platform. This allows you to monitor, analyze and operate your custom Kontena Platform Grid via [Kontena Cloud](https://www.kontena.io/cloud).
+
+To connect your Kontena Platform Grid to Kontena Cloud, use following command:
+
+```
+$ kontena cloud platform join [--organization=<ORGANIZATION>] <MASTER_NAME> <GRID_NAME> <PLATFORM_NAME>
+```
+
+> **Note!** You need to install Kontena CLI cloud plugin `kontena plugin install cloud` for cloud subcommands.
+
+
+## List Kontena Platform Grids
+
+List all Kontena Platform Grids.
+
+```
+$ kontena grid list
 ```
 
 ## Switch to Another Kontena Platform Grid
 
-Switch context to another grid. The name of this other grid is provided as argument.
-
-Example: Switch the grid to `staging`.
+Switches CLI context to another Kontena Platform Grid.
 
 ```
-$ kontena grid use staging
-```
-
-## Remove Kontena Platform Grid
-
-Remove the platform grid.
-
-```
-$ kontena grid remove <GRID_NAME>
+$ kontena grid use <GRID_NAME>
 ```
 
 ## Show Kontena Platform Grid Configuration
@@ -105,27 +91,13 @@ Show details of current Kontena Platform Grid.
 $ kontena grid current
 ```
 
-## Update Kontena Platform Grid Configuration
+## Remove Kontena Platform Grid
 
-Your Kontena Platform configuration may be updated through the Kontena Platform Grid configuration. Therefore, use the command:
-
-```
-$ kontena grid update <GRID_NAME>
-```
-
-The configuration options are the same with Kontena Platform `create`. See the list of supported configuration options [above](#configuration-options).
-
-## Import Kontena Platform Grid to Kontena Cloud
-
-It's possible to connect [Kontena Platform Grid](../advanced/grids.md) to the [Kontena Cloud](https://www.kontena.io/cloud) as a Kontena Platform. This allows you to monitor, analyze and operate your custom Kontena Platform Grid via [Kontena Cloud](https://www.kontena.io/cloud).
-
-To connect your Kontena Platform Grid to Kontena Cloud, use following command:
+Remove a Kontena Platform Grid.
 
 ```
-$ kontena cloud platform join [--organization=<ORGANIZATION>] <MASTER_NAME> <GRID_NAME> <PLATFORM_NAME>
+$ kontena grid remove <GRID_NAME>
 ```
-
-> **Note!** You need to install Kontena CLI cloud plugin  `kontena plugin install cloud` for cloud subcommands.
 
 ## Show Kontena Platform Event Logs
 
@@ -135,7 +107,7 @@ Show all life-cycle events.
 $ kontena grid events
 ```
 
-## Show Kontena Platform Grid Logs
+## Show Kontena Platform Logs
 
 Show logs from Kontena Stacks and Services.
 
@@ -143,7 +115,7 @@ Show logs from Kontena Stacks and Services.
 $ kontena grid logs
 ```
 
-## Show Kontena Platform Grid Audit Logs
+## Show Kontena Platform Audit Log
 
 Show audit logs.
 

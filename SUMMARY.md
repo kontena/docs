@@ -2,7 +2,7 @@
 
 ## About
 
-* [What is Kontena?](README.md)
+* [What is Kontena Classic?](README.md)
 * [Quick Start](quick-start.md)
 * [Install Kontena Platform](install.md)
 * [Kontena FAQ](faq.md)
@@ -11,7 +11,18 @@
 ## Using Kontena
 
 * [Overview](using-kontena/README.md)
-* [Platform](using-kontena/platform.md)
+* [Platform Master](using-kontena/master.md)
+  * [Installing](using-kontena/install-master/README.md)
+    * [AWS EC2](using-kontena/install-master/aws-ec2.md)
+    * [Microsoft Azure (Classic)](using-kontena/install-master/azure.md)
+    * [Container Linux](using-kontena/install-master/container-linux.md)
+    * [DigitalOcean](using-kontena/install-master/digitalocean.md)
+    * [Docker Compose](using-kontena/install-master/docker-compose.md)
+    * [Packet](using-kontena/install-master/packet.md)
+    * [Ubuntu](using-kontena/install-master/ubuntu.md)
+    * [UpCloud](using-kontena/install-master/upcloud.md)
+    * [Vagrant](using-kontena/install-master/vagrant.md)
+* [Platform Grid](using-kontena/grids.md)
 * [Nodes](using-kontena/nodes.md)
   * [Installing](using-kontena/install-nodes/README.md)
     * [Kontena Cloud](using-kontena/install-nodes/cloud.md)
@@ -45,20 +56,8 @@
 
 ## Advanced
 
-* [Platform Master](advanced/master.md)
-  * [Installing](advanced/install-master/README.md)
-    * [AWS EC2](advanced/install-master/aws-ec2.md)
-    * [Microsoft Azure (Classic)](advanced/install-master/azure.md)
-    * [Container Linux](advanced/install-master/container-linux.md)
-    * [DigitalOcean](advanced/install-master/digitalocean.md)
-    * [Docker Compose](advanced/install-master/docker-compose.md)
-    * [Packet](advanced/install-master/packet.md)
-    * [Ubuntu](advanced/install-master/ubuntu.md)
-    * [UpCloud](advanced/install-master/upcloud.md)
-    * [Vagrant](advanced/install-master/vagrant.md)
-* [Platform Grid](advanced/grids.md)
-  * [Etcd](advanced/etcd.md)
-  * [Internal Image Registry](advanced/internal-image-registry.md)
+* [Etcd](advanced/etcd.md)
+* [Internal Image Registry](advanced/internal-image-registry.md)
 * [Authentication](advanced/authentication.md)
 * [Networking](advanced/networking.md)
 * [Technology](advanced/technology.md)

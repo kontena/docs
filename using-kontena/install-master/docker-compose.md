@@ -2,7 +2,7 @@
 
 ## Prerequisites
 
-* [Kontena CLI](cli.md)
+* [Kontena CLI](/tools/cli.md)
 * Docker Engine version 1.10 or later
 * Docker Compose
 

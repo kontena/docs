@@ -2,7 +2,7 @@
 
 ## Prerequisites
 
-- [Kontena CLI](cli.md)
+- [Kontena CLI](/tools/cli.md)
 - Vagrant 1.6 or later. Visit [https://www.vagrantup.com/](https://www.vagrantup.com/) to get started
 
 ## Install Kontena CLI Plugin

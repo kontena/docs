@@ -2,7 +2,7 @@
 
 ## Prerequisites
 
-- [Kontena CLI](cli.md)
+- [Kontena CLI](/tools/cli.md)
 - AWS Account. Visit [http://aws.amazon.com](http://aws.amazon.com) to get started.
 - AWS [instance profile and role](http://docs.aws.amazon.com/IAM/latest/UserGuide/instance-profiles.html) with full EC2 access
 
