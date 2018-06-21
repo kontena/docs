@@ -4,7 +4,6 @@
 
 * [What is Kontena Classic?](README.md)
 * [Quick Start](quick-start.md)
-* [Install Kontena Platform](install.md)
 * [Kontena FAQ](faq.md)
 * [Help and Support](help-support.md)
 
