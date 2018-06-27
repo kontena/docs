@@ -3,7 +3,7 @@
 The average time for Kontena Classic users to get from zero to hero is just under 20 minutes! Let's assume you have already created some amazing application and packaged it as docker containers, here's what it takes to get from zero to hero with Kontena Classic:
 
 1. Install Kontena CLI (command-line interface).
-2. Install a [Kontena Platform Master](using-kontena/platform.md).
+2. Install a [Kontena Platform Master](using-kontena/install-master/).
 4. Install [Kontena Platform Nodes](using-kontena/nodes.md).
 5. Deploy first [Kontena Stack](using-kontena/stacks.md).
 
