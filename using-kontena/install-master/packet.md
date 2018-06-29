@@ -2,7 +2,7 @@
 
 ## Prerequisites
 
-* [Kontena CLI](cli.md)
+* [Kontena CLI](/tools/cli.md)
 * Packet.net Account. Visit [https://www.packet.net/promo/kontena/](https://www.packet.net/promo/kontena/) to get started
 
 ## Install Kontena CLI Plugin

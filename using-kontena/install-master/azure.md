@@ -2,7 +2,7 @@
 
 ## Prerequisites
 
-- [Kontena CLI](cli.md)
+- [Kontena CLI](/tools/cli.md)
 - Azure Account
 
 ## Install Kontena CLI Plugin

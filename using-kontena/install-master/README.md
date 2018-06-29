@@ -1,7 +1,5 @@
 # Installing Kontena Platform Master
 
-> Kontena Cloud users do not need to install Kontena Platform Master. This article is for those who want to tinker and run their own custom Kontena Platform Master.
-
 The [Kontena Platform Master](../../using-kontena/README.md#kontena-platform-master) may be installed on _any_ Linux machine. The easiest way, is to use Kontena CLI built-in provision tool that is designed to help Kontena Platform Master installation. See below instructions for installing Kontena Platform Master on various platforms:
 
 * [AWS EC2](aws-ec2.md) (via plugin)
@@ -16,7 +14,7 @@ The [Kontena Platform Master](../../using-kontena/README.md#kontena-platform-mas
 
 ## System Requirements
 
-Any Linux machine that is able to run Docker 1.9.x - 1.12.x.
+Any Linux machine that is able to run Docker >= 1.9.x
 
 ## Needed open ports
 
@@ -31,7 +29,7 @@ Kontena Platform Master can be run in high availability setup where multiple ins
 
 ### Requirements for High Availability Setup
 
-For HA setup, it is recommended to have 2+ dedicated machines from different availability zones running Kontena Platform Master software. Those machines should be operating with any modern Linux distribution with support for Docker and docker-compose. CoreOS and Ubuntu are recommended. 
+For HA setup, it is recommended to have 2+ dedicated machines from different availability zones running Kontena Platform Master software. Those machines should be operating with any modern Linux distribution with support for Docker and docker-compose. CoreOS and Ubuntu are recommended.
 
 Kontena Platform Master requires MongoDB. For HA setup, it is recommended to have 3+ dedicated machines from different availability zones running MongoDB replica-set.
 
@@ -47,7 +45,7 @@ For example, if you are setting up Kontena Platform Master using docker-compose 
 version: '2'
 services:
   master:
-    image: kontena/server:1.3
+    image: kontena/server:1.5
     container_name: kontena-server-api
     restart: unless-stopped
     environment:
@@ -74,7 +72,7 @@ $ kontena aws master create --mongodb-uri mongodb://<user>:<password>@mongodb-1:
 
 ### Load Balancing for HA Setup
 
-Since Kontena CLI and Kontena Nodes connect to the Kontena master using http(s) protocol, there should be a load balancer distributing the connections to different Kontena Platform Master instances. SSL termination should be enabled on the load balancer since the Kontena Platform Master accepts only plain HTTP traffic. 
+Since Kontena CLI and Kontena Nodes connect to the Kontena master using http(s) protocol, there should be a load balancer distributing the connections to different Kontena Platform Master instances. SSL termination should be enabled on the load balancer since the Kontena Platform Master accepts only plain HTTP traffic.
 
 The recommended way to perform load balancing is to use cloud provider solutions such as ELB/ALB. If this is not possible, it is possible to setup some custom load balancer in front (e.g. nginx, caddy, traefik) or use Kontena HAProxy
 

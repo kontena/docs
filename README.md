@@ -1,12 +1,10 @@
 <img src="_images/logo.png" width="400" alt="Kontena Logo" />
 
-# What is Kontena?
+# What is Kontena Classic?
 
-[Kontena](http://www.kontena.io) is the new, better way to run your containers in production. It's [open source](https://www.github.com/kontena/kontena) and easy to use!
+[Kontena Classic](https://kontena.io/classic) is the new, better way to run your containers in production. It's [open source](https://www.github.com/kontena/kontena) and easy to use!
 
-<img src="_images/kontena-cloud-screenshot.png" alt="Kontena Screenshot" />
-
-# Why Kontena?
+# Why Kontena Classic?
 
 Containers promise extreme scalability, portability and improved compute resource utilization. Setting up, tinkering and maintaining a complex container platform framework such as Kubernetes is not where the race is won. Kontena is a developer friendly container platform with all batteries included that is extremely easy to use and works for everybody, on any cloud. Get from zero to hero in matter of minutes rather than days, weeks or months.
 
@@ -16,7 +14,7 @@ If you are looking for a complete, easy to understand and use platform with mini
 
 If you are new to Kontena, we recommend that you first read through the [quick start](./quick-start.md) guide. We also recommend you to [get familiar with usage](using-kontena/README.md).
 
-# Kontena Key Features
+# Kontena Classic Key Features
 
 ### Orchestration
 
