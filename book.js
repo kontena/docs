@@ -2,7 +2,7 @@ module.exports = {
   title: "Kontena",
   plugins: [
     "edit-link", "prism", "-highlight", "github", "anchorjs",
-    "ga", "scripts", "mixpanel"
+    "ga", "scripts", "mikxpanel@git+https://github.com/kontena/gitbook-plugin-mikxpanel.git"
   ],
   pluginsConfig: {
     "edit-link": {
@@ -25,8 +25,9 @@ module.exports = {
     hs: {
       code: process.env.HUBSPOT_CODE || ""
     },
-    mixpanel: {
-      token: process.env.MIXPANEL_TOKEN || ""
+    mikxpanel: {
+      token: process.env.MIXPANEL_TOKEN || "",
+      event_prefix: "docs.classic"
     }
   },
   styles: {
