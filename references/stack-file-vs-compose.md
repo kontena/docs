@@ -19,7 +19,7 @@
 | dns_search | ✗ |
 | domainname | ✗ |
 | tmpfs | ✗ |
-| entrypoint | ✓ |
+| entrypoint | ✗ |
 | env_file | ✓ |
 | environment | ✓ |
 | expose | v |
